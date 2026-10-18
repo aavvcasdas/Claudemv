@@ -13,6 +13,7 @@
 //     node render.mjs --encode --out=out/video.mp4                                           out/frames → MP4
 //   Standalone loops (LOOPS in the page): add --loop=<name> to any of the above (times are then loop times), or
 //     node render.mjs --loop=emotions --png --out=out/loop_emotions                          one cycle as PNGs (for GIFs)
+//   Silent picture intermediate: --no-audio (clip only; overrides PROJECT.audio).
 //   Project page: --page=projects/<id>/studio.html (default: studio.html; same rendering interface).
 //   Music: --audio=assets/song.mp3 (or PROJECT.audio) is muxed into --clip and --encode. Other flags: --fps=24,
 //   --chrome=<path to Chrome/Chromium>.
@@ -138,7 +139,7 @@ if (args.sheet || args.strip) {
 } else if (args.clip) {
   const page = await openPage(), len = await lengthOf(page);
   const [a, b] = args.range ? span(args.range) : typeof args.clip === 'string' ? span(args.clip) : [0, len];
-  const audio = args.audio || await page.evaluate(() => PROJECT.audio || '');
+  const audio = args['no-audio'] ? '' : (args.audio || await page.evaluate(() => PROJECT.audio || ''));
   const out = args.out || 'out/clip.mp4'; mkdirSync(dirname(out), { recursive: true });
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
     ...(audio ? ['-ss', String(a), '-t', String(b - a), '-i', audio, '-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '192k', '-shortest'] : []),

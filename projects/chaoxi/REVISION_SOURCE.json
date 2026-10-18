@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "status": "revision-complete",
+  "reference_video": "潮汐.mp4",
+  "reference_sha256": "9ed7ed6e4ef2987cf2ec161f863a026ea74612768a0cffdfe5601e77c6c941f9",
+  "duration_s": 56,
+  "audio": "projects/chaoxi/assets/song.m4a",
+  "audio_origin": "extracted from 潮汐.mp4; verified identical AAC elementary stream",
+  "re_repository_role": "tooling and production-quality reference only",
+  "excluded_inputs": [
+    "projects/chaoxi-tide/assets/song.mp3",
+    "projects/chaoxi-tide/assets/song.lrc",
+    "projects/chaoxi-tide/STORYBOARD.md"
+  ],
+  "requirements": [
+    "Use the actual 56-second MP4 story and original audio",
+    "Do not substitute the 31.84-second project song or its 118 BPM timeline",
+    "Do not reuse unrelated lyric text or timing",
+    "Improve shot composition, character acting, detail and transitions; not just recoloring"
+  ],
+  "current_delivered_video": "out/潮汐-纸上海.mp4",
+  "current_delivered_video_status": "previous version; rejected by user for insufficient quality; not the new revision",
+  "current_delivery": "../chaoxi-v2/out/video.mp4",
+  "current_delivery_manifest": "../chaoxi-v2/production.json"
+}

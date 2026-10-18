@@ -15,3 +15,9 @@ projects/*/out/*
 !projects/chaoxi/out/潮汐-纸上海.mp4
 !projects/chaoxi/out/ffprobe.json
 !projects/chaoxi/out/check/
+
+# Revised 56-second film: retained deliverables, no 32-second project assets.
+!projects/chaoxi-v2/assets/song.m4a
+!projects/chaoxi-v2/out/video.mp4
+!projects/chaoxi-v2/out/check/
+!projects/chaoxi-v2/out/metadata.json

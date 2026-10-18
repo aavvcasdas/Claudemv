@@ -1,0 +1,693 @@
+{
+  "source": "潮汐.mp4",
+  "method": "burned-in subtitle OCR consensus; no speech recognition",
+  "sampling_step_s": 0.5,
+  "timing_uncertainty_s": 0.25,
+  "rows": [
+    {
+      "start_s": 1.5,
+      "end_s": 4.5,
+      "text": "我们都是渺小真实存在",
+      "confidence": 0.995,
+      "sample_count": 6,
+      "variants": {
+        "我们都是渺小真实存在": 6
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 5.0,
+      "end_s": 8.5,
+      "text": "祈愿小世界里不只有挫败",
+      "confidence": 0.986,
+      "sample_count": 7,
+      "variants": {
+        "祈愿小世界里不只有挫败": 7
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 8.5,
+      "end_s": 11.5,
+      "text": "直到遇见你我以为就光明起来",
+      "confidence": 0.995,
+      "sample_count": 6,
+      "variants": {
+        "直到遇见你我以为就光明起来": 6
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 12.0,
+      "end_s": 15.5,
+      "text": "眼睛里看到的都是广无垠的大海",
+      "confidence": 0.918,
+      "sample_count": 7,
+      "variants": {
+        "眼睛里看到的都是广衰无垠的大海": 1,
+        "眼睛里看到的都是广表无垠的大海": 2,
+        "眼睛里看到的都是广无垠的大海": 4
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 15.5,
+      "end_s": 19.0,
+      "text": "有你在的日子里不可能被取代",
+      "confidence": 0.997,
+      "sample_count": 7,
+      "variants": {
+        "有你在的日子里不可能被取代": 7
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 19.0,
+      "end_s": 22.5,
+      "text": "在最灰暗的日子你陪着我发呆",
+      "confidence": 0.993,
+      "sample_count": 7,
+      "variants": {
+        "在最灰暗的日子你陪着我发呆": 7
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 22.5,
+      "end_s": 25.5,
+      "text": "你让我学会如何拨开阴霾",
+      "confidence": 0.963,
+      "sample_count": 6,
+      "variants": {
+        "你让我学会如何拨开阴霾": 6
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 25.5,
+      "end_s": 27.0,
+      "text": "将快乐全部收集",
+      "confidence": 0.994,
+      "sample_count": 3,
+      "variants": {
+        "将快乐全部收集": 3
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 27.0,
+      "end_s": 29.0,
+      "text": "将不开心全都淘汰",
+      "confidence": 0.991,
+      "sample_count": 4,
+      "variants": {
+        "将不开心全都淘汰": 4
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 29.0,
+      "end_s": 31.5,
+      "text": "你对我说的情话",
+      "confidence": 0.996,
+      "sample_count": 5,
+      "variants": {
+        "你对我说的情话": 5
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 31.5,
+      "end_s": 35.5,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.985,
+      "sample_count": 8,
+      "variants": {
+        "像转瞬即逝的烟花": 8
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 35.5,
+      "end_s": 38.5,
+      "text": "只停在绽放一刹那",
+      "confidence": 0.954,
+      "sample_count": 6,
+      "variants": {
+        "只停在绽放一刹那": 6
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 39.0,
+      "end_s": 42.5,
+      "text": "我却已无法自拔",
+      "confidence": 0.973,
+      "sample_count": 7,
+      "variants": {
+        "我却已无法自拔": 7
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 42.5,
+      "end_s": 44.5,
+      "text": "我们的爱总有时差",
+      "confidence": 0.996,
+      "sample_count": 4,
+      "variants": {
+        "我们的爱总有时差": 4
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 44.5,
+      "end_s": 48.5,
+      "text": "也为你骗自己放下",
+      "confidence": 0.997,
+      "sample_count": 8,
+      "variants": {
+        "也为你骗自己放下": 8
+      },
+      "status": "needs_visual_review"
+    },
+    {
+      "start_s": 48.5,
+      "end_s": 53.5,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.986,
+      "sample_count": 10,
+      "variants": {
+        "爱炙热的你却忘了爱自己": 10
+      },
+      "status": "needs_visual_review"
+    }
+  ],
+  "samples": [
+    {
+      "t": 1.75,
+      "text": "我们都是渺小真实存在",
+      "confidence": 0.9954
+    },
+    {
+      "t": 2.25,
+      "text": "我们都是渺小真实存在",
+      "confidence": 0.9951
+    },
+    {
+      "t": 2.75,
+      "text": "我们都是渺小真实存在",
+      "confidence": 0.9954
+    },
+    {
+      "t": 3.25,
+      "text": "我们都是渺小真实存在",
+      "confidence": 0.9953
+    },
+    {
+      "t": 3.75,
+      "text": "我们都是渺小真实存在",
+      "confidence": 0.9954
+    },
+    {
+      "t": 4.25,
+      "text": "我们都是渺小真实存在",
+      "confidence": 0.9959
+    },
+    {
+      "t": 5.25,
+      "text": "祈愿小世界里不只有挫败",
+      "confidence": 0.9885
+    },
+    {
+      "t": 5.75,
+      "text": "祈愿小世界里不只有挫败",
+      "confidence": 0.9826
+    },
+    {
+      "t": 6.25,
+      "text": "祈愿小世界里不只有挫败",
+      "confidence": 0.9897
+    },
+    {
+      "t": 6.75,
+      "text": "祈愿小世界里不只有挫败",
+      "confidence": 0.9851
+    },
+    {
+      "t": 7.25,
+      "text": "祈愿小世界里不只有挫败",
+      "confidence": 0.9836
+    },
+    {
+      "t": 7.75,
+      "text": "祈愿小世界里不只有挫败",
+      "confidence": 0.9883
+    },
+    {
+      "t": 8.25,
+      "text": "祈愿小世界里不只有挫败",
+      "confidence": 0.987
+    },
+    {
+      "t": 8.75,
+      "text": "直到遇见你我以为就光明起来",
+      "confidence": 0.996
+    },
+    {
+      "t": 9.25,
+      "text": "直到遇见你我以为就光明起来",
+      "confidence": 0.9955
+    },
+    {
+      "t": 9.75,
+      "text": "直到遇见你我以为就光明起来",
+      "confidence": 0.9958
+    },
+    {
+      "t": 10.25,
+      "text": "直到遇见你我以为就光明起来",
+      "confidence": 0.9961
+    },
+    {
+      "t": 10.75,
+      "text": "直到遇见你我以为就光明起来",
+      "confidence": 0.9945
+    },
+    {
+      "t": 11.25,
+      "text": "直到遇见你我以为就光明起来",
+      "confidence": 0.9947
+    },
+    {
+      "t": 12.25,
+      "text": "眼睛里看到的都是广衰无垠的大海",
+      "confidence": 0.9027
+    },
+    {
+      "t": 12.75,
+      "text": "眼睛里看到的都是广表无垠的大海",
+      "confidence": 0.894
+    },
+    {
+      "t": 13.25,
+      "text": "眼睛里看到的都是广表无垠的大海",
+      "confidence": 0.9067
+    },
+    {
+      "t": 13.75,
+      "text": "眼睛里看到的都是广无垠的大海",
+      "confidence": 0.9328
+    },
+    {
+      "t": 14.25,
+      "text": "眼睛里看到的都是广无垠的大海",
+      "confidence": 0.9286
+    },
+    {
+      "t": 14.75,
+      "text": "眼睛里看到的都是广无垠的大海",
+      "confidence": 0.9284
+    },
+    {
+      "t": 15.25,
+      "text": "眼睛里看到的都是广无垠的大海",
+      "confidence": 0.9341
+    },
+    {
+      "t": 15.75,
+      "text": "有你在的日子里不可能被取代",
+      "confidence": 0.9973
+    },
+    {
+      "t": 16.25,
+      "text": "有你在的日子里不可能被取代",
+      "confidence": 0.9961
+    },
+    {
+      "t": 16.75,
+      "text": "有你在的日子里不可能被取代",
+      "confidence": 0.9965
+    },
+    {
+      "t": 17.25,
+      "text": "有你在的日子里不可能被取代",
+      "confidence": 0.9977
+    },
+    {
+      "t": 17.75,
+      "text": "有你在的日子里不可能被取代",
+      "confidence": 0.9963
+    },
+    {
+      "t": 18.25,
+      "text": "有你在的日子里不可能被取代",
+      "confidence": 0.996
+    },
+    {
+      "t": 18.75,
+      "text": "有你在的日子里不可能被取代",
+      "confidence": 0.9966
+    },
+    {
+      "t": 19.25,
+      "text": "在最灰暗的日子你陪着我发呆",
+      "confidence": 0.9937
+    },
+    {
+      "t": 19.75,
+      "text": "在最灰暗的日子你陪着我发呆",
+      "confidence": 0.993
+    },
+    {
+      "t": 20.25,
+      "text": "在最灰暗的日子你陪着我发呆",
+      "confidence": 0.9924
+    },
+    {
+      "t": 20.75,
+      "text": "在最灰暗的日子你陪着我发呆",
+      "confidence": 0.9935
+    },
+    {
+      "t": 21.25,
+      "text": "在最灰暗的日子你陪着我发呆",
+      "confidence": 0.9924
+    },
+    {
+      "t": 21.75,
+      "text": "在最灰暗的日子你陪着我发呆",
+      "confidence": 0.9939
+    },
+    {
+      "t": 22.25,
+      "text": "在最灰暗的日子你陪着我发呆",
+      "confidence": 0.9942
+    },
+    {
+      "t": 22.75,
+      "text": "你让我学会如何拨开阴霾",
+      "confidence": 0.9614
+    },
+    {
+      "t": 23.25,
+      "text": "你让我学会如何拨开阴霾",
+      "confidence": 0.9634
+    },
+    {
+      "t": 23.75,
+      "text": "你让我学会如何拨开阴霾",
+      "confidence": 0.9672
+    },
+    {
+      "t": 24.25,
+      "text": "你让我学会如何拨开阴霾",
+      "confidence": 0.9611
+    },
+    {
+      "t": 24.75,
+      "text": "你让我学会如何拨开阴霾",
+      "confidence": 0.9657
+    },
+    {
+      "t": 25.25,
+      "text": "你让我学会如何拨开阴霾",
+      "confidence": 0.96
+    },
+    {
+      "t": 25.75,
+      "text": "将快乐全部收集",
+      "confidence": 0.9942
+    },
+    {
+      "t": 26.25,
+      "text": "将快乐全部收集",
+      "confidence": 0.994
+    },
+    {
+      "t": 26.75,
+      "text": "将快乐全部收集",
+      "confidence": 0.993
+    },
+    {
+      "t": 27.25,
+      "text": "将不开心全都淘汰",
+      "confidence": 0.9928
+    },
+    {
+      "t": 27.75,
+      "text": "将不开心全都淘汰",
+      "confidence": 0.9925
+    },
+    {
+      "t": 28.25,
+      "text": "将不开心全都淘汰",
+      "confidence": 0.9865
+    },
+    {
+      "t": 28.75,
+      "text": "将不开心全都淘汰",
+      "confidence": 0.9915
+    },
+    {
+      "t": 29.25,
+      "text": "你对我说的情话",
+      "confidence": 0.9963
+    },
+    {
+      "t": 29.75,
+      "text": "你对我说的情话",
+      "confidence": 0.9964
+    },
+    {
+      "t": 30.25,
+      "text": "你对我说的情话",
+      "confidence": 0.9961
+    },
+    {
+      "t": 30.75,
+      "text": "你对我说的情话",
+      "confidence": 0.9961
+    },
+    {
+      "t": 31.25,
+      "text": "你对我说的情话",
+      "confidence": 0.9957
+    },
+    {
+      "t": 31.75,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.9869
+    },
+    {
+      "t": 32.25,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.9862
+    },
+    {
+      "t": 32.75,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.9862
+    },
+    {
+      "t": 33.25,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.985
+    },
+    {
+      "t": 33.75,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.9884
+    },
+    {
+      "t": 34.25,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.9846
+    },
+    {
+      "t": 34.75,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.9827
+    },
+    {
+      "t": 35.25,
+      "text": "像转瞬即逝的烟花",
+      "confidence": 0.9835
+    },
+    {
+      "t": 35.75,
+      "text": "只停在绽放一刹那",
+      "confidence": 0.959
+    },
+    {
+      "t": 36.25,
+      "text": "只停在绽放一刹那",
+      "confidence": 0.9549
+    },
+    {
+      "t": 36.75,
+      "text": "只停在绽放一刹那",
+      "confidence": 0.9521
+    },
+    {
+      "t": 37.25,
+      "text": "只停在绽放一刹那",
+      "confidence": 0.9531
+    },
+    {
+      "t": 37.75,
+      "text": "只停在绽放一刹那",
+      "confidence": 0.9522
+    },
+    {
+      "t": 38.25,
+      "text": "只停在绽放一刹那",
+      "confidence": 0.9508
+    },
+    {
+      "t": 39.25,
+      "text": "我却已无法自拔",
+      "confidence": 0.978
+    },
+    {
+      "t": 39.75,
+      "text": "我却已无法自拔",
+      "confidence": 0.9728
+    },
+    {
+      "t": 40.25,
+      "text": "我却已无法自拔",
+      "confidence": 0.9612
+    },
+    {
+      "t": 40.75,
+      "text": "我却已无法自拔",
+      "confidence": 0.9752
+    },
+    {
+      "t": 41.25,
+      "text": "我却已无法自拔",
+      "confidence": 0.9732
+    },
+    {
+      "t": 41.75,
+      "text": "我却已无法自拔",
+      "confidence": 0.9766
+    },
+    {
+      "t": 42.25,
+      "text": "我却已无法自拔",
+      "confidence": 0.9749
+    },
+    {
+      "t": 42.75,
+      "text": "我们的爱总有时差",
+      "confidence": 0.9966
+    },
+    {
+      "t": 43.25,
+      "text": "我们的爱总有时差",
+      "confidence": 0.9967
+    },
+    {
+      "t": 43.75,
+      "text": "我们的爱总有时差",
+      "confidence": 0.9958
+    },
+    {
+      "t": 44.25,
+      "text": "我们的爱总有时差",
+      "confidence": 0.9951
+    },
+    {
+      "t": 44.75,
+      "text": "也为你骗自己放下",
+      "confidence": 0.996
+    },
+    {
+      "t": 45.25,
+      "text": "也为你骗自己放下",
+      "confidence": 0.9971
+    },
+    {
+      "t": 45.75,
+      "text": "也为你骗自己放下",
+      "confidence": 0.9966
+    },
+    {
+      "t": 46.25,
+      "text": "也为你骗自己放下",
+      "confidence": 0.9969
+    },
+    {
+      "t": 46.75,
+      "text": "也为你骗自己放下",
+      "confidence": 0.9967
+    },
+    {
+      "t": 47.25,
+      "text": "也为你骗自己放下",
+      "confidence": 0.9969
+    },
+    {
+      "t": 47.75,
+      "text": "也为你骗自己放下",
+      "confidence": 0.9956
+    },
+    {
+      "t": 48.25,
+      "text": "也为你骗自己放下",
+      "confidence": 0.9965
+    },
+    {
+      "t": 48.75,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9876
+    },
+    {
+      "t": 49.25,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9895
+    },
+    {
+      "t": 49.75,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9895
+    },
+    {
+      "t": 50.25,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9889
+    },
+    {
+      "t": 50.75,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9844
+    },
+    {
+      "t": 51.25,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9851
+    },
+    {
+      "t": 51.75,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.982
+    },
+    {
+      "t": 52.25,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9819
+    },
+    {
+      "t": 52.75,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9845
+    },
+    {
+      "t": 53.25,
+      "text": "爱炙热的你却忘了爱自己",
+      "confidence": 0.9861
+    }
+  ]
+}

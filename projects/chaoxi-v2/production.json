@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "status": "complete",
+  "source_video": "../../潮汐.mp4",
+  "source_sha256": "9ed7ed6e4ef2987cf2ec161f863a026ea74612768a0cffdfe5601e77c6c941f9",
+  "output": "out/video.mp4",
+  "audio": "assets/song.m4a",
+  "actual": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 24,
+    "frames": 1344,
+    "duration_s": 56.0,
+    "bytes": 20525157,
+    "unique_drawings_per_second": 12,
+    "native_p5_canvas": [
+      1920,
+      1080
+    ]
+  },
+  "render_command": "CHROME_PATH=/path/to/chrome python projects/chaoxi-v2/tools/render.py",
+  "audio_mux": "original AAC stream-copy, no song transcode/time stretch/cuts",
+  "caption_method": "16 source-video burned-in caption lines; offline OCR consensus + visual correction + screen-edge refinement + gold/white pixel fill ratio. Not phoneme forced alignment.",
+  "checks": {
+    "full_ffmpeg_decode": "pass, no errors",
+    "source_plan_caption_tests": "8 passed including preview range/relative-asset tests",
+    "browser_smoke": "pass: out-of-order identical frames, 19 nonblank shots, motion, native 1080p, source duration/caption identity, no JS errors",
+    "final_video_per_shot_frames": "19 extracted and visually inspected",
+    "motion_strips": "umbrella and firework inspected",
+    "audio_stream_identity": "source MP4 == extracted M4A == final MP4; validator checks SHA256",
+    "full_human_audio_listening": "not performed",
+    "http_preview": "pass: port 37189 redirects to revised player; video readyState 4, 56s duration, no JS errors; S04 inspector selection works"
+  },
+  "copyright": "user-provided video/music/lyrics; no new public-use licence inferred",
+  "audio_elementary_stream_sha256": "8fb508c27079fcf52dd17aee76ccef6f24876b39e61468b321e64e584cd96426"
+}

@@ -1,0 +1,157 @@
+{
+  "version": 2,
+  "scope": "人工查看最终MP4解码的19镜总览；雨伞和烟花连续帧；自动全片解码与像素/源校验。未完成全片人工听审。",
+  "shots": [
+    {
+      "shot_id": "S01",
+      "sample_s": 0.9,
+      "frame": "out/check/S01.jpg",
+      "status": "pass",
+      "notes": "极远纸星球与小角色可辨；这个镜头有意小主体，之后立即切近。"
+    },
+    {
+      "shot_id": "S02",
+      "sample_s": 3.3,
+      "frame": "out/check/S02.jpg",
+      "status": "pass",
+      "notes": "角色的担忧表情、旁侧小花与圆弧地面成立；禁用了角色库默认雨云。"
+    },
+    {
+      "shot_id": "S03",
+      "sample_s": 6.75,
+      "frame": "out/check/S03.jpg",
+      "status": "pass",
+      "notes": "局部雨云与仰望动作可辨；流星为镜头后半动作，非本中帧可验证项。"
+    },
+    {
+      "shot_id": "S04",
+      "sample_s": 10.2,
+      "frame": "out/check/S04.jpg",
+      "status": "pass",
+      "notes": "双人相遇、朱砂/藕粉身份区分清楚，背景为新绘青绿层山。"
+    },
+    {
+      "shot_id": "S05",
+      "sample_s": 12.6,
+      "frame": "out/check/S05.jpg",
+      "status": "pass",
+      "notes": "脸部特写确有景别变化；亮眼、张口和纸片镂空可见。腿部允许为特写裁切，字幕不遮脸。"
+    },
+    {
+      "shot_id": "S06",
+      "sample_s": 14.55,
+      "frame": "out/check/S06.jpg",
+      "status": "pass",
+      "notes": "双人背影看海，关系与方向成立；不是相同正面立绘重复。"
+    },
+    {
+      "shot_id": "S07",
+      "sample_s": 16.9,
+      "frame": "out/check/S07.jpg",
+      "status": "pass",
+      "notes": "两人交换目光和小幅跳动，纸心在中间，和相遇镜有动作区别。"
+    },
+    {
+      "shot_id": "S08",
+      "sample_s": 19.6,
+      "frame": "out/check/S08.jpg",
+      "status": "pass",
+      "notes": "伴侣从右撑伞靠近，雨和主体有分离；雨伞伞顶在画面内。"
+    },
+    {
+      "shot_id": "S09",
+      "sample_s": 22.35,
+      "frame": "out/check/S09.jpg",
+      "status": "pass",
+      "notes": "伞向朱砂角色偏移，二人在遮蔽范围内；20.67–21.33秒连续帧核对了衔接与雨线。"
+    },
+    {
+      "shot_id": "S10",
+      "sample_s": 24.95,
+      "frame": "out/check/S10.jpg",
+      "status": "pass",
+      "notes": "天光、岸边倒伞提供前镜连续性；角色是手绘轻跳，不做写实脚底接触。"
+    },
+    {
+      "shot_id": "S11",
+      "sample_s": 27.75,
+      "frame": "out/check/S11.jpg",
+      "status": "pass",
+      "notes": "瓶中纸星和两人手臂形成动作三角；字幕来自当前片“将不开心全都淘汰”。"
+    },
+    {
+      "shot_id": "S12",
+      "sample_s": 30.75,
+      "frame": "out/check/S12.jpg",
+      "status": "pass",
+      "notes": "近景闭眼依偎与夜色成立；小瓶在脚边继续保留，不增加新歌或旧项目道具剧情。"
+    },
+    {
+      "shot_id": "S13",
+      "sample_s": 33.6,
+      "frame": "out/check/S13.jpg",
+      "status": "pass",
+      "notes": "远景给第一组烟花留出上方空间；角色尺度有意变小。"
+    },
+    {
+      "shot_id": "S14",
+      "sample_s": 37.25,
+      "frame": "out/check/S14.jpg",
+      "status": "pass",
+      "notes": "最终视频35–36秒连续帧可见烟花升起、展开、余烬；金色是纸质低饱和处理，亮度比参考片克制。"
+    },
+    {
+      "shot_id": "S15",
+      "sample_s": 41.45,
+      "frame": "out/check/S15.jpg",
+      "status": "pass",
+      "notes": "下方墨水真实遮挡腿部，只剩单人；这一镜不是团聚或双人床铺。"
+    },
+    {
+      "shot_id": "S16",
+      "sample_s": 44.8,
+      "frame": "out/check/S16.jpg",
+      "status": "pass",
+      "notes": "两半日夜世界与分离角色可辨，保持原片时差意象。字幕在本中帧已进入下一唱句，这是原片显示时序，不用分镜硬套歌词。"
+    },
+    {
+      "shot_id": "S17",
+      "sample_s": 47.7,
+      "frame": "out/check/S17.jpg",
+      "status": "pass",
+      "notes": "单人、破心、泪滴保留失落情绪；未恢复伴侣。"
+    },
+    {
+      "shot_id": "S18",
+      "sample_s": 50.85,
+      "frame": "out/check/S18.jpg",
+      "status": "pass",
+      "notes": "收心到胸前的手势与暖色可见；这是忠于“忘了爱自己”的意象改写，非原片逐像素复制。"
+    },
+    {
+      "shot_id": "S19",
+      "sample_s": 54.25,
+      "frame": "out/check/S19.jpg",
+      "status": "pass",
+      "notes": "拉远到一个人的星球与花；无伴侣团聚，55秒后淡出。"
+    }
+  ],
+  "motion_evidence": [
+    "out/check/umbrella-motion.jpg",
+    "out/check/firework-motion.jpg"
+  ],
+  "limitations": [
+    "动作12幅/秒，24fps编码，不是24幅独立手绘",
+    "字幕是原片屏幕OCR/行级填色，不是逐字声学对齐",
+    "未完成全片人工听审；原AAC完整流哈希一致不等于主观听感评审",
+    "水墨为程序化青绿层山/纸纹与剪影，不是物理水墨流体模拟"
+  ],
+  "fixes": [
+    "纠正了上一版擅自团聚的结尾，最后保持单人",
+    "彻底丢弃32秒歌曲/歌词/118BPM/旧分镜草稿",
+    "用当前MP4的OCR与实际金白像素恢复16行字幕",
+    "修复p5全局dot命名冲突",
+    "禁用默认情绪emote避免额外天气/感叹号",
+    "native平面后端清颜色和深度缓冲，乱序渲染确认无历史残影"
+  ]
+}

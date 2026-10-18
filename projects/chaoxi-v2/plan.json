@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "title": "潮汐 · 一颗心的潮汐",
+  "source_video": "../../潮汐.mp4",
+  "source_sha256": "9ed7ed6e4ef2987cf2ec161f863a026ea74612768a0cffdfe5601e77c6c941f9",
+  "format": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 24,
+    "drawings_per_second": 12,
+    "duration_s": 56
+  },
+  "music": {
+    "source": "user-video",
+    "file": "assets/song.m4a",
+    "bpm": 143.55,
+    "bpm_status": "automatic estimate, not the unrelated 118 BPM grid",
+    "offset": 0.093,
+    "license": "user-provided; no new rights inferred"
+  },
+  "shots": [
+    {
+      "id": "S01",
+      "start_s": 0,
+      "end_s": 1.8,
+      "summary": "一粒星球",
+      "action": "极远景圆形纸星球与单独角色；缓缓靠近，建立孤独尺度。",
+      "camera_note": "极远景 / 拉近",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S02",
+      "start_s": 1.8,
+      "end_s": 4.8,
+      "summary": "花旁独坐",
+      "action": "镜头推进到花与朱砂角色，伸手触花又缩回，细小呼吸。",
+      "camera_note": "中景 / 低机位轻推",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S03",
+      "start_s": 4.8,
+      "end_s": 8.7,
+      "summary": "心里的阴雨",
+      "action": "墨云悬在头顶，局部落雨；抬头看流星，从低落转为惊讶。",
+      "camera_note": "中景 / 固定",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S04",
+      "start_s": 8.7,
+      "end_s": 11.7,
+      "summary": "你带来晨光",
+      "action": "暖色日出，藕粉角色从右走入；朱砂角色回头，双方手臂轻抬。",
+      "camera_note": "双人中景 / 横移",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S05",
+      "start_s": 11.7,
+      "end_s": 13.5,
+      "summary": "眼中星光",
+      "action": "真正的脸部近景，瞳孔中有纸星光，惊讶变为微笑。",
+      "camera_note": "脸部特写 / 固定",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": true
+    },
+    {
+      "id": "S06",
+      "start_s": 13.5,
+      "end_s": 15.6,
+      "summary": "并肩看海",
+      "action": "切到背影中景，两人并肩朝向水面，日轮与水纹呼应。",
+      "camera_note": "背影中景 / 缓慢拉远",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S07",
+      "start_s": 15.6,
+      "end_s": 18.2,
+      "summary": "不可替代",
+      "action": "两只纸角色交换目光，纸心从两人之间升起，身体错相弹跳。",
+      "camera_note": "双人近景 / 轻推",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S08",
+      "start_s": 18.2,
+      "end_s": 21,
+      "summary": "撑伞奔来",
+      "action": "墨云压境，伴侣撑金伞从右跑向左侧低落角色。",
+      "camera_note": "全景 / 跟随入画",
+      "transition_out": "墨云形状匹配",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S09",
+      "start_s": 21,
+      "end_s": 23.7,
+      "summary": "向你倾伞",
+      "action": "两人靠近伞下，伞向朱砂角色倾斜，伴侣肩侧仍有雨。",
+      "camera_note": "中近景 / 固定",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": true
+    },
+    {
+      "id": "S10",
+      "start_s": 23.7,
+      "end_s": 26.2,
+      "summary": "雨过天光",
+      "action": "雨云裂开，光带落下，伞放到岸边；两人靠肩。",
+      "camera_note": "中景 / 轻拉远",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S11",
+      "start_s": 26.2,
+      "end_s": 29.3,
+      "summary": "把烦恼装进瓶",
+      "action": "中间出现装有纸星的透明小瓶，两人伸手，烦恼碎片落入瓶。",
+      "camera_note": "道具与双人中景",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S12",
+      "start_s": 29.3,
+      "end_s": 32.2,
+      "summary": "依偎入夜",
+      "action": "夜色降下，中近景依偎，心形在上方短暂出现。",
+      "camera_note": "近景 / 固定",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S13",
+      "start_s": 32.2,
+      "end_s": 35,
+      "summary": "烟花升空",
+      "action": "拉远给烟花留空，第一支金色烟花从下向上升起。",
+      "camera_note": "远景 / 缓慢拉远",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S14",
+      "start_s": 35,
+      "end_s": 39.5,
+      "summary": "绽放一刹那",
+      "action": "金与藕粉烟花依次展开，35.09 秒候选拍点附近最大绽放；随后余烬落下。",
+      "camera_note": "远景 / 固定",
+      "transition_out": "水面匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": true
+    },
+    {
+      "id": "S15",
+      "start_s": 39.5,
+      "end_s": 43.4,
+      "summary": "沉入回忆",
+      "action": "匹配切到单独朱砂角色卧在墨色水面，眨眼、下沉少许；不是欢快团聚。",
+      "camera_note": "单人近景 / 水平平移",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S16",
+      "start_s": 43.4,
+      "end_s": 46.2,
+      "summary": "日夜时差",
+      "action": "两半圆形世界一昼一夜，两人隔着轮廓缓慢错开，表现时差。",
+      "camera_note": "极远景 / 两半世界",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S17",
+      "start_s": 46.2,
+      "end_s": 49.2,
+      "summary": "假装放下",
+      "action": "回到独处的星球，破裂纸心悬在上方，泪滴滑落，手臂放下。",
+      "camera_note": "单人中景 / 轻推",
+      "transition_out": "连续动作或构图匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": false
+    },
+    {
+      "id": "S18",
+      "start_s": 49.2,
+      "end_s": 52.5,
+      "summary": "忘记爱自己",
+      "action": "角色低头把破心接在胸前；纸瓣收拢，只留心中暖色。",
+      "camera_note": "胸口近景 / 固定",
+      "transition_out": "胸口暖心匹配切",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": true
+    },
+    {
+      "id": "S19",
+      "start_s": 52.5,
+      "end_s": 56,
+      "summary": "把心还给自己",
+      "action": "从胸口小小暖心拉远到完整小星球；单人、花与星光，不新增伴侣团聚。",
+      "camera_note": "近景到极远景 / 长拉远",
+      "transition_out": "纸色收束",
+      "reference_note": "依据56秒上传片的画面观察；人工叙事分镜，不是自动硬切检测",
+      "hero": true
+    }
+  ],
+  "captions": {
+    "enabled": true,
+    "source": "OCR of burned-in subtitles in the actual 56-second MP4",
+    "file": "assets/captions.json",
+    "timing_method": "OCR consensus + 0.125s edge scan + original gold/white pixel fill ratio",
+    "alignment_scope": "line-level screen timing and fill, not ASR/phoneme alignment",
+    "review": "16 source lines visually compared; 袤 corrected from source 15s frame"
+  }
+}
