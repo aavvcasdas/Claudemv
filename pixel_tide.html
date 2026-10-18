@@ -1,0 +1,392 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>潮汐 · 像素风</title>
+<style>
+  html, body { margin: 0; background: #111; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  canvas { image-rendering: pixelated; image-rendering: crisp-edges; width: min(100vw, 1280px); height: auto; }
+  .bar { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; align-items: center; background: rgba(0,0,0,0.7); padding: 8px 16px; border-radius: 8px; }
+  #scrub { width: 400px; }
+  #tt { color: #fff; font: 13px monospace; min-width: 160px; }
+</style>
+<script src="node_modules/p5/lib/p5.min.js"></script>
+</head>
+<body>
+<div class="bar"><input id="scrub" type="range" min="0" max="56" step="0.0417" value="0"><span id="tt">0.00s / 56.00s</span></div>
+<script>
+const W = 1920, H = 1080;
+const BPM = 143.6, BEAT = 60 / BPM, DUR = 56;
+const TAU = Math.PI * 2;
+
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, x) => a + (b - a) * x;
+const ease = x => { x = clamp(x); return x * x * (3 - 2 * x); };
+const easeOut = x => 1 - Math.pow(1 - clamp(x), 3);
+const hash = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+
+const C = {
+  night1: '#1A1A3E', night2: '#2D2D5E', night3: '#3D3D7E',
+  stars: '#FFFFFF', moon: '#FFFACD',
+  orange: '#E8734A', orangeDark: '#C05830', orangeLight: '#FF9070',
+  pink: '#F090A0', pinkDark: '#D06878', pinkLight: '#FFB0C0',
+  ground: '#4A6B4A', groundDark: '#3A5538',
+  sunset1: '#FF8C5A', sunset2: '#FFB07A', sunset3: '#FFD090',
+  planetGreen: '#5A9A5A', planetDark: '#2D5D2D',
+  firework1: '#FF6B6B', firework2: '#6BFF6B', firework3: '#6B6BFF',
+  firework4: '#FFFF6B', firework5: '#FF6BFF',
+  heart: '#FF4466',
+};
+
+const LYRICS = [
+  { t: 0.0, text: "潮汐起落" },
+  { t: 5.0, text: "心跳随着节拍" },
+  { t: 10.4, text: "你是我心中的光" },
+  { t: 15.0, text: "照亮每个夜晚" },
+  { t: 20.0, text: "烟花绽放时" },
+  { t: 25.0, text: "我们一起许愿" },
+  { t: 30.0, text: "星星为我们见证" },
+  { t: 35.4, text: "世界那么大" },
+  { t: 40.0, text: "却只遇见你" },
+  { t: 44.7, text: "潮汐不停息" },
+  { t: 50.0, text: "爱意永流转" },
+];
+
+const PW = 480, PH = 270;
+let pg;
+
+function setup() {
+  createCanvas(W, H);
+  noSmooth();
+  pg = createGraphics(PW, PH);
+  pg.pixelDensity(1);
+  pg.noSmooth();
+  pixelDensity(1);
+
+  // Scrub
+  const scrub = document.getElementById('scrub');
+  scrub.max = DUR;
+  scrub.addEventListener('input', () => {
+    scrubTime = parseFloat(scrub.value);
+  });
+}
+
+let scrubTime = 0;
+
+function draw() {
+  // Auto-play or scrub
+  if (!document.getElementById('scrub').matches(':active')) {
+    scrubTime += 1/60;
+    if (scrubTime > DUR) scrubTime = 0;
+  }
+  document.getElementById('scrub').value = scrubTime;
+  document.getElementById('tt').textContent = scrubTime.toFixed(2) + 's / ' + DUR.toFixed(2) + 's';
+
+  const t = scrubTime;
+  pg.clear();
+
+  // Determine shot
+  const shotTimes = [0, 10.4, 35.4, 42.7, 44.7];
+  let si = 0;
+  for (let i = shotTimes.length - 1; i >= 0; i--) {
+    if (t >= shotTimes[i]) { si = i; break; }
+  }
+  const t0 = shotTimes[si];
+  const lt = t - t0;
+  const nextT = si + 1 < shotTimes.length ? shotTimes[si + 1] : DUR;
+  const dur = nextT - t0;
+
+  [shot1, shot2, shot3, shot4, shot5][si](t, lt, dur);
+
+  // Draw pixel buffer scaled up
+  noSmooth();
+  image(pg, 0, 0, W, H);
+}
+
+// Helper: pixel rect
+function pR(x, y, w, h, col) {
+  pg.noStroke(); pg.fill(col);
+  pg.rect(Math.floor(x), Math.floor(y), Math.floor(w), Math.floor(h));
+}
+function pP(x, y, col) {
+  pg.stroke(col); pg.strokeWeight(1); pg.point(Math.floor(x), Math.floor(y));
+}
+
+function drawStar(x, y, size, col, twinkle) {
+  const s = Math.max(1, Math.floor(size));
+  const a = 0.5 + 0.5 * Math.sin(twinkle);
+  pg.noStroke();
+  const alpha = Math.floor(255 * a);
+  pg.fill(red(col), green(col), blue(col), alpha);
+  pg.rect(Math.floor(x) - s, Math.floor(y), s * 2 + 1, 1);
+  pg.rect(Math.floor(x), Math.floor(y) - s, 1, s * 2 + 1);
+  if (s >= 2 && a > 0.7) {
+    pg.rect(Math.floor(x) - s + 1, Math.floor(y) - 1, 1, 3);
+    pg.rect(Math.floor(x) + s - 1, Math.floor(y) - 1, 1, 3);
+    pg.rect(Math.floor(x) - 1, Math.floor(y) - s + 1, 3, 1);
+    pg.rect(Math.floor(x) - 1, Math.floor(y) + s - 1, 3, 1);
+  }
+}
+
+function drawMoon(x, y, r) {
+  const cx = Math.floor(x), cy = Math.floor(y), cr = Math.floor(r);
+  pg.noStroke();
+  const mc = color(C.moon);
+  pg.fill(red(mc), green(mc), blue(mc));
+  for (let py = -cr; py <= cr; py++) {
+    for (let px = -cr; px <= cr; px++) {
+      if (px * px + py * py <= cr * cr) {
+        const d2 = (px - cr * 0.35) ** 2 + (py + cr * 0.3) ** 2;
+        if (d2 > cr * cr * 0.55) {
+          pg.point(cx + px, cy + py);
+        }
+      }
+    }
+  }
+}
+
+function drawBoxChar(x, y, size, colKey, face, opts = {}) {
+  const color = C[colKey];
+  const darkCol = C[colKey + 'Dark'];
+  const lightCol = C[colKey + 'Light'];
+  const s = Math.floor(size);
+  const bx = Math.floor(x) - s / 2, by = Math.floor(y) - s / 2;
+
+  pR(bx, by, s, s, color);
+  pR(bx, by + s - 2, s, 2, darkCol);
+  pR(bx + s - 2, by, 2, s, darkCol);
+  pR(bx, by, s, 1, lightCol);
+  pR(bx, by, 1, s, lightCol);
+
+  const faceY = by + Math.floor(s * 0.35);
+  const eyeSp = Math.floor(s * 0.22);
+  const eyeSz = Math.max(2, Math.floor(s * 0.13));
+  const eyeL = bx + Math.floor(s / 2) - eyeSp - eyeSz;
+  const eyeR = bx + Math.floor(s / 2) + eyeSp - 1;
+
+  if (face === 'happy' || face === 'love') {
+    pR(eyeL, faceY, eyeSz, eyeSz, '#1A1A1A');
+    pR(eyeR, faceY, eyeSz, eyeSz, '#1A1A1A');
+    pR(bx + Math.floor(s/2) - 2, faceY + eyeSz + 2, 4, 2, '#1A1A1A');
+  } else if (face === 'sad') {
+    pR(eyeL, faceY, eyeSz, eyeSz, '#1A1A1A');
+    pR(eyeR, faceY, eyeSz, eyeSz, '#1A1A1A');
+    pR(bx + Math.floor(s/2) - 2, faceY + eyeSz + 4, 4, 1, '#1A1A1A');
+  } else if (face === 'surprised') {
+    pR(eyeL - 1, faceY - 1, eyeSz + 2, eyeSz + 2, '#1A1A1A');
+    pR(eyeR - 1, faceY - 1, eyeSz + 2, eyeSz + 2, '#1A1A1A');
+    pR(bx + Math.floor(s/2) - 1, faceY + eyeSz + 2, 3, 3, '#FFF');
+  } else if (face === 'love') {
+    pg.noStroke();
+    const hc = color(C.heart);
+    pg.fill(red(hc), green(hc), blue(hc));
+    const hx1 = bx + Math.floor(s/2) - eyeSp;
+    const hx2 = bx + Math.floor(s/2) + eyeSp;
+    pR(hx1-1, faceY-1, 2, 2, C.heart); pR(hx1+1, faceY-1, 2, 2, C.heart);
+    pR(hx1, faceY+1, 2, 1, C.heart);
+    pR(hx2-1, faceY-1, 2, 2, C.heart); pR(hx2+1, faceY-1, 2, 2, C.heart);
+    pR(hx2, faceY+1, 2, 1, C.heart);
+    pR(bx + Math.floor(s/2)-2, faceY+eyeSz+2, 4, 2, '#1A1A1A');
+  } else if (face === 'sleep') {
+    pR(eyeL-1, faceY+1, eyeSz*2+2, 2, '#1A1A1A');
+    pR(eyeR-1, faceY+1, eyeSz*2+2, 2, '#1A1A1A');
+  }
+
+  if (opts.blush) {
+    pg.noStroke(); pg.fill(255, 153, 153, 150);
+    pR(bx+Math.floor(s/2)-eyeSp-3, faceY+3, 3, 2, '#FF9999');
+    pR(bx+Math.floor(s/2)+eyeSp+1, faceY+3, 3, 2, '#FF9999');
+  }
+
+  if (opts.hands !== false) {
+    const handY = by + Math.floor(s * 0.5);
+    pR(bx - 3, handY, 3, 4, color);
+    pR(bx + s, handY, 3, 4, color);
+  }
+  if (opts.legs !== false) {
+    pR(bx + 3, by + s, 4, 4, darkCol);
+    pR(bx + s - 7, by + s, 4, 4, darkCol);
+  }
+}
+
+function drawGround(y, col, darkCol) {
+  pg.noStroke();
+  const gc = color(col);
+  pg.fill(red(gc), green(gc), blue(gc));
+  for (let x = 0; x < PW; x++) {
+    const h = Math.floor(8 + 4 * Math.sin(x * 0.04) + 2 * Math.sin(x * 0.11));
+    for (let py = 0; py < h; py++) pg.point(x, y - py);
+  }
+  const dc = color(darkCol);
+  pg.fill(red(dc), green(dc), blue(dc));
+  for (let x = 0; x < PW; x++) {
+    const h = Math.floor(8 + 4 * Math.sin(x * 0.04) + 2 * Math.sin(x * 0.11));
+    pg.point(x, y - h);
+    pg.point(x, y - h + 1);
+  }
+}
+
+function drawFirework(x, y, radius, colors, t) {
+  const n = colors.length;
+  for (let i = 0; i < n; i++) {
+    const angle = (i / n) * TAU + t * 0.5;
+    const r = radius * (0.3 + 0.7 * Math.abs(Math.sin(t * 2 + i * 0.7)));
+    for (let j = 0; j < 3; j++) {
+      const tr = r - j * 3;
+      if (tr > 0) {
+        pP(Math.floor(x + Math.cos(angle) * tr), Math.floor(y + Math.sin(angle) * tr), colors[i]);
+      }
+    }
+    pP(Math.floor(x + Math.cos(angle) * r), Math.floor(y + Math.sin(angle) * r), '#FFF');
+  }
+  pP(Math.floor(x), Math.floor(y), '#FFF');
+}
+
+function drawPlanet(x, y, r, t) {
+  const cx = Math.floor(x), cy = Math.floor(y), cr = Math.floor(r);
+  const lightX = Math.cos(t * 0.15) * 0.3;
+  const gc = color(C.planetGreen);
+  const dc = color(C.planetDark);
+  for (let py = -cr; py <= cr; py++) {
+    for (let px = -cr; px <= cr; px++) {
+      if (px * px + py * py <= cr * cr) {
+        const b = (px / cr) * lightX + 0.5;
+        const c = b > 0 ? gc : dc;
+        pg.noStroke(); pg.fill(red(c), green(c), blue(c));
+        pg.point(cx + px, cy + py);
+      }
+    }
+  }
+  pg.noStroke(); pg.fill(128, 192, 128, 100);
+  pR(cx - cr * 0.3, cy - cr * 0.3, cr * 0.3, cr * 0.2, '#80C080');
+}
+
+function drawSubtitle(text, alpha) {
+  if (!text) return;
+  const barH = 14;
+  const barY = PH - barH - 4;
+  pg.noStroke(); pg.fill(0, 0, 0, Math.floor(120 * alpha));
+  pg.rect(0, barY, PW, barH);
+  pg.fill(255, 255, 255, Math.floor(255 * alpha));
+  pg.textSize(8);
+  pg.textAlign(CENTER, CENTER);
+  pg.text(text, PW / 2, barY + barH / 2);
+}
+
+// ─── Shots ───
+
+function shot1(t, lt, dur) {
+  const progress = lt / dur;
+  for (let y = 0; y < PH * 0.7; y++) {
+    const k = y / (PH * 0.7);
+    pg.noStroke(); pg.fill(Math.floor(lerp(26, 45, k)), Math.floor(lerp(26, 45, k)), Math.floor(lerp(62, 90, k)));
+    pg.rect(0, y, PW, 1);
+  }
+  for (let i = 0; i < 60; i++)
+    drawStar(hash(i*3)*PW, hash(i*7+1)*PH*0.6, hash(i*11+2)>0.8?2:1, C.stars, t*(1+hash(i*5))*2+i);
+  drawMoon(PW*0.8, PH*0.15, 12);
+  drawGround(PH*0.78, C.ground, C.groundDark);
+
+  const cs = lerp(16, 24, easeOut(progress));
+  const cy2 = PH*0.78 - cs/2 - 4 + Math.sin(t*2)*1;
+  drawBoxChar(PW*0.5, cy2, cs, 'orange', 'happy', { blush: true });
+
+  const lyric = LYRICS.find(l => t >= l.t && t < l.t + 5);
+  const la = lyric ? clamp((t-lyric.t)/0.5,0,1) * clamp((lyric.t+4.5-t)/0.5,0,1) : 0;
+  drawSubtitle(lyric ? lyric.text : '', la);
+}
+
+function shot2(t, lt, dur) {
+  const progress = lt / dur;
+  if (progress < 0.3) {
+    for (let y = 0; y < PH*0.6; y++) {
+      const k = y/(PH*0.6);
+      pg.noStroke(); pg.fill(Math.floor(lerp(255,100,k)), Math.floor(lerp(140,80,k)), Math.floor(lerp(90,120,k)));
+      pg.rect(0, y, PW, 1);
+    }
+    const sunY = lerp(PH*0.5, PH*0.35, progress/0.3);
+    pR(PW*0.5-15, sunY, 30, 30, C.sunset3);
+    drawGround(PH*0.78, C.ground, C.groundDark);
+    drawBoxChar(PW*0.42, PH*0.78-13, 18, 'orange', 'happy', { blush: true });
+    drawBoxChar(PW*0.58, PH*0.78-13, 18, 'pink', 'happy', { blush: true });
+  } else if (progress < 0.6) {
+    for (let y = 0; y < PH*0.75; y++) {
+      const k = y/(PH*0.75);
+      pg.noStroke(); pg.fill(Math.floor(lerp(26,40,k)), Math.floor(lerp(26,40,k)), Math.floor(lerp(62,80,k)));
+      pg.rect(0, y, PW, 1);
+    }
+    for (let i = 0; i < 40; i++) drawStar(hash(i*3)*PW, hash(i*7+1)*PH*0.5, 1, C.stars, t*2+i);
+    drawGround(PH*0.78, C.ground, C.groundDark);
+    const fwP = (progress-0.3)/0.3;
+    if (fwP > 0.1) {
+      const colors = [C.firework1,C.firework2,C.firework3,C.firework4,C.firework5];
+      for (let i = 0; i < 3; i++) drawFirework(PW*(0.3+i*0.2), PH*(0.2+i*0.05), 20+10*Math.sin(t*3+i), colors, t+i*0.5);
+    }
+    drawBoxChar(PW*0.42, PH*0.78-13, 18, 'orange', 'surprised', { blush: true });
+    drawBoxChar(PW*0.58, PH*0.78-13, 18, 'pink', 'love', { blush: true });
+  } else {
+    for (let y = 0; y < PH*0.7; y++) {
+      const k = y/(PH*0.7);
+      pg.noStroke(); pg.fill(Math.floor(lerp(20,35,k)), Math.floor(lerp(20,35,k)), Math.floor(lerp(50,70,k)));
+      pg.rect(0, y, PW, 1);
+    }
+    for (let i = 0; i < 80; i++) drawStar(hash(i*3)*PW, hash(i*7+1)*PH*0.6, hash(i*11+2)>0.9?2:1, C.stars, t*(1+hash(i*5))*2+i);
+    drawMoon(PW*0.15, PH*0.12, 10);
+    drawGround(PH*0.78, C.ground, C.groundDark);
+    drawBoxChar(PW*0.42, PH*0.78-13, 18, 'orange', 'happy', { blush: true });
+    drawBoxChar(PW*0.58, PH*0.78-13, 18, 'pink', 'happy', { blush: true });
+  }
+  const lyric = LYRICS.find(l => t >= l.t && t < l.t + 5);
+  const la = lyric ? clamp((t-lyric.t)/0.5,0,1) * clamp((lyric.t+4.5-t)/0.5,0,1) : 0;
+  drawSubtitle(lyric ? lyric.text : '', la);
+}
+
+function shot3(t, lt, dur) {
+  const progress = lt / dur;
+  for (let y = 0; y < PH*0.7; y++) {
+    const k = y/(PH*0.7);
+    pg.noStroke(); pg.fill(Math.floor(lerp(26,45,k)), Math.floor(lerp(26,45,k)), Math.floor(lerp(62,90,k)));
+    pg.rect(0, y, PW, 1);
+  }
+  for (let i = 0; i < 50; i++) drawStar(hash(i*3)*PW, hash(i*7+1)*PH*0.5, 1, C.stars, t*2+i);
+  drawPlanet(PW*0.5, PH*0.4, lerp(20, 40, easeOut(progress)), t);
+  drawGround(PH*0.82, C.ground, C.groundDark);
+  const lyric = LYRICS.find(l => t >= l.t && t < l.t + 5);
+  const la = lyric ? clamp((t-lyric.t)/0.5,0,1) * clamp((lyric.t+4.5-t)/0.5,0,1) : 0;
+  drawSubtitle(lyric ? lyric.text : '', la);
+}
+
+function shot4(t, lt, dur) {
+  const progress = lt / dur;
+  const flash = progress < 0.3 ? easeOut(progress/0.3) : 1 - ease((progress-0.3)/0.7);
+  const b = Math.floor(flash * 200);
+  pg.noStroke(); pg.fill(26+b, 26+b, 62+b);
+  pg.rect(0, 0, PW, PH);
+  for (let i = 0; i < 30; i++) {
+    if (hash(i*17+Math.floor(t*10)) > 0.5) drawStar(hash(i*3)*PW, hash(i*7+1)*PH*0.6, 2, C.stars, t*10+i);
+  }
+}
+
+function shot5(t, lt, dur) {
+  const progress = lt / dur;
+  for (let y = 0; y < PH*0.7; y++) {
+    const k = y/(PH*0.7);
+    pg.noStroke(); pg.fill(Math.floor(lerp(26,45,k)), Math.floor(lerp(26,45,k)), Math.floor(lerp(62,90,k)));
+    pg.rect(0, y, PW, 1);
+  }
+  for (let i = 0; i < 60; i++) drawStar(hash(i*3)*PW, hash(i*7+1)*PH*0.6, 1, C.stars, t*2+i);
+  drawMoon(PW*0.8, PH*0.15, 12);
+  drawGround(PH*0.78, C.ground, C.groundDark);
+  const cs = lerp(20, 16, easeOut(progress));
+  drawBoxChar(PW*0.5, PH*0.78-cs/2-4, cs, 'orange', 'happy', { blush: true });
+  if (progress > 0.7) {
+    const ep = (progress-0.7)/0.3;
+    drawPlanet(PW*0.75, PH*0.3, lerp(5,15,easeOut(ep)), t);
+  }
+  const lyric = LYRICS.find(l => t >= l.t && t < l.t + 5);
+  const la = lyric ? clamp((t-lyric.t)/0.5,0,1) * clamp((lyric.t+4.5-t)/0.5,0,1) : 0;
+  drawSubtitle(lyric ? lyric.text : '', la);
+}
+</script>
+</body>
+</html>
