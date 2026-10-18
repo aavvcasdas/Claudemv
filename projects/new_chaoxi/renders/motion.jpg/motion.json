@@ -1,0 +1,17 @@
+{
+ "video": "projects/new_chaoxi/renders/video.mp4",
+ "fps": 24.0,
+ "frames": 793,
+ "cuts": [
+  9.75,
+  9.792,
+  16.417,
+  18.375,
+  18.458
+ ],
+ "freezes": [],
+ "black": [],
+ "white_flash": [],
+ "end_hard_cut_to_black": false,
+ "note": "open each strip. Pops are not detected here: check every action with clip_strip.py at 12 fps."
+}

@@ -71,7 +71,8 @@ window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
         c.lineWidth = 8.5;
         c.strokeStyle = '#1C141B';
         c.strokeText(ch, gx, gy);
-        c.fillStyle = PAL.ochre || '#E8AA38';
+        const isQinglv = typeof PROJECT !== 'undefined' && PROJECT.styles && PROJECT.styles.includes('qinglv-woodblock');
+        c.fillStyle = isQinglv ? '#FFD460' : (PAL.ochre || '#E8AA38');
         c.fillText(ch, gx, gy);
         c.restore();
       }
@@ -115,13 +116,13 @@ window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
     const L = raw.map(normLine);
     let idx = -1;
     for (let i = 0; i < L.length; i++) {
-      if (t >= L[i].t0 - 0.08 && t <= L[i].t1 + 0.20) { idx = i; break; }
+      if (t >= L[i].t0 - 0.06 && t <= L[i].t1 + 0.06) { idx = i; break; }
     }
     if (idx < 0) return;
 
     const cur = L[idx], { t0, t1, txt, words, o } = cur;
     const prev = idx > 0 && L[idx - 1].o?.hold && t < L[idx - 1].o.hold ? L[idx - 1] : null;
-    const a = clamp(Math.min((t - (t0 - 0.08)) / 0.14, (t1 + 0.20 - t) / 0.18));
+    const a = clamp(Math.min((t - (t0 - 0.06)) / 0.12, (t1 + 0.06 - t) / 0.12));
     if (a <= 0.01) return;
 
     c.save();
@@ -151,17 +152,22 @@ window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
       }
     } else {
       const px = W / 2 - bw / 2, py = Y - BH / 2;
-      // Traditional Ebony & Gold-Trimmed Lyric Plaque (乌木描金词牌)
-      c.fillStyle = 'rgba(24, 18, 24, 0.80)';
+      const isQinglv = typeof PROJECT !== 'undefined' && PROJECT.styles && PROJECT.styles.includes('qinglv-woodblock');
+      // Traditional Ebony or Lapis-Lazuli & Gold-Trimmed Lyric Plaque (乌木/青绿描金词牌)
+      c.fillStyle = isQinglv ? 'rgba(14, 28, 54, 0.84)' : 'rgba(24, 18, 24, 0.80)';
       pill(c, px, py, bw, BH, BR);
       c.fill();
-      c.strokeStyle = 'rgba(232, 170, 56, 0.48)';
-      c.lineWidth = 1.6;
+      c.strokeStyle = isQinglv ? 'rgba(245, 200, 92, 0.72)' : 'rgba(232, 170, 56, 0.48)';
+      c.lineWidth = isQinglv ? 2.0 : 1.6;
       c.stroke();
 
-      // Small vermilion seal ornament on left inside plaque
-      c.fillStyle = '#B02E22';
+      // Ornament on left & right inside plaque
+      c.fillStyle = isQinglv ? '#3B9E82' : '#B02E22';
       c.fillRect(px + 12, Y - 10, 8, 20);
+      if (isQinglv) {
+        c.fillStyle = '#F5C85C';
+        c.fillRect(px + bw - 20, Y - 10, 6, 20);
+      }
 
       const k = clamp((t - t0) / Math.max(0.01, t1 - t0));
       paintRow(c, txt, Y, k, words, t);

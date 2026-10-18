@@ -1036,4 +1036,499 @@
     PAL: PC_PAL, sawRow, crescent, teardrop, plum: pcPlum, coin: pcCoin,
     tuanhua, cornerFrame, heart: pcHeart, umbrella, jar: celadonJar
   };
+
+  // ============================================================================
+  // 5. QINGLV — 青绿金碧·敦煌重彩木版画 (styles/qinglv-woodblock/STYLE.md)
+  // ============================================================================
+  const QL_PAL = {
+    azurite: '#1B4F82', azuriteLt: '#3C88B8',
+    malachite: '#267F68', malachiteLt: '#58B894',
+    ochre: '#B86B43', mudGold: '#F5C85C', goldLt: '#FFF0B8',
+    cinnabar: '#E05A47', celadon: '#6EC4CA',
+    violet: '#583E6E', violetLt: '#B88498',
+    lapis: '#112244', lapisDk: '#091326', silk: '#F4E6CC'
+  };
+
+  function silkGround(ctx, w, h, mode = 'sunset', t = 0) {
+    ctx.save();
+    const g = ctx.createLinearGradient(0, -250, 0, h + 250);
+    if (mode === 'sunset') {
+      g.addColorStop(0.00, '#3D2E58');
+      g.addColorStop(0.28, '#8E5A7C');
+      g.addColorStop(0.52, '#E29A72');
+      g.addColorStop(0.72, '#F6CE86');
+      g.addColorStop(1.00, '#D9A46C');
+    } else if (mode === 'golden') {
+      g.addColorStop(0.00, '#D99B52');
+      g.addColorStop(0.35, '#F4C97A');
+      g.addColorStop(0.65, '#FFF0BE');
+      g.addColorStop(1.00, '#E8BA78');
+    } else if (mode === 'seabed') {
+      g.addColorStop(0.00, '#1B4F82');
+      g.addColorStop(0.45, '#112E56');
+      g.addColorStop(0.85, '#0A1B36');
+      g.addColorStop(1.00, '#071224');
+    } else if (mode === 'dusk') {
+      g.addColorStop(0.00, '#231F42');
+      g.addColorStop(0.38, '#4E3C6E');
+      g.addColorStop(0.68, '#8A6888');
+      g.addColorStop(1.00, '#4A3B5C');
+    } else {
+      // night (螺钿黑漆夜海)
+      g.addColorStop(0.00, '#0B1026');
+      g.addColorStop(0.45, '#182448');
+      g.addColorStop(0.80, '#25325C');
+      g.addColorStop(1.00, '#141B34');
+    }
+    ctx.fillStyle = g;
+    ctx.fillRect(-500, -350, w + 1000, h + 700);
+
+    // Subtle woodblock baren horizontal silk grain (熟绢与饾版横纹)
+    ctx.strokeStyle = mode === 'night' || mode === 'seabed' ? 'rgba(245,200,92,0.03)' : 'rgba(90,45,25,0.035)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let y = -100; y < h + 100; y += 8) {
+      ctx.moveTo(-200, y);
+      ctx.lineTo(w + 200, y);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Three-tiered Song-dynasty Blue-and-Green Mineral Mountains with 24K Mud-Gold Ridge Outlines (千里江山青绿叠嶂)
+  function qinglvMountains(ctx, yBase, w, t, o = {}) {
+    const night = o.night ?? 0;
+    const side = o.side || 'both'; // 'left', 'right', 'both'
+    const peaks = o.peaks || [
+      { x0: -220, x1: 780,  px: 210, py: yBase - 165, seed: 11 },
+      { x0: 80,   x1: 960,  px: 480, py: yBase - 115, seed: 17 },
+      { x0: 1120, x1: 2140, px: 1620, py: yBase - 150, seed: 23 }
+    ];
+    ctx.save();
+    for (const pk of peaks) {
+      if (side === 'left' && pk.px > w * 0.55) continue;
+      if (side === 'right' && pk.px < w * 0.45) continue;
+      const pts = [];
+      const N = 24;
+      for (let i = 0; i <= N; i++) {
+        const u = i / N;
+        const x = lerp(pk.x0, pk.x1, u);
+        const d = u < 0.5 ? u * 2 : (1 - u) * 2;
+        const arch = Math.pow(Math.max(0, d), 0.78);
+        const jag = (vnoise(u * 5.2, pk.seed, 3) - 0.5) * 26 * arch;
+        const y = lerp(yBase, pk.py, arch) + jag;
+        pts.push([x, y]);
+      }
+      // Mineral gradient: Ochre base -> Malachite middle -> Azurite peak
+      const mg = ctx.createLinearGradient(0, pk.py, 0, yBase);
+      mg.addColorStop(0.00, mixCol(QL_PAL.azurite, '#16203E', night * 0.65));
+      mg.addColorStop(0.45, mixCol(QL_PAL.malachite, '#223858', night * 0.65));
+      mg.addColorStop(0.82, mixCol(QL_PAL.malachiteLt, '#384668', night * 0.65));
+      mg.addColorStop(1.00, mixCol(QL_PAL.ochre, '#2C2644', night * 0.65));
+
+      ctx.beginPath();
+      ctx.moveTo(pk.x0, yBase + 6);
+      for (const [x, y] of pts) ctx.lineTo(x, y);
+      ctx.lineTo(pk.x1, yBase + 6);
+      ctx.closePath();
+      ctx.fillStyle = mg;
+      ctx.fill();
+
+      // Internal mineral contour veins (石青石绿分染结构线)
+      ctx.strokeStyle = mixCol(QL_PAL.mudGold, '#9EA8D8', night * 0.5);
+      ctx.lineWidth = 2.4;
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      pts.forEach(([x, y], idx) => idx ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+      ctx.stroke();
+
+      // Vertical gold-and-malachite ridge ribs (泥金皴脊线)
+      for (let k = 4; k < N - 3; k += 4) {
+        const [rx, ry] = pts[k];
+        ctx.beginPath();
+        ctx.moveTo(rx, ry);
+        ctx.quadraticCurveTo(rx + (k < N / 2 ? -18 : 18), (ry + yBase) * 0.5, rx + (k < N / 2 ? -36 : 36), yBase);
+        ctx.strokeStyle = `rgba(245, 200, 92, ${(0.48 * (1 - night * 0.4)).toFixed(3)})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
+
+  // Mineral Sea, Shimmering Sun/Moon Ladder, and Golden Sandy Beach (碧海金沙与鎏金水纹)
+  function seaShore(ctx, horizonY, shoreY, w, h, t, o = {}) {
+    const mode = o.mode || 'sunset'; // 'sunset' | 'golden' | 'dusk' | 'night'
+    const sunX = o.sunX ?? 1280;
+    const wetSand = o.wetSand ?? false;
+    ctx.save();
+
+    // 1. Sandy Beach (金沙或暮紫镜面滩涂)
+    const sg = ctx.createLinearGradient(0, shoreY - 30, 0, h + 200);
+    if (mode === 'golden') {
+      sg.addColorStop(0, '#F5D696');
+      sg.addColorStop(1, '#D8A45C');
+    } else if (mode === 'sunset') {
+      sg.addColorStop(0, wetSand ? '#B88498' : '#E6BA8E');
+      sg.addColorStop(0.5, wetSand ? '#8E6888' : '#D49E78');
+      sg.addColorStop(1, wetSand ? '#5E4868' : '#B87C5C');
+    } else if (mode === 'dusk') {
+      sg.addColorStop(0, '#6E5A7E');
+      sg.addColorStop(1, '#3E3252');
+    } else {
+      sg.addColorStop(0, '#323458');
+      sg.addColorStop(1, '#1B1D36');
+    }
+    ctx.fillStyle = sg;
+    ctx.fillRect(-400, shoreY - 20, w + 800, h - shoreY + 300);
+
+    // 2. Layered Azurite & Malachite Sea Band (horizonY .. shoreY)
+    const seaG = ctx.createLinearGradient(0, horizonY, 0, shoreY);
+    if (mode === 'golden') {
+      seaG.addColorStop(0.0, '#1E6E7A');
+      seaG.addColorStop(0.5, '#389E92');
+      seaG.addColorStop(1.0, '#78CCB4');
+    } else if (mode === 'sunset') {
+      seaG.addColorStop(0.0, '#2B4870');
+      seaG.addColorStop(0.55, '#426B8E');
+      seaG.addColorStop(1.0, '#7A92A8');
+    } else if (mode === 'dusk') {
+      seaG.addColorStop(0.0, '#1E2C56');
+      seaG.addColorStop(0.6, '#2E4270');
+      seaG.addColorStop(1.0, '#4E628E');
+    } else {
+      seaG.addColorStop(0.0, '#0F1A3A');
+      seaG.addColorStop(0.6, '#1C2C54');
+      seaG.addColorStop(1.0, '#2E4470');
+    }
+    ctx.fillStyle = seaG;
+    ctx.fillRect(-400, horizonY, w + 800, shoreY - horizonY + 12);
+
+    // Gold-outlined mineral wave ripples across the sea
+    const rows = 5;
+    for (let r = 0; r < rows; r++) {
+      const ry = lerp(horizonY + 18, shoreY - 16, r / (rows - 1));
+      ctx.beginPath();
+      for (let x = -300; x <= w + 300; x += 28) {
+        const wy = ry + Math.sin(x * 0.015 + t * (1.6 + r * 0.25) + r * 1.7) * (3 + r * 1.4);
+        if (x === -300) ctx.moveTo(x, wy); else ctx.lineTo(x, wy);
+      }
+      ctx.strokeStyle = mode === 'night' ? 'rgba(180,210,255,0.28)' : 'rgba(245,200,92,0.38)';
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+    }
+
+    // 3. Shimmering Sun/Moon Reflection Ladder on the Water (浮光跃金水阶)
+    const shimCol = mode === 'night' ? 'rgba(225, 238, 255, 0.72)' : 'rgba(255, 230, 145, 0.75)';
+    ctx.fillStyle = shimCol;
+    const stripCount = wetSand ? 22 : 12;
+    const maxY = wetSand ? h - 60 : shoreY - 6;
+    for (let i = 0; i < stripCount; i++) {
+      const u = i / (stripCount - 1);
+      const sy = lerp(horizonY + 6, maxY, u);
+      const sw = lerp(26, wetSand ? 155 : 95, u) * (0.75 + 0.25 * Math.sin(t * 4.2 + i * 1.3));
+      const sx = sunX + Math.sin(t * 3.1 + i * 0.9) * (6 + u * 14);
+      ctx.beginPath();
+      ctx.roundRect(sx - sw * 0.5, sy, sw, 3.2 + u * 2.5, 2);
+      ctx.fill();
+    }
+
+    // 4. Scalloped Woodblock Foam Shoreline (雕版浪沫线)
+    const surfSwell = Math.sin(t * 2.2) * 10 + (o.surfOffset || 0);
+    const foamY = shoreY + surfSwell;
+    ctx.beginPath();
+    ctx.moveTo(-300, horizonY + 40);
+    for (let x = -300; x <= w + 300; x += 24) {
+      const fy = foamY + Math.sin(x * 0.018 + t * 2.4) * 7 + Math.cos(x * 0.045 - t * 3.2) * 4;
+      ctx.lineTo(x, fy);
+    }
+    ctx.lineTo(w + 300, horizonY + 40);
+    ctx.closePath();
+    ctx.fillStyle = mode === 'golden' ? 'rgba(120, 210, 190, 0.32)' : 'rgba(190, 220, 245, 0.18)';
+    ctx.fill();
+
+    // Crisp white & gold foam lace along shoreY
+    ctx.beginPath();
+    for (let x = -300; x <= w + 300; x += 18) {
+      const fy = foamY + Math.sin(x * 0.018 + t * 2.4) * 7 + Math.cos(x * 0.045 - t * 3.2) * 4;
+      if (x === -300) ctx.moveTo(x, fy); else ctx.lineTo(x, fy);
+    }
+    ctx.strokeStyle = '#FFF9EA';
+    ctx.lineWidth = 5.5;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    ctx.strokeStyle = QL_PAL.mudGold;
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  // Towering Woodblock & Mineral Great Wave (汹涌的潮汐 · 浮世木版鹰爪巨浪)
+  function greatWave(ctx, yBase, w, h, swellK, crashK, t) {
+    if (swellK <= 0.01) return;
+    ctx.save();
+    const peakH = lerp(20, 490, easeOut(swellK)) * (1 - crashK * 0.35);
+    const cx = w * 0.5 + Math.sin(t * 1.8) * 18;
+    const pts = [];
+    const N = 48;
+    for (let i = 0; i <= N; i++) {
+      const u = i / N;
+      const x = -120 + u * (w + 240);
+      const bell = Math.exp(-Math.pow((x - cx) / 560, 2));
+      const shoulder = 0.25 * Math.sin(u * Math.PI);
+      const y = yBase - (bell * 0.82 + shoulder) * peakH + Math.sin(u * 18 + t * 4) * 6;
+      pts.push([x, y]);
+    }
+
+    // Mineral Azurite-to-Malachite Wave Body
+    const wg = ctx.createLinearGradient(0, yBase - peakH, 0, yBase + 60);
+    wg.addColorStop(0.00, '#68C4B8');
+    wg.addColorStop(0.22, '#2B7F88');
+    wg.addColorStop(0.60, '#1B4F82');
+    wg.addColorStop(1.00, '#102B52');
+
+    ctx.beginPath();
+    ctx.moveTo(-120, yBase + 40);
+    for (const [x, y] of pts) ctx.lineTo(x, y);
+    ctx.lineTo(w + 120, yBase + 40);
+    ctx.closePath();
+    ctx.fillStyle = wg;
+    ctx.fill();
+
+    // Gold-and-cyan woodblock vertical water striation ribs (木版水纹肋线)
+    for (let i = 4; i < N - 3; i += 2) {
+      const [px, py] = pts[i];
+      ctx.beginPath();
+      ctx.moveTo(px, py + 12);
+      ctx.quadraticCurveTo(px + (px < cx ? -24 : 24), (py + yBase) * 0.5, px + (px < cx ? -45 : 45), yBase + 15);
+      ctx.strokeStyle = i % 4 === 0 ? 'rgba(245,200,92,0.42)' : 'rgba(150,225,235,0.32)';
+      ctx.lineWidth = 2.0;
+      ctx.stroke();
+    }
+
+    // Thick woodblock crest band + Eagle-Claw Foam Tendrils (木版鹰爪浪头 + 飞沫水珠)
+    if (swellK > 0.25) {
+      const clawA = clamp((swellK - 0.25) / 0.35);
+      ctx.strokeStyle = QL_PAL.mudGold;
+      ctx.lineWidth = 22 * clawA;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+      ctx.stroke();
+
+      ctx.strokeStyle = '#FFF9EE';
+      ctx.lineWidth = 16 * clawA;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+      ctx.stroke();
+
+      // Claw hooks + flying pearl spray along the crest
+      for (let i = 4; i <= N - 4; i += 2) {
+        const [px, py] = pts[i];
+        const dir = px < cx ? -1 : 1;
+        ctx.fillStyle = '#FFF9EE';
+        ctx.strokeStyle = '#1B365C';
+        ctx.lineWidth = 2.2;
+        for (const k of [-1, 0, 1]) {
+          ctx.beginPath();
+          const hx = px + k * 10, hy = py + 3;
+          ctx.moveTo(hx, hy);
+          ctx.quadraticCurveTo(hx + dir * 22, hy + 16, hx + dir * (30 + k * 6), hy + 36 * clawA);
+          ctx.quadraticCurveTo(hx + dir * 10, hy + 24, hx - dir * 5, hy + 6);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        }
+        // Flying sea-spray pearl droplets above the crest
+        if (i % 4 === 0) {
+          ctx.fillStyle = '#FFF9EE';
+          ctx.strokeStyle = QL_PAL.mudGold;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(px + Math.sin(t * 5 + i) * 12, py - 22 - (i % 3) * 10, 5.5 * clawA, 0, TAU);
+          ctx.fill();
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Crashing White Surf Billows (3.25 - 3.63s)
+    if (crashK > 0.01) {
+      const nPuffs = 11;
+      for (let i = 0; i < nPuffs; i++) {
+        const u = i / (nPuffs - 1);
+        const bx = lerp(80, w - 80, u) + Math.sin(i * 3.1 + t * 4) * 20;
+        const by = lerp(yBase - peakH * 0.35, yBase + 110, crashK) + Math.cos(i * 2.3) * 18;
+        const br = (75 + 35 * Math.sin(i * 1.7)) * easeOut(crashK);
+        ctx.fillStyle = '#FAF5E8';
+        ctx.strokeStyle = '#2B4870';
+        ctx.lineWidth = 3.0;
+        ctx.beginPath();
+        ctx.arc(bx, by, br, 0, TAU);
+        ctx.fill();
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
+
+  // Blue-and-White Porcelain Drift Bottle with Red Silk Cord & Glowing Secret (青花瓷漂流瓶)
+  function porcelainBottle(ctx, x, y, sc = 1, rot = 0, glowAmt = 0.6) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    ctx.scale(sc, sc);
+    if (glowAmt > 0.05) {
+      const rg = ctx.createRadialGradient(0, 0, 2, 0, 0, 56 * glowAmt);
+      rg.addColorStop(0, `rgba(255, 232, 148, ${(0.75 * glowAmt).toFixed(3)})`);
+      rg.addColorStop(1, 'rgba(255, 232, 148, 0)');
+      ctx.fillStyle = rg;
+      ctx.beginPath();
+      ctx.arc(0, 0, 56 * glowAmt, 0, TAU);
+      ctx.fill();
+    }
+    // Translucent porcelain/glass bottle silhouette
+    ctx.fillStyle = 'rgba(235, 248, 252, 0.88)';
+    ctx.strokeStyle = '#1B3B5A';
+    ctx.lineWidth = 2.6;
+    ctx.beginPath();
+    ctx.moveTo(-7, -28);
+    ctx.lineTo(7, -28);
+    ctx.lineTo(6, -15);
+    ctx.bezierCurveTo(18, -10, 19, 18, 12, 28);
+    ctx.lineTo(-12, 28);
+    ctx.bezierCurveTo(-19, 18, -18, -10, -6, -15);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Rolled golden scroll + tiny red heart inside the bottle (瓶中心事锦书)
+    ctx.fillStyle = '#F5C85C';
+    ctx.strokeStyle = '#8C5222';
+    ctx.lineWidth = 1.5;
+    ctx.save();
+    ctx.rotate(-0.18);
+    ctx.fillRect(-5, -8, 10, 22);
+    ctx.strokeRect(-5, -8, 10, 22);
+    ctx.restore();
+    pcHeart(ctx, 0, 4, 6.5, 0, '#D2201F', '#FFF5E2');
+
+    // Cobalt blue-and-white cloud band around bottle belly (青花缠枝云纹)
+    ctx.strokeStyle = '#1E5898';
+    ctx.lineWidth = 2.0;
+    ctx.beginPath();
+    ctx.moveTo(-13, 18);
+    ctx.lineTo(13, 18);
+    ctx.moveTo(-14, 22);
+    ctx.lineTo(14, 22);
+    ctx.stroke();
+
+    // Cork stopper & crimson silk cord
+    ctx.fillStyle = '#B87A44';
+    ctx.fillRect(-6, -34, 12, 7);
+    ctx.strokeStyle = '#D2201F';
+    ctx.lineWidth = 2.4;
+    ctx.beginPath();
+    ctx.moveTo(-7, -22);
+    ctx.lineTo(7, -22);
+    ctx.quadraticCurveTo(16, -24, 20, -16);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Vermilion-and-Gold Swimming/Leaping Koi Fish (朱金锦鲤)
+  function koi(ctx, x, y, sc = 1, ang = 0, t = 0, col = '#E85A3C') {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(ang);
+    ctx.scale(sc, sc);
+    const wag = Math.sin(t * 14) * 5;
+    ctx.fillStyle = col;
+    ctx.strokeStyle = '#1C1624';
+    ctx.lineWidth = 2.0;
+    // Body
+    ctx.beginPath();
+    ctx.moveTo(18, 0);
+    ctx.quadraticCurveTo(6, -10, -14, -4 + wag * 0.3);
+    ctx.lineTo(-26, -11 + wag);
+    ctx.lineTo(-21, 0 + wag * 0.6);
+    ctx.lineTo(-26, 11 + wag);
+    ctx.lineTo(-14, 4 + wag * 0.3);
+    ctx.quadraticCurveTo(6, 10, 18, 0);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    // Gold dorsal spot & eye
+    ctx.fillStyle = '#F5C85C';
+    ctx.beginPath();
+    ctx.arc(3, -2, 4.5, 0, TAU);
+    ctx.fill();
+    ctx.fillStyle = '#1C1624';
+    ctx.beginPath();
+    ctx.arc(11, -2.5, 1.8, 0, TAU);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Swaying Dunhuang-Ribbon Underwater Kelp (敦煌绶带水草)
+  function kelp(ctx, x0, yBot, h, t, seed = 1, col = '#267F68') {
+    ctx.save();
+    const ptsL = [], ptsR = [];
+    const N = 12;
+    for (let i = 0; i <= N; i++) {
+      const u = i / N;
+      const sway = Math.sin(t * 2.6 + u * 4.2 + seed) * (18 * u);
+      const w = (1 - u * 0.85) * 11;
+      const x = x0 + sway, y = yBot - u * h;
+      ptsL.push([x - w, y]);
+      ptsR.push([x + w, y]);
+    }
+    ctx.beginPath();
+    ptsL.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+    ptsR.reverse().forEach(([x, y]) => ctx.lineTo(x, y));
+    ctx.closePath();
+    ctx.fillStyle = col;
+    ctx.fill();
+    ctx.strokeStyle = QL_PAL.mudGold;
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Scalloped Woodblock White-and-Gold Wave Curtain (雕版白浪卷帘，用于开场与结尾转场)
+  function foamCurtain(ctx, w, h, cov, fromTop = true, t = 0) {
+    if (cov <= 0.005) return;
+    ctx.save();
+    const edgeY = fromTop ? lerp(-60, h + 80, cov) : lerp(h + 60, -80, cov);
+    ctx.beginPath();
+    if (fromTop) {
+      ctx.moveTo(-100, -100);
+      ctx.lineTo(w + 100, -100);
+      for (let x = w + 100; x >= -100; x -= 24) {
+        const sc = Math.abs(Math.sin(x * 0.025 + t * 3)) * 22 + Math.sin(x * 0.06 - t * 4) * 8;
+        ctx.lineTo(x, edgeY + sc);
+      }
+    } else {
+      ctx.moveTo(-100, h + 100);
+      ctx.lineTo(w + 100, h + 100);
+      for (let x = w + 100; x >= -100; x -= 24) {
+        const sc = Math.abs(Math.sin(x * 0.025 + t * 3)) * 22 + Math.sin(x * 0.06 - t * 4) * 8;
+        ctx.lineTo(x, edgeY - sc);
+      }
+    }
+    ctx.closePath();
+    ctx.fillStyle = '#F6EFE0';
+    ctx.fill();
+    ctx.strokeStyle = QL_PAL.mudGold;
+    ctx.lineWidth = 3.5;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  window.QINGLV = {
+    PAL: QL_PAL, silkGround, qinglvMountains, seaShore, greatWave,
+    porcelainBottle, koi, kelp, foamCurtain
+  };
 })();
