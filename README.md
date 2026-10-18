@@ -39,3 +39,19 @@ On Linux, `render.mjs` starts Chrome with `--no-sandbox` (Ubuntu 23.10+ blocks C
 | [src/scenes/](src/scenes/) | Your video goes here (the demo is an example) |
 | [render.mjs](render.mjs) | Headless renderer: contact sheets, frame strips, crops, stills, MP4 |
 | [docs/](docs/) | Model sheets: [emotions](docs/emotions.jpg) (also [animated](docs/emotions.webp)) and [views, motion and hats](docs/views.jpg) |
+| [tools/](tools/) | `analyze.py` (参考片 BPM/节奏拆解) 和 `align_lyrics.py` (歌词×音频自动对时)，从 [ReelMimic](https://github.com/edenfunf/reelmimic) 引入 |
+| [styles/](styles/) | 三种中式传统风格规范（水墨、皮影、剪纸），参考 [lemo-opuscar](https://github.com/lemomo-ai/lemo-opuscar) 的 STYLE.md 格式 |
+| [src/_lib.js](src/_lib.js) | 风格库：三种风格的渲染参数编码为 JS 对象，供 scene 文件选用 |
+| [CONTRACT.md](CONTRACT.md) | 文件合约：agent 与使用者之间通过文件结构沟通的协议 |
+| [TOOLS_AND_STYLES.md](TOOLS_AND_STYLES.md) | 工具与风格系统的完整文档 |
+
+## 新增：参考片模仿流程
+
+本项目现在支持从参考 MV 学习节奏手法，再用自己的管线执行：
+
+1. **拆解参考片** — `python tools/analyze.py reference.mp4 --out analysis/`
+2. **选择风格** — 从 `styles/` 选一种（水墨/皮影/剪纸），或自定义
+3. **歌词对时** — `python tools/align_lyrics.py song.mp3 lyrics.txt --out subs.lrc`
+4. **企划 → 分镜 → 构建 → 审查** — 遵循 [CONTRACT.md](CONTRACT.md) 的文件合约
+
+详见 [TOOLS_AND_STYLES.md](TOOLS_AND_STYLES.md)。
