@@ -1,2 +1,17 @@
 node_modules
-out/
+/out/
+
+.venv/
+__pycache__/
+projects/*/analysis/*.wav
+projects/*/analysis/source.*
+projects/*/analysis/proxy.mp4
+projects/*/assets/*.m4a
+projects/*/assets/*.wav
+projects/*/out/*
+
+# Explicitly version the completed Chaoxi delivery and its review evidence.
+!projects/chaoxi/assets/song.m4a
+!projects/chaoxi/out/潮汐-纸上海.mp4
+!projects/chaoxi/out/ffprobe.json
+!projects/chaoxi/out/check/

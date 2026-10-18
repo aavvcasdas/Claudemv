@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "status": "complete",
+  "output": "out/潮汐-纸上海.mp4",
+  "source_audio": "assets/song.m4a",
+  "renderer": "root render.mjs --page=projects/chaoxi/studio.html; Canvas 2D backend",
+  "command": "node render.mjs --page=projects/chaoxi/studio.html --soft-gl --clip --out=projects/chaoxi/out/潮汐-纸上海.mp4",
+  "actual": {
+    "width": 1280,
+    "height": 720,
+    "fps": "24/1",
+    "frames": 1343,
+    "duration_s": 55.983991,
+    "audio_codec": "aac",
+    "audio_channels": 2,
+    "bytes": 9167473
+  },
+  "checks": {
+    "full_decode": "pass; ffmpeg reported no errors",
+    "decoded_nonblank_samples": 11,
+    "browser_smoke": "pass; 10 nonblank shots, deterministic frames, motion, no JS errors",
+    "lyric_unit_tests": "5 passed",
+    "original_audio_stream_copy": "SHA256 identical; see analysis/audio-extraction.json",
+    "transition_strip": "17.4–17.7 s inspected",
+    "full_human_listening": "not performed"
+  },
+  "mux_note": "Original audio is 55.983 s; -shortest produces 1343 video frames / 55.984 s container from a nominal 56 s timeline. No speed change.",
+  "lyrics_status": "pending; no confirmed lyrics or local ASR model"
+}

@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "title": "潮汐 · 纸上海",
+  "logline": "两只剪纸小蟹在纸上海岸相遇、共度风雨，把思念变成相守。",
+  "format": {
+    "width": 1280,
+    "height": 720,
+    "fps": 24,
+    "duration_s": 56
+  },
+  "music": {
+    "source": "user",
+    "file": "assets/song.m4a",
+    "bpm": 143.55,
+    "offset": 0.093,
+    "bpm_status": "estimated; half-time 71.8 possible",
+    "license": "user-provided; redistribution not inferred"
+  },
+  "shots": [
+    {
+      "id": "S01",
+      "start_s": 0,
+      "end_s": 8.66,
+      "start_beat": -0.223,
+      "end_beat": 20.497,
+      "summary": "月下独行",
+      "action": "朱砂小蟹沿岛岸走近中央，细浪和月亮建立海景。",
+      "camera_note": "留白远景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S02",
+      "start_s": 8.66,
+      "end_s": 13.35,
+      "start_beat": 20.497,
+      "end_beat": 31.717,
+      "summary": "潮岸相遇",
+      "action": "藕粉小蟹从右侧靠近，两个纸片角色在岸边相会。",
+      "camera_note": "留白远景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S03",
+      "start_s": 13.35,
+      "end_s": 17.55,
+      "start_beat": 31.717,
+      "end_beat": 41.766,
+      "summary": "纸心初动",
+      "action": "中景，两只小蟹摆动，三枚纸心轻轻浮动。",
+      "camera_note": "中景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S04",
+      "start_s": 17.55,
+      "end_s": 23.8,
+      "start_beat": 41.766,
+      "end_beat": 56.719,
+      "summary": "一伞听雨",
+      "action": "斜雨落下，共用金色纸伞，伴侣向伞中央靠近。",
+      "camera_note": "留白远景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S05",
+      "start_s": 23.8,
+      "end_s": 28.4,
+      "start_beat": 56.719,
+      "end_beat": 67.724,
+      "summary": "分享暖意",
+      "action": "两只纸杯与热气在中间出现，以中景表现分享。",
+      "camera_note": "中景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S06",
+      "start_s": 28.4,
+      "end_s": 33.8,
+      "start_beat": 67.724,
+      "end_beat": 80.644,
+      "summary": "相依入夜",
+      "action": "夜色覆盖纸面，两只蟹闭眼依偎。",
+      "camera_note": "中景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S07",
+      "start_s": 33.8,
+      "end_s": 40.2,
+      "start_beat": 80.644,
+      "end_beat": 95.956,
+      "summary": "烟花为证",
+      "action": "保持双角色构图，金与藕粉色烟花逐圈展开。",
+      "camera_note": "留白远景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S08",
+      "start_s": 40.2,
+      "end_s": 44.5,
+      "start_beat": 95.956,
+      "end_beat": 106.244,
+      "summary": "潮声入梦",
+      "action": "一只蟹卧在深墨色椭圆床上，海浪与呼吸持续。",
+      "camera_note": "留白远景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S09",
+      "start_s": 44.5,
+      "end_s": 49.3,
+      "start_beat": 106.244,
+      "end_beat": 117.728,
+      "summary": "思念成影",
+      "action": "朱砂小蟹仰望纸心，伴侣以半透明记忆出现。",
+      "camera_note": "中景轻推",
+      "transition_out": "纸色洗染",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    },
+    {
+      "id": "S10",
+      "start_s": 49.3,
+      "end_s": 56,
+      "start_beat": 117.728,
+      "end_beat": 133.757,
+      "summary": "归于相守",
+      "action": "两只小蟹依偎，爱心依节拍轻动，最后回到纸色。",
+      "camera_note": "留白远景轻推",
+      "transition_out": "纸色淡出",
+      "reference_note": "参考片叙事意象；非自动检测切镜"
+    }
+  ],
+  "lyrics": {
+    "status": "pending",
+    "reason": "未提供确认歌词，未准备本地 Whisper 模型；成片不含歌词字幕"
+  }
+}

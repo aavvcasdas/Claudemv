@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "scope": "人工查看每镜静帧总览；单处转场逐帧检查；不代表完整听审。",
+  "shots": [
+    {
+      "shot_id": "S01",
+      "sample_s": 4,
+      "frame": "out/check/stills/t4_00.png",
+      "status": "pass",
+      "notes": "单角色情绪与月下海景清晰。"
+    },
+    {
+      "shot_id": "S02",
+      "sample_s": 11,
+      "frame": "out/check/stills/t11_00.png",
+      "status": "pass",
+      "notes": "角色左右接近，主体没有重叠。"
+    },
+    {
+      "shot_id": "S03",
+      "sample_s": 15,
+      "frame": "out/check/stills/t15_00.png",
+      "status": "pass",
+      "notes": "中景放大，爱心可见；太阳作为背景局部出画。"
+    },
+    {
+      "shot_id": "S04",
+      "sample_s": 21,
+      "frame": "out/check/stills/t21_00.png",
+      "status": "pass",
+      "notes": "黄伞与雨线可辨，角色位于伞下。"
+    },
+    {
+      "shot_id": "S05",
+      "sample_s": 26,
+      "frame": "out/check/stills/t26_00.png",
+      "status": "pass",
+      "notes": "纸杯与热气可见，纸杯允许局部遮挡角色。"
+    },
+    {
+      "shot_id": "S06",
+      "sample_s": 31,
+      "frame": "out/check/stills/t31_00.png",
+      "status": "pass",
+      "notes": "闭眼依偎，夜景轮廓有分离。"
+    },
+    {
+      "shot_id": "S07",
+      "sample_s": 37,
+      "frame": "out/check/stills/t37_00.png",
+      "status": "pass",
+      "notes": "烟花色彩克制，亮度弱于商业炫光效果。"
+    },
+    {
+      "shot_id": "S08",
+      "sample_s": 42,
+      "frame": "out/check/stills/t42_00.png",
+      "status": "pass",
+      "notes": "床铺为抽象墨形，没有加入未经确认的歌词。"
+    },
+    {
+      "shot_id": "S09",
+      "sample_s": 47,
+      "frame": "out/check/stills/t47_00.png",
+      "status": "pass",
+      "notes": "伴侣淡影为本版的意象改写。"
+    },
+    {
+      "shot_id": "S10",
+      "sample_s": 52,
+      "frame": "out/check/stills/t52_00.png",
+      "status": "pass",
+      "notes": "团聚与开头孤独形成呼应；结尾纸色淡出。"
+    }
+  ],
+  "limitations": [
+    "未完成全片人工听审",
+    "未确认歌词文本，未运行实际 ASR 对齐",
+    "720p 风格化重制，不是逐像素复刻"
+  ],
+  "fixes": [
+    "逐镜总览发现镜头变换平移符号错误导致主体出画，已修正并重新渲染所有成片与审查帧。"
+  ]
+}

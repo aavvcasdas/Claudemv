@@ -1,0 +1,7 @@
+numpy>=2.0,<3
+librosa>=0.11,<0.12
+opencv-python-headless>=4.10,<5
+scenedetect>=0.6.7,<0.7
+Pillow>=11,<13
+# Optional lyric alignment: pip install faster-whisper opencc-python-reimplemented
+# Requires ffmpeg + ffprobe on PATH, and a downloaded Whisper model (or local --model path).

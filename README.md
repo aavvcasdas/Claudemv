@@ -39,3 +39,13 @@ On Linux, `render.mjs` starts Chrome with `--no-sandbox` (Ubuntu 23.10+ blocks C
 | [src/scenes/](src/scenes/) | Your video goes here (the demo is an example) |
 | [render.mjs](render.mjs) | Headless renderer: contact sheets, frame strips, crops, stills, MP4 |
 | [docs/](docs/) | Model sheets: [emotions](docs/emotions.jpg) (also [animated](docs/emotions.webp)) and [views, motion and hats](docs/views.jpg) |
+
+## 中文 MV：参考片分析与换风格重制
+
+已加入独立项目 [projects/chaoxi](projects/chaoxi/README.md)：《潮汐 · 纸上海》。
+从用户上传的 `潮汐.mp4` 提取原音轨，以宣纸水墨＋朱砂剪纸重做 56 秒动画；
+原始 p5.brush 演示未替换。采用 ReelMimic 的 MIT 分析／歌词对齐工具及文件合约思路，
+参考 lemo-opuscar 的 STYLE 文档结构，不引入它们完整的引擎和 agent 调度。
+
+`render.mjs` 新增 `--page=<项目 studio.html>`，默认仍打开根目录 demo。
+工具来源、许可、限制和复现命令见项目 README。
