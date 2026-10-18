@@ -1,0 +1,51 @@
+{
+  "version": 3,
+  "status": "complete",
+  "source_video": "../../潮汐.mp4",
+  "source_sha256": "9ed7ed6e4ef2987cf2ec161f863a026ea74612768a0cffdfe5601e77c6c941f9",
+  "output": "out/video.mp4",
+  "audio": "assets/song.m4a",
+  "actual": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 24,
+    "frames": 1344,
+    "duration_s": 56.0,
+    "bytes": 17798229,
+    "unique_drawings_per_second": 12,
+    "native_p5_canvas": [
+      1920,
+      1080
+    ]
+  },
+  "purpose": "Source-like small-world remake with detail variations; previous v2 preserved.",
+  "changes": [
+    "朱砂/藕粉改为更接近原片的橘杏/莓粉；主角星形徽章、伴侣小花发饰",
+    "山水海岸改回弧形小星球，加入新月形水洼与草芽",
+    "条纹金伞、纸星罐、花瓣/星形烟花取代原来的细节",
+    "相遇时补小幅挥手与错身，放下雨伞、接住破心等动作保留变奏",
+    "不改变原音轨、字幕内容及单人结尾"
+  ],
+  "audio_mux": "Original AAC stream copy; no change of song, speed or audio encoding.",
+  "caption_method": "Same-source 16-line OCR recovery and original gold/white screen fill inherited from v2; no new ASR claim.",
+  "checks": {
+    "full_ffmpeg_decode": "pass; no errors",
+    "python_tests": "9 passed",
+    "browser_smoke": "pass; 19 nonblank shots, 56s source, 16 correct-source captions, 1080p native canvas, deterministic out-of-order frames, motion, no JS errors",
+    "encoded_per_shot_review": "19 decoded frames viewed",
+    "same_time_comparison": "3 source/remake pairs viewed",
+    "motion_strips": "umbrella and fireworks viewed",
+    "full_human_audio_listening": "not performed",
+    "http_browser_preview": {
+      "video_ready_state": 4,
+      "duration_s": 56,
+      "poster_http_status": 200,
+      "inspect": "S04 at 10.2s",
+      "js_errors": 0,
+      "range_requests": "unit tests passed"
+    }
+  },
+  "render_command": "CHROME_PATH=/path/to/chrome python projects/chaoxi-v3/tools/render.py",
+  "audio_elementary_stream_sha256": "8fb508c27079fcf52dd17aee76ccef6f24876b39e61468b321e64e584cd96426",
+  "copyright": "User-provided video/music/lyrics; no new public-use rights inferred."
+}

@@ -21,3 +21,9 @@ projects/*/out/*
 !projects/chaoxi-v2/out/video.mp4
 !projects/chaoxi-v2/out/check/
 !projects/chaoxi-v2/out/metadata.json
+
+# Detail-variation version of the user-linked 56-second source.
+!projects/chaoxi-v3/assets/song.m4a
+!projects/chaoxi-v3/out/video.mp4
+!projects/chaoxi-v3/out/check/
+!projects/chaoxi-v3/out/metadata.json

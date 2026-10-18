@@ -1,0 +1,12 @@
+# ffmpeg + ffprobe + Node + Chrome are also required on PATH / CHROME_PATH.
+numpy>=2,<3
+opencv-python-headless>=4.10,<5
+rapidocr_onnxruntime==1.4.4
+Pillow>=11,<13
+# Shared ReelMimic BPM analysis:
+librosa>=0.11,<0.12
+scenedetect>=0.6.7,<0.7
+# Optional true audio forced alignment: faster-whisper, opencc-python-reimplemented
+# Supply local Whisper weights; the sandbox cannot access the model host.
+# RapidOCR depends on opencv-python; on headless Linux replace that wheel with
+# opencv-python-headless after installation (see README).

@@ -1,0 +1,150 @@
+{
+  "version": 3,
+  "scope": "人工查看最终编码文件提取的19镜总览、3组同时间原片/变奏对照、雨伞与烟花连续帧。自动全片解码与浏览器确定性回归通过；未完成全片人工听审。",
+  "shots": [
+    {
+      "shot_id": "S01",
+      "sample_s": 0.9,
+      "frame": "out/check/S01.jpg",
+      "status": "pass",
+      "notes": "单人小星球极远景保留；灰蓝圆球上的新坑位与月牙水洼区别于原片。"
+    },
+    {
+      "shot_id": "S02",
+      "sample_s": 3.3,
+      "frame": "out/check/S02.jpg",
+      "status": "pass",
+      "notes": "小花、星形徽章和局促手势清晰，仍是原片孤独语义。"
+    },
+    {
+      "shot_id": "S03",
+      "sample_s": 6.75,
+      "frame": "out/check/S03.jpg",
+      "status": "pass",
+      "notes": "墨灰小云与流星动作保留，云形和位置不是逐帧描摹。"
+    },
+    {
+      "shot_id": "S04",
+      "sample_s": 10.2,
+      "frame": "out/check/S04.jpg",
+      "status": "pass",
+      "notes": "橘杏/莓粉、花发饰和新的挥手/入画动作可辨；暖橙日出比原片该时刻略早，是本版变奏。"
+    },
+    {
+      "shot_id": "S05",
+      "sample_s": 12.6,
+      "frame": "out/check/S05.jpg",
+      "status": "pass",
+      "notes": "亮眼特写保持情绪读点；星形徽章替代原有装饰，字幕不遮脸。"
+    },
+    {
+      "shot_id": "S06",
+      "sample_s": 14.55,
+      "frame": "out/check/S06.jpg",
+      "status": "pass",
+      "notes": "双人背影、日轮与海平线清晰；球面地平线与水纹重新绘制。"
+    },
+    {
+      "shot_id": "S07",
+      "sample_s": 16.9,
+      "frame": "out/check/S07.jpg",
+      "status": "pass",
+      "notes": "双角色相伴与纸心保留，改花饰与小跳相位；非静止重复立绘。"
+    },
+    {
+      "shot_id": "S08",
+      "sample_s": 19.6,
+      "frame": "out/check/S08.jpg",
+      "status": "pass",
+      "notes": "雨伞奔来方向明确，阴雨阶段为灰蓝；伞面细线是新设计。"
+    },
+    {
+      "shot_id": "S09",
+      "sample_s": 22.35,
+      "frame": "out/check/S09.jpg",
+      "status": "pass",
+      "notes": "向对方倾伞动作成立；20.67–21.33s连续帧检查了入伞与景别切换。"
+    },
+    {
+      "shot_id": "S10",
+      "sample_s": 24.95,
+      "frame": "out/check/S10.jpg",
+      "status": "pass",
+      "notes": "光带打开、倒伞留在岸边，和前镜有连续性。"
+    },
+    {
+      "shot_id": "S11",
+      "sample_s": 27.75,
+      "frame": "out/check/S11.jpg",
+      "status": "pass",
+      "notes": "中央纸星罐与伸手动作构成变化细节；没有新增歌词或换歌。"
+    },
+    {
+      "shot_id": "S12",
+      "sample_s": 30.75,
+      "frame": "out/check/S12.jpg",
+      "status": "pass",
+      "notes": "夜色依偎和花饰可辨；手绘跳动属于拍二表演，不是写实脚底约束。"
+    },
+    {
+      "shot_id": "S13",
+      "sample_s": 33.6,
+      "frame": "out/check/S13.jpg",
+      "status": "pass",
+      "notes": "拉远后烟花与人物分区清楚；草球与原片同类语法但轮廓和坑位不同。"
+    },
+    {
+      "shot_id": "S14",
+      "sample_s": 37.25,
+      "frame": "out/check/S14.jpg",
+      "status": "pass",
+      "notes": "35–36秒连续帧显示新的亮色拖尾和星点；相比原片仍更偏细线而非大面积光晕。"
+    },
+    {
+      "shot_id": "S15",
+      "sample_s": 41.45,
+      "frame": "out/check/S15.jpg",
+      "status": "pass",
+      "notes": "单人水面遮挡保留失落，细水纹区别于原片卧水画面。"
+    },
+    {
+      "shot_id": "S16",
+      "sample_s": 44.8,
+      "frame": "out/check/S16.jpg",
+      "status": "pass",
+      "notes": "日夜两半小世界与分离人物保留；不将两人排成团聚结尾。"
+    },
+    {
+      "shot_id": "S17",
+      "sample_s": 47.7,
+      "frame": "out/check/S17.jpg",
+      "status": "pass",
+      "notes": "破心、泪滴与单人表情保留；徽章和星球表面改变。"
+    },
+    {
+      "shot_id": "S18",
+      "sample_s": 50.85,
+      "frame": "out/check/S18.jpg",
+      "status": "pass",
+      "notes": "将破心接回胸前是局部动作变化，不改变原片关于爱自己的歌词。"
+    },
+    {
+      "shot_id": "S19",
+      "sample_s": 54.25,
+      "frame": "out/check/S19.jpg",
+      "status": "pass",
+      "notes": "最后拉远回一个人和小花，保留原声结束；不是双人团聚。"
+    }
+  ],
+  "comparison": "out/check/source-vs-variation.jpg",
+  "motion_evidence": [
+    "out/check/umbrella-motion.jpg",
+    "out/check/firework-motion.jpg"
+  ],
+  "limitations": [
+    "12幅独立手绘/秒，24fps编码",
+    "字幕沿用同一源片的OCR/行级屏幕进度，不是重新执行声学逐字对齐",
+    "烟花设计为细线星点，原片更偏大面积光晕；不是逐像素复制",
+    "完整人工听审未执行，原声一致通过AAC流SHA256核验"
+  ]
+}

@@ -1,3 +1,5 @@
+> **最新细节变奏版：** [潮汐 · 星屿微光](projects/chaoxi-v3/README.md) · [成片](projects/chaoxi-v3/out/video.mp4)。更贴近原片的圆形小世界，人物装饰、伞纹、地貌与烟花有变化；56秒原声保留。
+
 > **当前中文 MV 修订版：** [一颗心的潮汐（56 秒）](projects/chaoxi-v2/README.md) · [成片](projects/chaoxi-v2/out/video.mp4) · [19 镜分镜](projects/chaoxi-v2/STORYBOARD.md)
 > 使用当前上传 MP4 的原始音轨和实际字幕，不使用参考仓库的 32 秒歌曲。较早的 `projects/chaoxi` 为历史简化版，不是当前交付。
 
