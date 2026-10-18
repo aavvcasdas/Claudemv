@@ -1,0 +1,64 @@
+{
+  "peaks": [
+    {
+      "id": 1,
+      "t": 2.11,
+      "range": [1.6, 3.0],
+      "kind": "drop",
+      "rise": 2.72,
+      "lyric": "我们都是渺小真实存在",
+      "reference_action": "Iris opens fully onto the solitary dark planet; vocal enters as rain begins to fall from a tiny storm cloud onto the lonely protagonist.",
+      "remake_action": "Song-dynasty moon-gate iris opens onto a misty ink-wash island (披麻皴 & 苔点); silver ink rain threads fall onto Ink-Scholar Clawd beneath a dark ink cloud."
+    },
+    {
+      "id": 2,
+      "t": 13.19,
+      "range": [11.8, 15.8],
+      "kind": "lift",
+      "rise": 0.98,
+      "lyric": "眼睛里看到的都是广袤无垠的大海",
+      "reference_action": "Extreme close-up of sparkling eyes transitions to a wide shot of both characters watching a golden sunrise over a boundless ocean, ending in a diagonal brush wipe at 15.5s.",
+      "remake_action": "Close-up of eyes reflecting rolling Song-dynasty waves (INK.wave) pulls back to both characters watching a giant vermilion sun (朱砂日轮) rise over an ink-and-gold sea, stamped with a vermilion seal before an ink brush sweep."
+    },
+    {
+      "id": 3,
+      "t": 23.85,
+      "range": [22.4, 25.5],
+      "kind": "lift",
+      "rise": 1.05,
+      "lyric": "你让我学会如何拨开阴霾",
+      "reference_action": "Both characters push apart the dark storm clouds, toss the umbrella aside, and embrace under warm golden sunlight.",
+      "remake_action": "In festive Red Papercut (剪纸) & Ink contrast, both characters part the dark ink storm clouds with their hands, folding the Jiangnan oiled-paper umbrella as a golden 团花 sun blooms overhead."
+    },
+    {
+      "id": 4,
+      "t": 31.50,
+      "range": [31.4, 35.4],
+      "kind": "chorus_climax",
+      "rise": 1.12,
+      "lyric": "像转瞬即逝的烟花",
+      "reference_action": "Colorful fireworks burst in rapid succession across the night sky while both characters watch side by side.",
+      "remake_action": "On a backlit Shadow-Puppet (皮影) oil-lamp stage, translucent dyed-hide fireworks (朱红/石绿/藤黄/群青) burst and bloom above the two jointed leather puppets."
+    },
+    {
+      "id": 5,
+      "t": 38.79,
+      "range": [38.7, 42.6],
+      "kind": "emotional_flood",
+      "rise": 1.08,
+      "lyric": "我却已无法自拔",
+      "reference_action": "After the single central firework fades and the partner vanishes, a dark blue ocean tide rises up the screen, submerging the protagonist up to its eyes.",
+      "remake_action": "Towering multi-layered Song-dynasty ink waves (INK.wave) surge upward across the rice paper, submerging Ink-Scholar Clawd in deep indigo-ink water."
+    },
+    {
+      "id": 6,
+      "t": 48.62,
+      "range": [48.6, 56.0],
+      "kind": "resolution",
+      "rise": 0.94,
+      "lyric": "爱炙热的你却忘了爱自己",
+      "reference_action": "The floating heart breaks; a warm golden self-love light ignites inside the protagonist's chest as the camera pulls back to the tiny planet in starry space and irises out.",
+      "remake_action": "The fractured crimson papercut heart scatters into plum petals; a warm golden-vermilion inner lantern (心灯) ignites in Ink-Scholar Clawd's chest as the camera pulls back to the solitary ink island in the starry宣纸 cosmos and irises out."
+    }
+  ]
+}

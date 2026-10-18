@@ -1,157 +1,260 @@
-// render.mjs: renders studio.html in headless Chrome. Length and fps come from the page (PROJECT in src/config.js).
-//
-//   Look at it (open the images with your image viewer / Read tool):
-//     node render.mjs --sheet=0.5,1,1.5,2 [--cols=4] [--w=480] --out=out/check/a.jpg        contact sheet of chosen times
-//     node render.mjs --strip=2.0:2.5 [--cols=6] [--w=320] --out=out/check/strip.jpg        EVERY frame in a stretch (motion)
-//     node render.mjs --sheet=2.1,2.2 --crop=760,300,400,400 --w=600 --out=out/check/face.jpg full-res crops (details)
-//     node render.mjs --strip=2.0:2.5 --crop-at=960,780,500,400 --out=out/check/feet.jpg       crops that follow a WORLD point
-//         (x,y in world px, may be page expressions like PLK.MX(1.38); w,h in screen px) through each frame's camera
-//     node render.mjs --stills=1.2,3.4 --out=out/stills                                     full-res PNGs
-//   Make the video:
-//     node render.mjs --clip [--range=0:4] --out=out/video.mp4                               straight to MP4 (one worker)
-//     node render.mjs --frames [--range=0:8] --workers=4                                     JPEG frames → out/frames (parallel, resumable)
-//     node render.mjs --encode --out=out/video.mp4                                           out/frames → MP4
-//   Standalone loops (LOOPS in the page): add --loop=<name> to any of the above (times are then loop times), or
-//     node render.mjs --loop=emotions --png --out=out/loop_emotions                          one cycle as PNGs (for GIFs)
-//   Music: --audio=assets/song.mp3 (or PROJECT.audio) is muxed into --clip and --encode. Other flags: --fps=24,
-//   --chrome=<path to Chrome/Chromium>.
+// render.mjs — Headless frame renderer, contact-sheet generator, and ffmpeg encoder.
+// Supports both desktop Chrome/Chromium and container headless Chromium (@sparticuz/chromium).
 import puppeteer from 'puppeteer-core';
-import { spawn } from 'node:child_process';
-import { mkdirSync, writeFileSync, existsSync, statSync, renameSync, readdirSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { homedir } from 'node:os';
+import { existsSync, mkdirSync, writeFileSync, readFileSync, readdirSync, unlinkSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { resolve, dirname } from 'node:path';
+import { createHash } from 'node:crypto';
+import os from 'node:os';
 
-const args = Object.fromEntries(process.argv.slice(2).map(a => { const [k, v] = a.replace(/^--/, '').split('='); return [k, v ?? true]; }));
-const CHROMES = [args.chrome, process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
-  ...playwrightChromes()];
-// Chromium builds Playwright downloaded (~/.cache/ms-playwright/chromium-NNNN), newest first
-function playwrightChromes() {
-  const dir = `${homedir()}/.cache/ms-playwright`;
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir).filter(n => /^chromium-\d+$/.test(n)).sort((a, b) => b.split('-')[1] - a.split('-')[1])
-    .map(n => `${dir}/${n}/chrome-linux64/chrome`);
+const args = Object.fromEntries(process.argv.slice(2).map(a => {
+  const m = a.match(/^--([^=]+)(?:=(.*))?$/);
+  return m ? [m[1], m[2] ?? true] : [a, true];
+}));
+
+const FPS = +(args.fps || 24);
+const WORKERS = +(args.workers || Math.min(4, Math.max(1, Math.floor(os.cpus().length))));
+const OUT = args.out || 'out';
+
+// Prepare environment for @sparticuz/chromium if present in /tmp
+if (existsSync('/tmp/al2023/lib')) {
+  process.env.LD_LIBRARY_PATH = `/tmp/al2023/lib:/tmp:${process.env.LD_LIBRARY_PATH || ''}`;
 }
-const CHROME = CHROMES.find(p => p && existsSync(p));
-if (!CHROME) { console.error('Chrome not found: pass --chrome=<path> or set CHROME_PATH'); process.exit(1); }
-const fps = +(args.fps || 24), FRAMES_DIR = 'out/frames';
-const run = (cmd, a) => new Promise((ok, bad) => { const p = spawn(cmd, a, { stdio: 'inherit' }); p.on('close', c => c ? bad(new Error(cmd + ' exited ' + c)) : ok()); });
-const times = s => String(s).split(',').map(Number);
-const span = s => String(s).split(':').map(Number);
-// comma-separated fields, keeping commas inside parentheses ('PLK.MX(1.38),PLK.WL,500,300'); numbers stay numbers
-const fields = s => { const out = []; let d = 0, cur = ''; for (const ch of String(s)) { if (ch === ',' && !d) { out.push(cur); cur = ''; continue; } d += ch === '(' ? 1 : ch === ')' ? -1 : 0; cur += ch; } out.push(cur); return out.map(v => isNaN(+v) ? v : +v); };
+if (existsSync('/tmp/vk_swiftshader_icd.json')) {
+  process.env.VK_ICD_FILENAMES = '/tmp/vk_swiftshader_icd.json';
+}
 
-if (args.encode) {
-  const out = args.out || 'out/video.mp4', n = readdirSync(FRAMES_DIR).filter(f => f.endsWith('.jpg')).length, audio = args.audio;
-  console.log(`encoding ${n} frames → ${out}${audio ? ' with ' + audio : ''}`);
-  await run('ffmpeg', ['-y', '-loglevel', 'error', '-stats', '-framerate', String(fps), '-i', `${FRAMES_DIR}/f%05d.jpg`,
-    ...(audio ? ['-i', audio, '-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '192k', '-shortest'] : []),
-    '-c:v', 'libx264', '-preset', 'slow', '-crf', '17', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out]);
-  console.log('wrote ' + out);
+const CHROMES = [
+  process.env.CHROME_PATH,
+  '/tmp/chromium',
+  '/usr/local/bin/chromium',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  '/Applications/Chromium.app/Contents/MacOS/Chromium',
+  '/usr/bin/google-chrome',
+  '/usr/bin/google-chrome-stable',
+  '/usr/bin/chromium',
+  '/usr/bin/chromium-browser',
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+].filter(Boolean);
+
+const executablePath = CHROMES.find(p => existsSync(p));
+if (!executablePath) {
+  console.error('No Chrome/Chromium found. Set CHROME_PATH=/path/to/chrome');
+  process.exit(1);
+}
+
+// Build self-contained HTML from studio.html with embedded woff2 fonts & scripts
+let _cachedHtml = null;
+function buildRenderHtml() {
+  if (_cachedHtml) return _cachedHtml;
+  let html = readFileSync('studio.html', 'utf8');
+  // Inline fonts.css with base64 woff2 data URIs so fonts load instantaneously in setContent
+  html = html.replace(/<link[^>]*href="([^"]*fonts\.css)"[^>]*>/g, (_, cssPath) => {
+    if (!existsSync(cssPath)) return '';
+    const cssDir = dirname(cssPath);
+    let css = readFileSync(cssPath, 'utf8');
+    css = css.replace(/url\(['"]?([^'")]+)['"]?\)/g, (m, relUrl) => {
+      const fp = resolve(cssDir, relUrl);
+      if (!existsSync(fp)) return m;
+      const b64 = readFileSync(fp).toString('base64');
+      return `url('data:font/woff2;base64,${b64}')`;
+    });
+    return `<style>\n${css}\n</style>`;
+  });
+  // Inline script tags
+  html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
+    if (src.includes('p5.brush')) {
+      return `<script>window.brush = { scaleBrushes(){}, add(){}, noWash(){}, noFill(){}, noHatch(){}, noStroke(){}, set(){} };</script>`;
+    }
+    const code = readFileSync(src, 'utf8');
+    return `<script>\n${code}\n</script>`;
+  });
+  html = html.replace("location.search.includes('render')", 'true');
+  _cachedHtml = html;
+  return html;
+}
+
+const LAUNCH_ARGS = [
+  '--no-sandbox',
+  '--no-zygote',
+  '--disable-setuid-sandbox',
+  '--disable-dev-shm-usage',
+  '--disable-web-security',
+  '--allow-file-access-from-files',
+  '--disable-features=AudioServiceOutOfProcess,IsolateOrigins,site-per-process',
+  '--disable-site-isolation-trials',
+  '--ignore-gpu-blocklist',
+  '--disable-accelerated-2d-canvas',
+  '--in-process-gpu',
+  '--use-gl=angle',
+  '--use-angle=swiftshader',
+  '--enable-unsafe-swiftshader',
+  '--font-render-hinting=none',
+  '--window-size=1920,1080',
+];
+
+const launch = () => puppeteer.launch({
+  executablePath,
+  headless: executablePath === '/tmp/chromium' ? 'shell' : true,
+  args: LAUNCH_ARGS,
+});
+
+const closeBrowser = async (b) => {
+  const proc = b?.process?.();
+  await Promise.race([b.close().catch(() => {}), new Promise(r => setTimeout(r, 1200))]);
+  try { proc?.kill('SIGKILL'); } catch (_) {}
+};
+
+async function openPage(b) {
+  const p = await b.newPage();
+  await p.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
+  p.on('pageerror', e => console.error('[page error]', e.message));
+  const html = buildRenderHtml();
+  await p.setContent(html, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  for (let i = 0; i < 60; i++) {
+    const r = await p.evaluate(() => window.ready === true).catch(() => false);
+    if (r) break;
+    await new Promise(res => setTimeout(res, 100));
+  }
+  if (args.loop) {
+    await p.evaluate((name) => {
+      if (!LOOPS[name]) throw new Error(`No LOOPS.${name}`);
+      window.LOOP = LOOPS[name];
+    }, args.loop);
+  }
+  return p;
+}
+
+const saveUrl = (url, file) => writeFileSync(file, Buffer.from(url.slice(url.indexOf(',') + 1), 'base64'));
+const parseBox = s => s ? s.split(',').map((v, i) => i < 2 && isNaN(+v) ? v : +v) : null;
+
+// Mode 1: contact sheet (--sheet or --sheet=t1,t2,... or --strip=t0,t1)
+if (args.sheet || args.strip) {
+  const b = await launch(), p = await openPage(b);
+  const [dur, gpu] = await p.evaluate(() => [window.LOOP ? (window.LOOP.len || 4) : DUR, window.gpuInfo()]);
+  let times;
+  if (args.strip) {
+    const [a, b0] = String(args.strip).split(',').map(Number);
+    const step = +(args.every || (b0 - a) / 11);
+    times = [];
+    for (let t = a; t <= b0 + 1e-6; t += step) times.push(+t.toFixed(3));
+  } else if (typeof args.sheet === 'string') {
+    times = args.sheet.split(',').map(Number);
+  } else {
+    const c0 = +(args.cols || 4), r0 = +(args.rows || 5), n = c0 * r0;
+    times = Array.from({ length: n }, (_, i) => +((i + 0.5) / n * dur).toFixed(2));
+  }
+  const cols = +(args.cols || Math.min(4, times.length));
+  const crop = parseBox(args.crop), at = parseBox(args.at);
+  const file = args.out || 'out/sheet.jpg';
+  mkdirSync(dirname(file), { recursive: true });
+  const { url, ms } = await p.evaluate((ts, c, cr, a) => window.renderSheet(ts, c, 640, cr, a), times, cols, crop, at);
+  saveUrl(url, file);
+  const avg = Math.round(ms.reduce((a, b) => a + b, 0) / ms.length);
+  console.log(`sheet -> ${file}  (${times.length} frames, avg ${avg} ms/frame [${ms.join(', ')}])  [${gpu}]`);
+  await closeBrowser(b);
   process.exit(0);
 }
 
-// --soft-gl: no GPU on this machine; render WebGL in software (SwiftShader), which Chrome only allows when asked.
-// --gpu-angle=vulkan|gl-egl: headless Linux on an NVIDIA GPU (e.g. a cloud or cluster node); plain --use-gl=angle gets
-// no WebGL context there. Check which GPU Chrome actually lands on with gpu_probe.mjs.
-const ANGLE = { vulkan: ['--use-angle=vulkan', '--enable-features=Vulkan'], 'gl-egl': ['--use-angle=gl-egl'] };
-if (args['gpu-angle'] && !ANGLE[args['gpu-angle']]) { console.error(`--gpu-angle must be one of ${Object.keys(ANGLE)}`); process.exit(1); }
-const gpu = args['soft-gl'] ? ['--use-angle=swiftshader', '--enable-unsafe-swiftshader']
-  : args['gpu-angle'] ? ANGLE[args['gpu-angle']]
-  : process.platform === 'win32' ? ['--use-angle=d3d11'] : process.platform === 'darwin' ? ['--use-angle=metal'] : ['--use-gl=angle'];
-// Ubuntu 23.10+ blocks Chrome's user-namespace sandbox; headless rendering of local files doesn't need it.
-const sandbox = process.platform === 'linux' ? ['--no-sandbox'] : [];
-const browser = await puppeteer.launch({
-  executablePath: CHROME, headless: true, protocolTimeout: 0,
-  args: [...sandbox, '--allow-file-access-from-files', '--ignore-gpu-blocklist', ...gpu, '--enable-gpu-rasterization', '--window-size=1920,1080', '--disable-renderer-backgrounding', '--disable-background-timer-throttling']
-});
-async function openPage(tag = '') {
-  const page = await browser.newPage();
-  page.on('console', m => { if (['error', 'warn'].includes(m.type())) console.log(`[page${tag}]`, m.text()); });
-  page.on('pageerror', e => console.log(`[page error${tag}]`, e.message));
-  await page.goto(pathToFileURL(resolve('studio.html')).href + '?render', { waitUntil: 'networkidle0' });
-  await page.waitForFunction('window.ready === true', { timeout: 60000 });
-  if (args.loop) {
-    const ok = await page.evaluate(name => { if (!LOOPS[name]) return false; window.LOOP = LOOPS[name]; return true; }, args.loop);
-    if (!ok) { console.error(`no loop named "${args.loop}"`); process.exit(1); }
+// Mode 2: full-res stills (--stills=t1,t2,...)
+if (args.stills) {
+  const times = String(args.stills).split(',').map(Number);
+  mkdirSync(OUT, { recursive: true });
+  const b = await launch(), p = await openPage(b);
+  for (const t of times) {
+    const t0 = Date.now(), f = `${OUT}/t_${t.toFixed(2)}s.jpg`;
+    saveUrl(await p.evaluate(s => window.renderAt(s, 'image/jpeg', .92), t), f);
+    console.log(`${f}  (${Date.now() - t0} ms)`);
   }
-  return page;
+  await closeBrowser(b);
+  process.exit(0);
 }
-const frameOf = async (page, t, type, q) => {
-  const url = await page.evaluate((t, type, q) => window.renderAt(t, type, q), t, type, q);
-  return Buffer.from(url.slice(url.indexOf(',') + 1), 'base64');
-};
-// the length of whatever is being rendered: a loop's .len, or the video's duration
-const lengthOf = page => page.evaluate(() => window.LOOP ? window.LOOP.len : DUR);
 
-if (args.sheet || args.strip) {
-  const page = await openPage(), out = args.out || 'out/sheet.jpg'; mkdirSync(dirname(out), { recursive: true });
-  let ts;
-  if (args.strip) { const [a, b] = span(args.strip); ts = []; for (let i = Math.round(a * fps); i <= Math.round(b * fps); i++) ts.push(i / fps); }
-  else ts = times(args.sheet);
-  const crop = args.crop ? times(args.crop) : null, at = args['crop-at'] ? fields(args['crop-at']) : null;
-  const { url, ms } = await page.evaluate((ts, c, w, crop, at) => window.renderSheet(ts, c, w, crop, at), ts, +(args.cols || (args.strip ? 6 : 3)), +(args.w || (args.strip ? 320 : 640)), crop, at);
-  writeFileSync(out, Buffer.from(url.slice(url.indexOf(',') + 1), 'base64'));
-  console.log(`${out}  (${ts.length} frames)  ms/frame: ${ms.join(' ')}`);
-} else if (args.stills) {
-  const page = await openPage(), out = args.out || 'out/stills'; mkdirSync(out, { recursive: true });
-  console.log('GPU:', await page.evaluate(() => window.gpuInfo()));
-  for (const s of times(args.stills)) {
-    const t0 = Date.now(), buf = await frameOf(page, s, 'image/png');
-    const f = `${out}/t${s.toFixed(2).replace('.', '_')}.png`; writeFileSync(f, buf);
-    console.log(`${f}  ${Date.now() - t0} ms`);
+// Mode 3: sequence render -> out/frames/f_NNNNN.jpg (and optional --encode -> out/video.mp4)
+const fdir = `${OUT}/frames`;
+mkdirSync(fdir, { recursive: true });
+
+// Hash all source scripts so unchanged frames can be reused unless --force
+const srcHash = (() => {
+  const h = createHash('sha1');
+  const html = readFileSync('studio.html', 'utf8');
+  for (const m of html.matchAll(/<script src="([^"]+)"><\/script>/g)) {
+    if (existsSync(m[1])) h.update(m[1]).update(readFileSync(m[1]));
   }
-} else if (args.png) {
-  // PNG sequence (for GIFs): a loop's full cycle (frame n equals frame 0, so it isn't rendered), or --range=a:b.
-  const probe = await openPage(), len = await lengthOf(probe); await probe.close();
-  const [a, b] = args.range ? span(args.range) : [0, len], n = Math.round((b - a) * fps);
-  const out = args.out || `out/${args.loop ? 'loop_' + args.loop : 'png'}`, workers = +(args.workers || 3); mkdirSync(out, { recursive: true });
-  let next = 0; const start = Date.now();
-  await Promise.all(Array.from({ length: workers }, async (_, w) => {
-    const page = await openPage('#' + w);
-    while (next < n) { const i = next++; writeFileSync(`${out}/f${String(i).padStart(4, '0')}.png`, await frameOf(page, a + i / fps, 'image/png')); }
-  }));
-  console.log(`${n} frames → ${out}  (${((Date.now() - start) / n).toFixed(0)} ms/frame)`);
-} else if (args.frames) {
-  // Parallel and resumable: each worker pulls the next missing frame; files are written atomically.
-  const probe = await openPage(), len = await lengthOf(probe); await probe.close();
-  const [a, b] = args.range ? span(args.range) : [0, len], workers = +(args.workers || 4);
-  mkdirSync(FRAMES_DIR, { recursive: true });
-  const first = Math.round(a * fps), last = Math.min(Math.ceil(len * fps) - 1, Math.round(b * fps) - 1);
-  const todo = []; for (let i = first; i <= last; i++) { const f = `${FRAMES_DIR}/f${String(i).padStart(5, '0')}.jpg`; if (!existsSync(f) || statSync(f).size < 1000) todo.push(i); }
-  console.log(`${todo.length} frames to render (${last - first + 1 - todo.length} already done), ${workers} workers`);
-  let next = 0, done = 0; const start = Date.now();
-  await Promise.all(Array.from({ length: workers }, async (_, w) => {
-    const page = await openPage('#' + w);
-    while (next < todo.length) {
-      const i = todo[next++], f = `${FRAMES_DIR}/f${String(i).padStart(5, '0')}.jpg`;
-      const buf = await frameOf(page, i / fps, 'image/jpeg', .94);
-      writeFileSync(f + '.tmp', buf); renameSync(f + '.tmp', f);
-      if (++done % 24 === 0 || done === todo.length) {
-        const el = (Date.now() - start) / 1000;
-        console.log(`frame ${done}/${todo.length}  ${(el / done * 1000).toFixed(0)} ms/frame effective  eta ${((todo.length - done) * el / done / 60).toFixed(1)} min`);
-      }
-    }
-  }));
-} else if (args.clip) {
-  const page = await openPage(), len = await lengthOf(page);
-  const [a, b] = args.range ? span(args.range) : typeof args.clip === 'string' ? span(args.clip) : [0, len];
-  const audio = args.audio || await page.evaluate(() => PROJECT.audio || '');
-  const out = args.out || 'out/clip.mp4'; mkdirSync(dirname(out), { recursive: true });
-  const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
-    ...(audio ? ['-ss', String(a), '-t', String(b - a), '-i', audio, '-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '192k', '-shortest'] : []),
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out],
-    { stdio: ['pipe', 'inherit', 'inherit'] });
-  const n = Math.round((b - a) * fps), start = Date.now();
-  for (let i = 0; i < n; i++) {
-    const buf = await frameOf(page, a + i / fps, 'image/jpeg', .93);
-    if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
-    if (i % 24 === 0 || i === n - 1) console.log(`frame ${i + 1}/${n}  ${((Date.now() - start) / (i + 1)).toFixed(0)} ms/frame`);
+  return h.digest('hex').slice(0, 12);
+})();
+const mfPath = `${fdir}/manifest.json`;
+const prevMf = (!args.force && existsSync(mfPath)) ? JSON.parse(readFileSync(mfPath, 'utf8')) : null;
+
+const b0 = await launch(), p0 = await openPage(b0);
+const [dur, gpu, cfgAudio] = await p0.evaluate(() => [
+  window.LOOP ? (window.LOOP.len || 4) : DUR,
+  window.gpuInfo(),
+  typeof PROJECT !== 'undefined' ? PROJECT.audio : null,
+]);
+await closeBrowser(b0);
+
+const [t0, t1] = args.range ? args.range.split(',').map(Number) : [0, dur];
+const f0 = Math.round(t0 * FPS), f1 = Math.round(t1 * FPS), total = f1 - f0;
+
+const reuse = prevMf && prevMf.srcHash === srcHash && prevMf.fps === FPS && prevMf.loop === (args.loop || null);
+if (!reuse) {
+  for (const f of readdirSync(fdir)) {
+    if (/^f_\d+\.jpg$/.test(f)) unlinkSync(`${fdir}/${f}`);
   }
-  ff.stdin.end(); await new Promise(r => ff.on('close', r));
-  console.log(`wrote ${out}`);
-} else {
-  console.log('nothing to do: see the usage notes at the top of render.mjs');
 }
-await browser.close();
+writeFileSync(mfPath, JSON.stringify({ srcHash, fps: FPS, loop: args.loop || null, t0, t1 }, null, 2));
+
+const todo = [];
+for (let f = f0; f < f1; f++) {
+  const path = `${fdir}/f_${String(f - f0).padStart(5, '0')}.jpg`;
+  if (!(reuse && existsSync(path))) todo.push(f);
+}
+const cached = total - todo.length;
+console.log(`rendering ${todo.length}/${total} frames (${cached} cached) @ ${FPS} fps (${(t1 - t0).toFixed(2)}s) with ${WORKERS} workers  [${gpu}]`);
+
+let nextIdx = 0, done = 0;
+const start = Date.now();
+const BATCH = 16;
+
+async function worker() {
+  const b = await launch(), p = await openPage(b);
+  while (true) {
+    const i0 = nextIdx;
+    if (i0 >= todo.length) break;
+    nextIdx += BATCH;
+    const batch = todo.slice(i0, i0 + BATCH);
+    const urls = await p.evaluate(async (fs, fps) => {
+      const res = [];
+      for (const f of fs) {
+        res.push(await window.renderAt(f / fps, 'image/jpeg', .90));
+      }
+      return res;
+    }, batch, FPS);
+    for (let k = 0; k < batch.length; k++) {
+      const f = batch[k];
+      saveUrl(urls[k], `${fdir}/f_${String(f - f0).padStart(5, '0')}.jpg`);
+      done++;
+    }
+    const el = (Date.now() - start) / 1000, rate = done / el, eta = (todo.length - done) / Math.max(0.1, rate);
+    console.log(`  ${done}/${todo.length}  (${rate.toFixed(1)} fps, ETA ${eta.toFixed(0)}s)`);
+  }
+  await closeBrowser(b);
+}
+
+if (todo.length) await Promise.all(Array.from({ length: Math.min(WORKERS, todo.length) }, worker));
+writeFileSync(mfPath, JSON.stringify({ srcHash, fps: FPS, loop: args.loop || null, t0, t1 }, null, 2));
+
+if (args.encode) {
+  const mp4 = `${OUT}/video.mp4`;
+  const audioFile = typeof args.audio === 'string' ? args.audio : (!args.loop && cfgAudio && existsSync(cfgAudio) ? cfgAudio : null);
+  const ff = ['-y', '-framerate', String(FPS), '-i', `${fdir}/f_%05d.jpg`];
+  if (audioFile) {
+    if (t0 > 0) ff.push('-ss', String(t0));
+    ff.push('-i', audioFile, '-c:a', 'aac', '-b:a', '192k', '-shortest');
+  }
+  ff.push('-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-vf', 'scale=out_range=tv', '-pix_fmt', 'yuv420p', '-color_range', 'tv', '-movflags', '+faststart', mp4);
+  execFileSync('ffmpeg', ff, { stdio: 'inherit' });
+  console.log(`encoded -> ${mp4}${audioFile ? ` (audio: ${audioFile})` : ' (silent)'}`);
+}

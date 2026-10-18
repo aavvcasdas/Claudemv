@@ -1,0 +1,18 @@
+{
+ "video": "out/video.mp4",
+ "fps": 24.0,
+ "frames": 1344,
+ "cuts": [
+  19.125,
+  28.875,
+  31.875,
+  35.417,
+  42.583,
+  44.667
+ ],
+ "freezes": [],
+ "black": [],
+ "white_flash": [],
+ "end_hard_cut_to_black": false,
+ "note": "open each strip. Pops are not detected here: check every action with clip_strip.py at 12 fps."
+}

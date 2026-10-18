@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Permanent Marker';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('permanent-marker-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Shantell Sans';
+  font-style: normal;
+  font-weight: 800;
+  font-display: block;
+  src: url('shantell-sans-latin-800-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Ma Shan Zheng';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('ma-shan-zheng-chinese-simplified-400-normal.woff2') format('woff2'),
+       url('ma-shan-zheng-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+  src: url('noto-serif-sc-chinese-simplified-600-normal.woff2') format('woff2');
+}

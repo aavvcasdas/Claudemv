@@ -1,0 +1,545 @@
+[
+ {
+  "id": "S01",
+  "ref_shot": 1,
+  "ref": {
+   "camera": {
+    "pan_x": -0.0002,
+    "tilt_y": -0.001,
+    "zoom": -0.0016,
+    "rotate": -0.0018,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.002,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.195,
+    "contrast": 0.103,
+    "dark_ratio": 0.004,
+    "colourfulness": 0.127,
+    "dominant": [
+     "#1C2146",
+     "#2C315B",
+     "#5D6B8F",
+     "#CD8664"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": -0.0008,
+    "tilt_y": 0.0027,
+    "zoom": 0.01,
+    "rotate": 0.0055,
+    "kind": [
+     "push_in"
+    ],
+    "speed": 0.01,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.207,
+    "contrast": 0.084,
+    "dark_ratio": 0.098,
+    "colourfulness": 0.084,
+    "dominant": [
+     "#333D48",
+     "#27323E",
+     "#11121A",
+     "#B79276"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S02",
+  "ref_shot": 2,
+  "ref": {
+   "camera": {
+    "pan_x": 0.0002,
+    "tilt_y": 0.0024,
+    "zoom": -0.0019,
+    "rotate": 0.0007,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.002,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.495,
+    "contrast": 0.221,
+    "dark_ratio": 0.013,
+    "colourfulness": 0.241,
+    "dominant": [
+     "#6E727F",
+     "#9ABED1",
+     "#26254A",
+     "#D49977"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": -0.0048,
+    "tilt_y": -0.0017,
+    "zoom": -0.0111,
+    "rotate": 0.0143,
+    "kind": [
+     "pull_out",
+     "roll/orbit"
+    ],
+    "speed": 0.014,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.564,
+    "contrast": 0.208,
+    "dark_ratio": 0.001,
+    "colourfulness": 0.178,
+    "dominant": [
+     "#E0C7A7",
+     "#B39A82",
+     "#5C6A61",
+     "#323D43"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S03",
+  "ref_shot": 2,
+  "ref": {
+   "camera": {
+    "pan_x": 0.0002,
+    "tilt_y": 0.0024,
+    "zoom": -0.0019,
+    "rotate": 0.0007,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.002,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.495,
+    "contrast": 0.221,
+    "dark_ratio": 0.013,
+    "colourfulness": 0.241,
+    "dominant": [
+     "#6E727F",
+     "#9ABED1",
+     "#26254A",
+     "#D49977"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": -0.0006,
+    "tilt_y": 0.0,
+    "zoom": -0.006,
+    "rotate": 0.0014,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.006,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.686,
+    "contrast": 0.204,
+    "dark_ratio": 0.001,
+    "colourfulness": 0.265,
+    "dominant": [
+     "#E6D5BF",
+     "#D1B69B",
+     "#4B724F",
+     "#C95030"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S04",
+  "ref_shot": 2,
+  "ref": {
+   "camera": {
+    "pan_x": 0.0002,
+    "tilt_y": 0.0024,
+    "zoom": -0.0019,
+    "rotate": 0.0007,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.002,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.495,
+    "contrast": 0.221,
+    "dark_ratio": 0.013,
+    "colourfulness": 0.241,
+    "dominant": [
+     "#6E727F",
+     "#9ABED1",
+     "#26254A",
+     "#D49977"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": 0.0008,
+    "tilt_y": 0.0037,
+    "zoom": -0.0073,
+    "rotate": -0.0006,
+    "kind": [
+     "pull_out"
+    ],
+    "speed": 0.007,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.434,
+    "contrast": 0.213,
+    "dark_ratio": 0.001,
+    "colourfulness": 0.162,
+    "dominant": [
+     "#555D5D",
+     "#343E47",
+     "#E3CAAC",
+     "#CD976A"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S05",
+  "ref_shot": 2,
+  "ref": {
+   "camera": {
+    "pan_x": 0.0002,
+    "tilt_y": 0.0024,
+    "zoom": -0.0019,
+    "rotate": 0.0007,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.002,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.495,
+    "contrast": 0.221,
+    "dark_ratio": 0.013,
+    "colourfulness": 0.241,
+    "dominant": [
+     "#6E727F",
+     "#9ABED1",
+     "#26254A",
+     "#D49977"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": 0.0005,
+    "tilt_y": -0.0006,
+    "zoom": -0.0015,
+    "rotate": -0.0031,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.003,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.677,
+    "contrast": 0.189,
+    "dark_ratio": 0.0,
+    "colourfulness": 0.169,
+    "dominant": [
+     "#DFCAB2",
+     "#C9AA8E",
+     "#49714E",
+     "#33272E"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S06",
+  "ref_shot": 2,
+  "ref": {
+   "camera": {
+    "pan_x": 0.0002,
+    "tilt_y": 0.0024,
+    "zoom": -0.0019,
+    "rotate": 0.0007,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.002,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.495,
+    "contrast": 0.221,
+    "dark_ratio": 0.013,
+    "colourfulness": 0.241,
+    "dominant": [
+     "#6E727F",
+     "#9ABED1",
+     "#26254A",
+     "#D49977"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": 0.0001,
+    "tilt_y": 0.0075,
+    "zoom": 0.0031,
+    "rotate": -0.0077,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.008,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.288,
+    "contrast": 0.201,
+    "dark_ratio": 0.129,
+    "colourfulness": 0.154,
+    "dominant": [
+     "#191626",
+     "#453534",
+     "#B8987D",
+     "#896A50"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S07",
+  "ref_shot": 3,
+  "ref": {
+   "camera": {
+    "pan_x": -0.0057,
+    "tilt_y": -0.0057,
+    "zoom": -0.0114,
+    "rotate": 0.016,
+    "kind": [
+     "pull_out",
+     "roll/orbit"
+    ],
+    "speed": 0.016,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.227,
+    "contrast": 0.144,
+    "dark_ratio": 0.006,
+    "colourfulness": 0.179,
+    "dominant": [
+     "#1B1E49",
+     "#2D3467",
+     "#726089",
+     "#D6979B"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": -0.0002,
+    "tilt_y": 0.0047,
+    "zoom": 0.0095,
+    "rotate": 0.0014,
+    "kind": [
+     "push_in"
+    ],
+    "speed": 0.009,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.225,
+    "contrast": 0.079,
+    "dark_ratio": 0.0,
+    "colourfulness": 0.112,
+    "dominant": [
+     "#353C45",
+     "#242D38",
+     "#5F564D",
+     "#BD6757"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S08",
+  "ref_shot": 3,
+  "ref": {
+   "camera": {
+    "pan_x": -0.0057,
+    "tilt_y": -0.0057,
+    "zoom": -0.0114,
+    "rotate": 0.016,
+    "kind": [
+     "pull_out",
+     "roll/orbit"
+    ],
+    "speed": 0.016,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.227,
+    "contrast": 0.144,
+    "dark_ratio": 0.006,
+    "colourfulness": 0.179,
+    "dominant": [
+     "#1B1E49",
+     "#2D3467",
+     "#726089",
+     "#D6979B"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": -0.0067,
+    "tilt_y": 0.0015,
+    "zoom": 0.002,
+    "rotate": -0.0064,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.007,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.167,
+    "contrast": 0.065,
+    "dark_ratio": 0.006,
+    "colourfulness": 0.085,
+    "dominant": [
+     "#29323E",
+     "#112131",
+     "#B7856F",
+     "#5B6775"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S09",
+  "ref_shot": 4,
+  "ref": {
+   "camera": {
+    "pan_x": 0.0004,
+    "tilt_y": 0.0001,
+    "zoom": -0.0487,
+    "rotate": 0.0061,
+    "kind": [
+     "pull_out"
+    ],
+    "speed": 0.049,
+    "pace": "medium"
+   },
+   "look": {
+    "brightness": 0.415,
+    "contrast": 0.277,
+    "dark_ratio": 0.008,
+    "colourfulness": 0.198,
+    "dominant": [
+     "#181B47",
+     "#99C0D8",
+     "#2F415A",
+     "#7DA663"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": 0.0019,
+    "tilt_y": -0.0009,
+    "zoom": -0.0014,
+    "rotate": -0.0033,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.003,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.441,
+    "contrast": 0.278,
+    "dark_ratio": 0.0,
+    "colourfulness": 0.195,
+    "dominant": [
+     "#2A333F",
+     "#E0C6A7",
+     "#547954",
+     "#CD7A42"
+    ]
+   }
+  }
+ },
+ {
+  "id": "S10",
+  "ref_shot": 5,
+  "ref": {
+   "camera": {
+    "pan_x": 0.0,
+    "tilt_y": 0.0008,
+    "zoom": -0.0003,
+    "rotate": -0.0015,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.002,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.218,
+    "contrast": 0.11,
+    "dark_ratio": 0.008,
+    "colourfulness": 0.16,
+    "dominant": [
+     "#232851",
+     "#44426A",
+     "#68798A",
+     "#D28767"
+    ]
+   }
+  },
+  "ours": {
+   "camera": {
+    "pan_x": -0.0003,
+    "tilt_y": -0.0009,
+    "zoom": -0.0196,
+    "rotate": 0.0005,
+    "kind": [
+     "pull_out"
+    ],
+    "speed": 0.02,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.257,
+    "contrast": 0.115,
+    "dark_ratio": 0.092,
+    "colourfulness": 0.102,
+    "dominant": [
+     "#2D3842",
+     "#505854",
+     "#12141B",
+     "#967F6C"
+    ]
+   }
+  }
+ }
+]
