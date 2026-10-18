@@ -1,9 +1,6 @@
-// karaoke.js — 2D brush-font KTV lyric bar with per-character fill & Chinese scroll-plaque styling.
-// Adapted from ReelMimic (.claude/skills/painted-animation/template/src/karaoke.js) for Claudemv.
-//
-// Accepts PROJECT.lyrics in either format:
-//   1. Array of objects from align_lyrics.py: [{ t, end, text, words: [{w, s, e}] }, ...]
-//   2. Array of tuples: [[t0, t1, 'text', { hold, pun }], ...]
+// karaoke.js — Dual-mode 2D brush-font lyric renderer:
+//   1. Classic Scroll-Plaque KTV mode (default, for 潮汐 / new潮汐)
+//   2. Frameless Kinetic Pop-In Typography mode (PROJECT.subtitleMode === 'kinetic', for 去年夏天)
 
 window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
 
@@ -14,13 +11,14 @@ window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
   function normLine(entry) {
     if (Array.isArray(entry)) {
       const [t0, t1, txt, o = {}] = entry;
-      return { t0, t1, txt, words: o.words || null, o };
+      return { t0, t1, txt, words: o.words || null, meta: o.meta || {}, o };
     }
     return {
       t0: entry.t ?? entry.start ?? 0,
       t1: entry.end ?? (entry.t + 3),
       txt: entry.text ?? entry.txt ?? '',
       words: entry.words || null,
+      meta: entry.meta || {},
       o: entry
     };
   }
@@ -33,6 +31,112 @@ window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
     c.arcTo(x, y + h, x, y, r);
     c.arcTo(x, y, x + w, y, r);
     c.closePath();
+  }
+
+  // Compute which character indices in `txt` belong to highlighted keywords (`meta.hi`)
+  function getHighlightSet(txt, hiStr) {
+    const set = new Set();
+    if (!hiStr) return set;
+    for (const kw of String(hiStr).split(',').map(s => s.trim()).filter(Boolean)) {
+      const idx = txt.indexOf(kw);
+      if (idx >= 0) {
+        for (let k = idx; k < idx + kw.length; k++) set.add(k);
+      }
+    }
+    return set;
+  }
+
+  // Draw comic golden burst rays around a highlighted word
+  function drawWordRays(c, cx, cy, rx, ry, popK) {
+    if (popK <= 0.05) return;
+    c.save();
+    c.strokeStyle = '#F5C84C';
+    c.lineWidth = 3.2;
+    c.lineCap = 'round';
+    const angles = [-2.5, -1.9, -1.2, -0.5, 0.4, 1.1, 1.9, 2.6];
+    for (const a of angles) {
+      const r0 = 1.05, r1 = 1.05 + 0.36 * Math.sin(popK * Math.PI);
+      c.beginPath();
+      c.moveTo(cx + Math.cos(a) * rx * r0, cy + Math.sin(a) * ry * r0);
+      c.lineTo(cx + Math.cos(a) * rx * r1, cy + Math.sin(a) * ry * r1);
+      c.stroke();
+    }
+    c.restore();
+  }
+
+  // Frameless Kinetic Pop-In Subtitle Renderer (《去年夏天》手绘弹出式高光黄字字幕)
+  function drawKineticSubtitle(c, cur, t, alpha) {
+    const { t0, t1, txt, words, meta } = cur;
+    const chars = [...txt];
+    const n = chars.length || 1;
+    const hiSet = getHighlightSet(txt, meta.hi);
+    const posMode = meta.pos || 'center';
+
+    c.save();
+    c.globalAlpha = alpha;
+    c.textBaseline = 'middle';
+    c.textAlign = 'center';
+    c.lineJoin = 'round';
+
+    const drawCharAt = (ch, i, gx, gy) => {
+      const ws = t0 + (i / n) * Math.min(1.35, (t1 - t0) * 0.52);
+      const we = ws + 0.18;
+      if (t < ws - 0.03) return;
+      const p = clamp((t - ws) / Math.max(0.08, we - ws));
+      const isHi = hiSet.has(i);
+      const sc = backOut(p) * (isHi ? 1.32 : 1.0);
+      const bounceY = p < 1 ? -Math.sin(p * Math.PI) * (isHi ? 12 : 6) : 0;
+
+      c.save();
+      c.translate(gx, gy + bounceY);
+      c.scale(sc, sc);
+      if (isHi && p > 0.15 && p < 0.98) {
+        drawWordRays(c, 0, 0, 28, 26, p);
+      }
+      c.font = isHi
+        ? 'bold 60px "Ma Shan Zheng", "Noto Serif SC", cursive'
+        : '50px "Ma Shan Zheng", "Noto Serif SC", cursive';
+      c.lineWidth = isHi ? 11 : 9.5;
+      c.strokeStyle = '#23141E';
+      c.strokeText(ch, 0, 0);
+      c.fillStyle = isHi ? '#F5C445' : '#FFFDF7';
+      c.fillText(ch, 0, 0);
+      c.restore();
+    };
+
+    if (posMode === 'vert_right' || posMode === 'vert_left') {
+      const vx = posMode === 'vert_right' ? 1420 : 490;
+      const vy0 = 235;
+      const stepY = 60;
+      chars.forEach((ch, i) => drawCharAt(ch, i, vx, vy0 + i * stepY));
+    } else if (posMode === 'two_line') {
+      const splitIdx = meta.split || Math.ceil(n / 2);
+      const row1 = chars.slice(0, splitIdx);
+      const row2 = chars.slice(splitIdx);
+      const stepX = 56;
+      const cx1 = W / 2 - 55, cy1 = H - 132;
+      const cx2 = W / 2 + 55, cy2 = H - 68;
+      row1.forEach((ch, i) => {
+        const gx = cx1 + (i - (row1.length - 1) / 2) * stepX;
+        drawCharAt(ch, i, gx, cy1);
+      });
+      row2.forEach((ch, j) => {
+        const i = splitIdx + j;
+        const gx = cx2 + (j - (row2.length - 1) / 2) * stepX;
+        drawCharAt(ch, i, gx, cy2);
+      });
+    } else {
+      let cx = W / 2, cy = H - 88;
+      if (posMode === 'left') { cx = 640; cy = H - 92; }
+      else if (posMode === 'cloud_right') { cx = 1230; cy = 365; }
+      const stepX = 56;
+      chars.forEach((ch, i) => {
+        const gx = cx + (i - (n - 1) / 2) * stepX;
+        drawCharAt(ch, i, gx, cy);
+      });
+    }
+
+    c.restore();
   }
 
   function paintRow(c, txt, y, k, words = null, t = 0) {
@@ -80,35 +184,6 @@ window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
     return { x0: W / 2 - tw / 2, x1: W / 2 + tw / 2, tw };
   }
 
-  function strikeAndFix(c, x0, x1, y, p, word) {
-    const sk = easeOut(seg(p, 0, 0.35)), fk = backOut(seg(p, 0.25, 0.75));
-    c.save();
-    c.strokeStyle = '#D94436';
-    c.lineCap = 'round';
-    c.lineWidth = 6.5;
-    for (const dy of [-5, 5]) {
-      c.beginPath();
-      c.moveTo(x0 - 6, y + dy);
-      c.lineTo(lerp(x0 - 6, x1 + 6, sk), y - dy);
-      c.stroke();
-    }
-    if (fk > 0.01) {
-      c.translate((x0 + x1) / 2, y - 50);
-      c.rotate(-0.07);
-      c.scale(fk, fk);
-      c.font = FONT;
-      c.textAlign = 'center';
-      c.textBaseline = 'middle';
-      c.lineJoin = 'round';
-      c.lineWidth = 8.5;
-      c.strokeStyle = '#1C141B';
-      c.strokeText(word, 0, 0);
-      c.fillStyle = '#6E9F58';
-      c.fillText(word, 0, 0);
-    }
-    c.restore();
-  }
-
   function drawKaraoke(c, t) {
     const Y = (typeof H !== 'undefined' ? H : 1080) - 62;
     const raw = PROJECT.lyrics;
@@ -120,58 +195,38 @@ window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
     }
     if (idx < 0) return;
 
-    const cur = L[idx], { t0, t1, txt, words, o } = cur;
-    const prev = idx > 0 && L[idx - 1].o?.hold && t < L[idx - 1].o.hold ? L[idx - 1] : null;
+    const cur = L[idx], { t0, t1, txt, words } = cur;
     const a = clamp(Math.min((t - (t0 - 0.06)) / 0.12, (t1 + 0.06 - t) / 0.12));
     if (a <= 0.01) return;
+
+    if (typeof PROJECT !== 'undefined' && PROJECT.subtitleMode === 'kinetic') {
+      drawKineticSubtitle(c, cur, t, a);
+      return;
+    }
 
     c.save();
     c.globalAlpha = a;
     c.font = FONT;
     const w1 = c.measureText(txt).width;
-    const w0 = prev ? c.measureText(prev.txt).width : 0;
-    const bw = Math.max(w1, w0) + PADX * 2 + 24;
+    const bw = w1 + PADX * 2 + 24;
+    const px = W / 2 - bw / 2, py = Y - BH / 2;
+    const isQinglv = typeof PROJECT !== 'undefined' && PROJECT.styles && PROJECT.styles.includes('qinglv-woodblock');
+    c.fillStyle = isQinglv ? 'rgba(14, 28, 54, 0.84)' : 'rgba(24, 18, 24, 0.80)';
+    pill(c, px, py, bw, BH, BR);
+    c.fill();
+    c.strokeStyle = isQinglv ? 'rgba(245, 200, 92, 0.72)' : 'rgba(232, 170, 56, 0.48)';
+    c.lineWidth = isQinglv ? 2.0 : 1.6;
+    c.stroke();
 
-    if (prev) {
-      const yTop = Y - 66, yBot = Y;
-      c.fillStyle = 'rgba(24, 18, 22, 0.80)';
-      pill(c, W / 2 - bw / 2, yTop - BH / 2 - 4, bw, BH + 74, BR);
-      c.fill();
-      paintRow(c, prev.txt, yTop, 1, prev.words, t);
-      const k = clamp((t - t0) / Math.max(0.01, t1 - t0));
-      const { x0, tw } = paintRow(c, txt, yBot, k, words, t);
-      if (o.pun && t >= o.pun.at) {
-        const i = txt.indexOf(o.pun.strike);
-        if (i >= 0) {
-          const sx0 = x0 + c.measureText(txt.slice(0, i)).width;
-          const sx1 = sx0 + c.measureText(o.pun.strike).width;
-          strikeAndFix(c, sx0, sx1, yBot, (t - o.pun.at) / 0.45, o.pun.fix);
-        } else {
-          strikeAndFix(c, x0, x0 + tw, yBot, (t - o.pun.at) / 0.45, o.pun.fix);
-        }
-      }
-    } else {
-      const px = W / 2 - bw / 2, py = Y - BH / 2;
-      const isQinglv = typeof PROJECT !== 'undefined' && PROJECT.styles && PROJECT.styles.includes('qinglv-woodblock');
-      // Traditional Ebony or Lapis-Lazuli & Gold-Trimmed Lyric Plaque (乌木/青绿描金词牌)
-      c.fillStyle = isQinglv ? 'rgba(14, 28, 54, 0.84)' : 'rgba(24, 18, 24, 0.80)';
-      pill(c, px, py, bw, BH, BR);
-      c.fill();
-      c.strokeStyle = isQinglv ? 'rgba(245, 200, 92, 0.72)' : 'rgba(232, 170, 56, 0.48)';
-      c.lineWidth = isQinglv ? 2.0 : 1.6;
-      c.stroke();
-
-      // Ornament on left & right inside plaque
-      c.fillStyle = isQinglv ? '#3B9E82' : '#B02E22';
-      c.fillRect(px + 12, Y - 10, 8, 20);
-      if (isQinglv) {
-        c.fillStyle = '#F5C85C';
-        c.fillRect(px + bw - 20, Y - 10, 6, 20);
-      }
-
-      const k = clamp((t - t0) / Math.max(0.01, t1 - t0));
-      paintRow(c, txt, Y, k, words, t);
+    c.fillStyle = isQinglv ? '#3B9E82' : '#B02E22';
+    c.fillRect(px + 12, Y - 10, 8, 20);
+    if (isQinglv) {
+      c.fillStyle = '#F5C85C';
+      c.fillRect(px + bw - 20, Y - 10, 6, 20);
     }
+
+    const k = clamp((t - t0) / Math.max(0.01, t1 - t0));
+    paintRow(c, txt, Y, k, words, t);
     c.restore();
   }
 

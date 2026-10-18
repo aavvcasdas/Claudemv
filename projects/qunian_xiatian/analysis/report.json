@@ -1,0 +1,777 @@
+{
+ "source": "source.mp4",
+ "input": "/home/user/Claudemv/去年夏天.mp4",
+ "video": {
+  "duration": 78.205,
+  "width": 854,
+  "height": 480,
+  "fps": 25.0,
+  "has_audio": true,
+  "channels": 2
+ },
+ "crop": null,
+ "analysed": "source.mp4",
+ "shots": [
+  [
+   0.0,
+   8.8
+  ],
+  [
+   8.8,
+   15.48
+  ],
+  [
+   15.48,
+   20.72
+  ],
+  [
+   20.72,
+   24.64
+  ],
+  [
+   24.64,
+   32.48
+  ],
+  [
+   32.48,
+   42.8
+  ],
+  [
+   42.8,
+   44.8
+  ],
+  [
+   44.8,
+   46.48
+  ],
+  [
+   46.48,
+   54.96
+  ],
+  [
+   54.96,
+   58.24
+  ],
+  [
+   58.24,
+   66.36
+  ],
+  [
+   66.36,
+   70.2
+  ],
+  [
+   70.2,
+   74.24
+  ],
+  [
+   74.24,
+   76.72
+  ],
+  [
+   76.72,
+   78.0
+  ],
+  [
+   78.0,
+   78.2
+  ]
+ ],
+ "pacing": {
+  "count": 16,
+  "mean_shot_s": 4.89,
+  "shortest_s": 0.2,
+  "longest_s": 10.32,
+  "mean_shot_beats": 10.0
+ },
+ "audio": {
+  "present": true,
+  "silent": false,
+  "levels_db": {
+   "L": -10.7,
+   "R": -10.9,
+   "mono": -10.9
+  },
+  "phase_inverted": false,
+  "noise_floor_db": -15.4,
+  "bpm": 123.05,
+  "beat_seconds": 0.4876,
+  "first_beat": 0.511,
+  "beats": [
+   0.511,
+   1.022,
+   1.486,
+   1.997,
+   2.461,
+   2.972,
+   3.46,
+   3.947,
+   4.435,
+   4.923,
+   5.41,
+   5.921,
+   6.385,
+   6.896,
+   7.361,
+   7.872,
+   8.336,
+   8.847,
+   9.334,
+   9.822,
+   10.31,
+   10.82,
+   11.285,
+   11.796,
+   12.283,
+   12.771,
+   13.259,
+   13.746,
+   14.234,
+   14.745,
+   15.209,
+   15.72,
+   16.208,
+   16.695,
+   17.183,
+   17.694,
+   18.158,
+   18.669,
+   19.156,
+   19.644,
+   20.132,
+   20.619,
+   21.107,
+   21.618,
+   22.082,
+   22.593,
+   23.081,
+   23.568,
+   24.056,
+   24.543,
+   25.031,
+   25.542,
+   26.006,
+   26.517,
+   27.005,
+   27.492,
+   27.98,
+   28.491,
+   28.955,
+   29.466,
+   29.931,
+   30.441,
+   30.929,
+   31.417,
+   31.904,
+   32.392,
+   32.879,
+   33.39,
+   33.855,
+   34.366,
+   34.853,
+   35.341,
+   35.828,
+   36.316,
+   36.804,
+   37.314,
+   37.779,
+   38.29,
+   38.754,
+   39.265,
+   39.753,
+   40.24,
+   40.728,
+   41.239,
+   41.703,
+   42.214,
+   42.678,
+   43.189,
+   43.677,
+   44.164,
+   44.652,
+   45.14,
+   45.627,
+   46.138,
+   46.602,
+   47.113,
+   47.578,
+   48.089,
+   48.576,
+   49.087,
+   49.551,
+   50.062,
+   50.527,
+   51.037,
+   51.502,
+   52.013,
+   52.5,
+   52.988,
+   53.476,
+   53.986,
+   54.451,
+   54.962,
+   55.449,
+   55.937,
+   56.424,
+   56.935,
+   57.4,
+   57.911,
+   58.375,
+   58.886,
+   59.373,
+   59.861,
+   60.349,
+   60.836,
+   61.324,
+   61.835,
+   62.299,
+   62.74,
+   63.181,
+   63.623,
+   64.064,
+   64.528,
+   65.016,
+   65.503,
+   65.991,
+   66.502,
+   66.99,
+   67.477,
+   67.965,
+   68.452,
+   68.94,
+   69.428,
+   69.915,
+   70.403,
+   70.914,
+   71.401,
+   71.889,
+   72.377,
+   72.864,
+   73.352,
+   73.839,
+   74.35,
+   74.838,
+   75.326
+  ],
+  "best_30s_starts": [
+   {
+    "start": 33.85,
+    "density": 1.651
+   },
+   {
+    "start": 31.9,
+    "density": 1.645
+   },
+   {
+    "start": 35.83,
+    "density": 1.632
+   },
+   {
+    "start": 29.93,
+    "density": 1.627
+   },
+   {
+    "start": 37.78,
+    "density": 1.624
+   }
+  ],
+  "peak_candidates": [
+   {
+    "t": 2.0,
+    "rise": 0.88,
+    "level_after": 0.84,
+    "kind": "lift"
+   },
+   {
+    "t": 23.57,
+    "rise": 1.02,
+    "level_after": 0.88,
+    "kind": "lift"
+   },
+   {
+    "t": 37.78,
+    "rise": 0.8,
+    "level_after": 1.05,
+    "kind": "lift"
+   }
+  ],
+  "quality_warning": null
+ },
+ "shot_details": [
+  {
+   "shot": 1,
+   "start": 0.0,
+   "end": 8.8,
+   "camera": {
+    "pan_x": 0.0004,
+    "tilt_y": -0.0121,
+    "zoom": 0.0251,
+    "rotate": -0.006,
+    "kind": [
+     "push_in",
+     "move_down"
+    ],
+    "speed": 0.025,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.421,
+    "contrast": 0.203,
+    "dark_ratio": 0.061,
+    "colourfulness": 0.182,
+    "dominant": [
+     "#544770",
+     "#847897",
+     "#E7D498",
+     "#181025"
+    ]
+   }
+  },
+  {
+   "shot": 2,
+   "start": 8.8,
+   "end": 15.48,
+   "camera": {
+    "pan_x": 0.0028,
+    "tilt_y": -0.0035,
+    "zoom": 0.0259,
+    "rotate": -0.0027,
+    "kind": [
+     "push_in"
+    ],
+    "speed": 0.026,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.409,
+    "contrast": 0.183,
+    "dark_ratio": 0.044,
+    "colourfulness": 0.209,
+    "dominant": [
+     "#55486F",
+     "#847797",
+     "#E5C977",
+     "#1C1123"
+    ]
+   }
+  },
+  {
+   "shot": 3,
+   "start": 15.48,
+   "end": 20.72,
+   "camera": {
+    "pan_x": 0.0091,
+    "tilt_y": -0.0005,
+    "zoom": -0.0339,
+    "rotate": -0.0104,
+    "kind": [
+     "pull_out",
+     "move_left",
+     "roll/orbit"
+    ],
+    "speed": 0.034,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.59,
+    "contrast": 0.195,
+    "dark_ratio": 0.044,
+    "colourfulness": 0.211,
+    "dominant": [
+     "#B67A65",
+     "#E4BB96",
+     "#23141B",
+     "#658158"
+    ]
+   }
+  },
+  {
+   "shot": 4,
+   "start": 20.72,
+   "end": 24.64,
+   "camera": {
+    "pan_x": -0.0164,
+    "tilt_y": 0.0061,
+    "zoom": -0.0101,
+    "rotate": -0.012,
+    "kind": [
+     "pull_out",
+     "move_right",
+     "roll/orbit"
+    ],
+    "speed": 0.016,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.571,
+    "contrast": 0.225,
+    "dark_ratio": 0.081,
+    "colourfulness": 0.211,
+    "dominant": [
+     "#DFBD9A",
+     "#C3816D",
+     "#8E685D",
+     "#20131D"
+    ]
+   }
+  },
+  {
+   "shot": 5,
+   "start": 24.64,
+   "end": 32.48,
+   "camera": {
+    "pan_x": 0.002,
+    "tilt_y": -0.0042,
+    "zoom": -0.0055,
+    "rotate": -0.0032,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.005,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.585,
+    "contrast": 0.203,
+    "dark_ratio": 0.052,
+    "colourfulness": 0.231,
+    "dominant": [
+     "#AF7D67",
+     "#E2BE9B",
+     "#27161A",
+     "#EDB84F"
+    ]
+   }
+  },
+  {
+   "shot": 6,
+   "start": 32.48,
+   "end": 42.8,
+   "camera": {
+    "pan_x": 0.0004,
+    "tilt_y": 0.0041,
+    "zoom": 0.0022,
+    "rotate": -0.001,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.004,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.385,
+    "contrast": 0.229,
+    "dark_ratio": 0.048,
+    "colourfulness": 0.209,
+    "dominant": [
+     "#2D2F4C",
+     "#5A6275",
+     "#DAD2D6",
+     "#D8AF56"
+    ]
+   }
+  },
+  {
+   "shot": 7,
+   "start": 42.8,
+   "end": 44.8,
+   "camera": {
+    "pan_x": 0.0,
+    "tilt_y": 0.0038,
+    "zoom": 0.0161,
+    "rotate": 0.0035,
+    "kind": [
+     "push_in"
+    ],
+    "speed": 0.016,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.325,
+    "contrast": 0.178,
+    "dark_ratio": 0.057,
+    "colourfulness": 0.214,
+    "dominant": [
+     "#343759",
+     "#5A5E82",
+     "#DDBA6E",
+     "#140E21"
+    ]
+   }
+  },
+  {
+   "shot": 8,
+   "start": 44.8,
+   "end": 46.48,
+   "camera": {
+    "pan_x": -0.0014,
+    "tilt_y": 0.0059,
+    "zoom": -0.0146,
+    "rotate": 0.0038,
+    "kind": [
+     "pull_out"
+    ],
+    "speed": 0.015,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.333,
+    "contrast": 0.189,
+    "dark_ratio": 0.052,
+    "colourfulness": 0.216,
+    "dominant": [
+     "#353759",
+     "#5B5E80",
+     "#DDBE71",
+     "#181022"
+    ]
+   }
+  },
+  {
+   "shot": 9,
+   "start": 46.48,
+   "end": 54.96,
+   "camera": {
+    "pan_x": 0.0137,
+    "tilt_y": 0.0019,
+    "zoom": -0.0084,
+    "rotate": -0.0015,
+    "kind": [
+     "pull_out",
+     "move_left"
+    ],
+    "speed": 0.014,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.32,
+    "contrast": 0.181,
+    "dark_ratio": 0.057,
+    "colourfulness": 0.196,
+    "dominant": [
+     "#313557",
+     "#575B7E",
+     "#C9AE7C",
+     "#120D1F"
+    ]
+   }
+  },
+  {
+   "shot": 10,
+   "start": 54.96,
+   "end": 58.24,
+   "camera": {
+    "pan_x": -0.0,
+    "tilt_y": 0.0,
+    "zoom": 0.0014,
+    "rotate": 0.0001,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.001,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.561,
+    "contrast": 0.255,
+    "dark_ratio": 0.04,
+    "colourfulness": 0.239,
+    "dominant": [
+     "#E8C89B",
+     "#4D406D",
+     "#977B86",
+     "#1E121D"
+    ]
+   }
+  },
+  {
+   "shot": 11,
+   "start": 58.24,
+   "end": 66.36,
+   "camera": {
+    "pan_x": 0.0039,
+    "tilt_y": -0.0089,
+    "zoom": -0.0114,
+    "rotate": 0.0039,
+    "kind": [
+     "pull_out",
+     "move_down"
+    ],
+    "speed": 0.011,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.379,
+    "contrast": 0.231,
+    "dark_ratio": 0.047,
+    "colourfulness": 0.213,
+    "dominant": [
+     "#2F2E50",
+     "#6D4A40",
+     "#A6836C",
+     "#F3E6D3"
+    ]
+   }
+  },
+  {
+   "shot": 12,
+   "start": 66.36,
+   "end": 70.2,
+   "camera": {
+    "pan_x": 0.0003,
+    "tilt_y": 0.0034,
+    "zoom": 0.0001,
+    "rotate": -0.0,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.003,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.314,
+    "contrast": 0.15,
+    "dark_ratio": 0.035,
+    "colourfulness": 0.223,
+    "dominant": [
+     "#303054",
+     "#684438",
+     "#A26C54",
+     "#EBCFB1"
+    ]
+   }
+  },
+  {
+   "shot": 13,
+   "start": 70.2,
+   "end": 74.24,
+   "camera": {
+    "pan_x": -0.0022,
+    "tilt_y": 0.017,
+    "zoom": 0.0003,
+    "rotate": -0.0019,
+    "kind": [
+     "move_up"
+    ],
+    "speed": 0.017,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.459,
+    "contrast": 0.196,
+    "dark_ratio": 0.031,
+    "colourfulness": 0.227,
+    "dominant": [
+     "#544D74",
+     "#8A80A0",
+     "#DEC376",
+     "#1C1328"
+    ]
+   }
+  },
+  {
+   "shot": 14,
+   "start": 74.24,
+   "end": 76.72,
+   "camera": {
+    "pan_x": -0.0424,
+    "tilt_y": 0.042,
+    "zoom": 0.1214,
+    "rotate": -0.0052,
+    "kind": [
+     "push_in",
+     "move_right",
+     "move_up"
+    ],
+    "speed": 0.121,
+    "pace": "fast"
+   },
+   "look": {
+    "brightness": 0.365,
+    "contrast": 0.175,
+    "dark_ratio": 0.017,
+    "colourfulness": 0.225,
+    "dominant": [
+     "#504D85",
+     "#2F3364",
+     "#E6D28A",
+     "#7B7AA6"
+    ]
+   }
+  },
+  {
+   "shot": 15,
+   "start": 76.72,
+   "end": 78.0,
+   "camera": {
+    "pan_x": -0.0007,
+    "tilt_y": -0.0008,
+    "zoom": 0.0274,
+    "rotate": -0.0004,
+    "kind": [
+     "push_in"
+    ],
+    "speed": 0.027,
+    "pace": "slow"
+   },
+   "look": {
+    "brightness": 0.474,
+    "contrast": 0.198,
+    "dark_ratio": 0.024,
+    "colourfulness": 0.204,
+    "dominant": [
+     "#534D7F",
+     "#8D83A5",
+     "#E5D596",
+     "#221A2F"
+    ]
+   }
+  },
+  {
+   "shot": 16,
+   "start": 78.0,
+   "end": 78.2,
+   "camera": {
+    "pan_x": 0.0,
+    "tilt_y": 0.0,
+    "zoom": 0.0,
+    "rotate": 0.0,
+    "kind": [
+     "static"
+    ],
+    "speed": 0.0,
+    "pace": "still"
+   },
+   "look": {
+    "brightness": 0.0,
+    "contrast": 0.0,
+    "dark_ratio": 1.0,
+    "colourfulness": 0.001,
+    "dominant": [
+     "#000000",
+     "#000400",
+     "#000200",
+     "#000000"
+    ]
+   }
+  }
+ ],
+ "flashes": [
+  32.5
+ ],
+ "look_summary": {
+  "low_key_shots": 0.06,
+  "moving_camera_shots": 0.69,
+  "mean_brightness": 0.406,
+  "camera_kinds": [
+   "move_down",
+   "move_left",
+   "move_right",
+   "move_up",
+   "pull_out",
+   "push_in",
+   "roll/orbit",
+   "static"
+  ]
+ }
+}
