@@ -1,0 +1,112 @@
+{
+  "title": "《东京不太热》— 青春校园暗恋篇 (Clawd Campus MV)",
+  "source_audio": "/home/user/Claudemv/东京不太热 .mp3",
+  "duration": 219.453,
+  "fps": 24,
+  "width": 1920,
+  "height": 1080,
+  "bpm": 126.05,
+  "beat_seconds": 0.476,
+  "beat_offset": 0.186,
+  "style": "japanese-chinese-youth-campus-illustration-with-clawd",
+  "shots": [
+    {
+      "index": 1,
+      "id": "S01_CampusGateIntro",
+      "start": 0.0,
+      "end": 19.9,
+      "scene": "樱花校门与钟楼序幕 (Intro)"
+    },
+    {
+      "index": 2,
+      "id": "S02_ClassroomAlbum",
+      "start": 19.9,
+      "end": 35.0,
+      "scene": "夕阳晚自习教室与手机相册 (Verse 1A)"
+    },
+    {
+      "index": 3,
+      "id": "S03_BoulevardCouples",
+      "start": 35.0,
+      "end": 50.2,
+      "scene": "放学林荫大道与左手牵右手 (Pre-Chorus 1)"
+    },
+    {
+      "index": 4,
+      "id": "S04_DormQQPopup",
+      "start": 50.2,
+      "end": 65.55,
+      "scene": "男生宿舍书桌与叮叮叮当当Q弹窗 (Chorus 1A)"
+    },
+    {
+      "index": 5,
+      "id": "S05_HallwayAloofHeartbreak",
+      "start": 65.55,
+      "end": 80.9,
+      "scene": "教学楼走廊高冷伪装与樱花树心碎 (Chorus 1B)"
+    },
+    {
+      "index": 6,
+      "id": "S06_RooftopStreetlamps",
+      "start": 80.9,
+      "end": 96.35,
+      "scene": "教学楼天台晚风与校园街灯 (Verse 2A)"
+    },
+    {
+      "index": 7,
+      "id": "S07_NightTrackWalk",
+      "start": 96.35,
+      "end": 111.45,
+      "scene": "晚间校园塑胶跑道与看台情侣 (Pre-Chorus 2)"
+    },
+    {
+      "index": 8,
+      "id": "S08_LibraryQQSolve",
+      "start": 111.45,
+      "end": 127.5,
+      "scene": "图书馆自习室震动解题大作战 (Chorus 2A)"
+    },
+    {
+      "index": 9,
+      "id": "S09_CourtyardUmbrella",
+      "start": 127.5,
+      "end": 142.85,
+      "scene": "校园连廊伞架与雨中错位 (Chorus 2B)"
+    },
+    {
+      "index": 10,
+      "id": "S10_MusicRoomTimeline",
+      "start": 142.85,
+      "end": 157.95,
+      "scene": "音乐教室黑胶时间轴与单曲循环 (Bridge)"
+    },
+    {
+      "index": 11,
+      "id": "S11_FestivalLanternQQ",
+      "start": 157.95,
+      "end": 173.25,
+      "scene": "校园文化祭灯笼夜街与QQ弹窗 (Chorus 3A)"
+    },
+    {
+      "index": 12,
+      "id": "S12_ClocktowerFireworks",
+      "start": 173.25,
+      "end": 188.8,
+      "scene": "钟楼烟花夜空与高冷面具背后 (Chorus 3B)"
+    },
+    {
+      "index": 13,
+      "id": "S13_GraduationChalkboard",
+      "start": 188.8,
+      "end": 204.25,
+      "scene": "毕业季黑板报教室与最后的叮当Q (Chorus 4A)"
+    },
+    {
+      "index": 14,
+      "id": "S14_SakuraGateOutro",
+      "start": 204.25,
+      "end": 219.453,
+      "scene": "樱花校门落日归途与单曲循环尾奏 (Chorus 4B & Outro)"
+    }
+  ]
+}

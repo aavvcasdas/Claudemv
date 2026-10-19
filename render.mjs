@@ -254,7 +254,8 @@ if (args.encode) {
     if (t0 > 0) ff.push('-ss', String(t0));
     ff.push('-i', audioFile, '-c:a', 'aac', '-b:a', '192k', '-shortest');
   }
-  ff.push('-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-vf', 'scale=out_range=tv', '-pix_fmt', 'yuv420p', '-color_range', 'tv', '-movflags', '+faststart', mp4);
+  const crf = String(args.crf || ((t1 - t0) > 90 ? 22 : 18));
+  ff.push('-c:v', 'libx264', '-preset', 'medium', '-crf', crf, '-vf', 'scale=out_range=tv', '-pix_fmt', 'yuv420p', '-color_range', 'tv', '-movflags', '+faststart', mp4);
   execFileSync('ffmpeg', ff, { stdio: 'inherit' });
   console.log(`encoded -> ${mp4}${audioFile ? ` (audio: ${audioFile})` : ' (silent)'}`);
 }
