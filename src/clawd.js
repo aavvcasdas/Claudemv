@@ -63,26 +63,13 @@ function tintCols(o) {
 //   extras: hat, emote + emoteK (0..1 pop) + emoteAge (s since it appeared), draw(u, sw), armL(u, sw), armR(u, sw)
 //   boil:   boilKey (a stable id for its boil seeds; defaults to call order, so set it if characters come and go mid-shot)
 function clawd(x, y, u, o = {}) {
-  // Auto-resolve o.pose / o.move / default beat-locked motion so Clawd is never static
-  const tNow = o.t ?? (typeof T !== 'undefined' ? T : 0);
-  const rawPose = String(o.pose || o.move || '').toLowerCase();
-  const poseMap = {
-    walk: 'walk', run: 'run', bounce: 'bounce', hop: 'hop', jump: 'hop',
-    roof: 'roof', cheer: 'roof', excited: 'hop', sway: 'sway', lean: 'sway',
-    spin: 'spin', wave: 'wave', stomp: 'stomp', shimmy: 'shimmy', mix: 'mix',
-    typing: 'typing', point: 'typing', study: 'typing', phone: 'phone',
-    selfhold: 'selfhold', aloof: 'aloof', think: 'aloof',
-    heartbreak: 'heartbreak', shrug: 'heartbreak', idle: 'bounce'
-  };
-  if (rawPose && poseMap[rawPose]) {
-    const mv = move(poseMap[rawPose], tNow, o.seed || 0);
-    o = { ...mv, ...o };
-  } else if (o.dy === undefined && o.aL === undefined && o.walk === undefined) {
-    const mv = move('bounce', tNow, o.seed || 0);
-    o = { ...mv, ...o };
+  // 轻量待机呼吸：未指定走路/跳跃时，随节拍微小起伏，避免画面完全静止但不过度跳动
+  if (o.t !== undefined && o.dy === undefined && o.walk === undefined && o.aL === undefined && o.aR === undefined) {
+    const _bp = (typeof BEAT !== 'undefined' && typeof OFF !== 'undefined') ? (o.t - OFF) / BEAT : o.t * 2.1;
+    const _ab = Math.abs(Math.sin(_bp * Math.PI));
+    const _hit = Math.max(0, 1 - (_bp - Math.floor(_bp)) * 3.5);
+    o = { ...o, dy: -_ab * 0.45, sq: _hit * 0.04 };
   }
-  if (o.Look !== undefined && o.lookX === undefined) o.lookX = o.Look;
-  if (o.sweat && !o.emote) o.emote = 'sweat';
   // each part boils from its own seed (see boilSeed), so a moving arm never re-boils the body, or the next character
   const id = o.boilKey ?? ++CLAWD_N, rs = part => boilSeed(`clawd ${id} ${part}`);
   x += (o.dx || 0) * u;
@@ -256,28 +243,10 @@ function eyes(u, o, sw, sides, smear = 0) {
   if (sqz > 0) { push(); translate(0, -6 * u); scale(1 + sqz * .15, 1 - sqz); translate(0, 6 * u); }
   for (const s of sides) { push(); translate(s * 2.5 * u, -6 * u); eye(kinds[s < 0 ? 0 : 1], s, u, o, sw); pop(); }
   if (sqz > 0) pop();
-  if (o.glasses && sides.length > 0) {
-    const P = pts => pts.map(([a, b]) => [a * u, b * u]);
-    const gl = 0.25 * Math.sin((typeof T !== 'undefined' ? T : 0) * 6);
-    for (const s of sides) {
-      const cx = s * 2.5;
-      paint(rectPts((cx - 1.55) * u, -7.25 * u, 3.1 * u, 2.35 * u, u * 0.04), {
-        fill: '#8CE8FF', fillOp: 65, ink: PAL.ink, sw: sw * 1.15
-      });
-      inkLine(P([[cx - 0.95 + gl, -6.85], [cx - 0.25 + gl, -5.35]]), sw * 0.65, '#FFFFFF', 'inkfine', 0);
-    }
-    if (sides.length > 1) {
-      inkLine(P([[-0.95, -6.15], [0.95, -6.15]]), sw * 1.1, PAL.ink, 'ink', 0);
-      inkLine(P([[-4.1, -6.2], [-5.0, -6.4]]), sw * 0.95, PAL.ink, 'ink', 0);
-      inkLine(P([[4.1, -6.2], [5.0, -6.4]]), sw * 0.95, PAL.ink, 'ink', 0);
-    }
-  }
 }
 
 // One eye, drawn around its centre. s = -1 for the left eye, 1 for the right.
 function eye(e, s, u, o, sw) {
-  const eyeAlias = { starstruck: 'spark', sparkle: 'shine', focused: 'determined', round: 'wide', calm: 'normal', dead: 'x' };
-  if (eyeAlias[e]) e = eyeAlias[e];
   const lx = (o.lookX || 0) * u * .5, ly = (o.lookY || 0) * u * .4;
   const slit = (w, h) => {
     paint(rectPts(-w / 2 * u + lx, -h / 2 * u + ly, w * u, h * u, u * .04), { wash: PAL.ink, ink: null });
@@ -357,7 +326,6 @@ function eye(e, s, u, o, sw) {
 // o, O, smile, grin, flat, wobble, cat, frown, smirk, laugh, open, wail, teeth, tongue, pout, yawn
 function mouth(u, m, sw) {
   if (!m) return;
-  if (m === 'wavy') m = 'wobble';
   const P = pts => pts.map(([a, b]) => [a * u, b * u]), dark = '#4A1F2A';
   const line = (pts, w = .8, c = .6) => inkLine(P(pts), sw * w, PAL.ink, 'ink', c);
   switch (m) {
@@ -638,12 +606,8 @@ function emotions(t, keys, o = {}) {
     const base = { dy: 0, sq: 0, aL: .2, aR: .2, rot: 0, dx: 0, lookX: 0, lookY: 0 };
     const k = backOut(seg(age, 0, .4)), kc = ease(seg(age, 0, .3));
     for (const f in base) cur[f] = lerp(prev[f] ?? base[f], cur[f] ?? base[f], k);
-    if (!o.noTint) {
-      const a = tintCols(prev), b = tintCols(cur);
-      cur.col = mixCol(a.col, b.col, kc); cur.dk = mixCol(a.dk, b.dk, kc); cur.lt = mixCol(a.lt, b.lt, kc); cur.tint = null;
-    } else {
-      cur.tint = null; cur.tintK = 0;
-    }
+    const a = tintCols(prev), b = tintCols(cur);
+    cur.col = mixCol(a.col, b.col, kc); cur.dk = mixCol(a.dk, b.dk, kc); cur.lt = mixCol(a.lt, b.lt, kc); cur.tint = null;
     for (const f of ['blush', 'gloom', 'lid']) cur[f] = lerp(prev[f] || 0, cur[f] || 0, kc);
   }
   // takes: the one this key fires, plus the anticipation squash of the next one
@@ -681,11 +645,6 @@ function move(style, t, seed = 0) {
     case 'idle': o.dy = -ab * .5; o.sq = hit * .05; break;
     case 'stomp': o.dy = -Math.max(0, Math.sin(bp * TAU)) * 1.4; o.sq = hit * .2; o.rot = (bi % 2 ? 1 : -1) * .06 * hit; o.aL = o.aR = -.3 + hit * .9; break;
     case 'shimmy': o.dx = Math.sin(bp * TAU * 2) * .6; o.rot = Math.sin(bp * TAU * 2) * .05; o.aL = .9 + .4 * Math.sin(bp * TAU * 2); o.aR = .9 - .4 * Math.sin(bp * TAU * 2); o.dy = -ab * .5; break;
-    case 'typing': o.dy = -ab * 1.1; o.sq = hit * .14; o.rot = .05 * Math.sin(bp * TAU); o.aL = .35 + .65 * Math.sin(bp * TAU * 2); o.aR = .35 - .65 * Math.sin(bp * TAU * 2); o.walk = bp; break;
-    case 'phone': o.dy = -ab * 1.2; o.sq = hit * .11; o.rot = .06 * s1; o.aR = .85 + .25 * Math.sin(bp * TAU); o.aL = .2 + .45 * Math.abs(Math.sin(bp * TAU * 2)); o.walk = bp * .5; break;
-    case 'selfhold': o.dy = -ab * 1.0; o.sq = hit * .12; o.rot = .09 * s1; o.dx = .45 * s1; o.aL = -.45 + .2 * s1; o.aR = -.45 - .2 * s1; break;
-    case 'aloof': o.dy = -ab * .9; o.sq = hit * .09; o.rot = -.07 + .04 * s1; o.aL = -.55; o.aR = -.35 + .25 * hit; o.walk = bp * .5; break;
-    case 'heartbreak': o.dy = -ab * .7; o.sq = .12 * hit; o.dx = .18 * Math.sin(t * 28); o.rot = -.08 + .05 * s1; o.aL = -.7 + .3 * ab; o.aR = -.7 + .3 * ab; break;
   }
   return o;
 }

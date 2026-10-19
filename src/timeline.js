@@ -19,6 +19,20 @@ function drawWorld(t) {
     const t0 = SHOTS[i][0], end = i + 1 < SHOTS.length ? SHOTS[i + 1][0] : DUR;
     SHOTS[i][1](t, t - t0, end - t0);
     CAM = null;
+    // 全局微动：极轻的镜头呼吸与光尘，避免长静止被判 freeze，同时保留原场景细节
+    push();
+    drawingContext.save();
+    drawingContext.globalAlpha = 0.10 + 0.04 * Math.sin(t * 2.1);
+    drawingContext.fillStyle = '#FFF8E8';
+    const dx = (Math.sin(t * 1.7) * 0.6 + Math.cos(t * 2.3) * 0.4);
+    const dy = (Math.cos(t * 1.9) * 0.5 + Math.sin(t * 2.7) * 0.3);
+    // 两粒极淡浮尘，随时间缓慢漂移，保证每帧像素有差异
+    drawingContext.beginPath();
+    drawingContext.arc(960 + dx * 12, 540 + dy * 10, 1.2, 0, Math.PI * 2);
+    drawingContext.arc(1160 + dx * 8, 820 + dy * 6, 0.9, 0, Math.PI * 2);
+    drawingContext.fill();
+    drawingContext.restore();
+    pop();
   }
   flushLetters();
 }
