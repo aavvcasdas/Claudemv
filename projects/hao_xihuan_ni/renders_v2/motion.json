@@ -1,0 +1,44 @@
+{
+ "video": "projects/hao_xihuan_ni/renders_v2/video.mp4",
+ "fps": 24.0,
+ "frames": 573,
+ "cuts": [
+  5.125,
+  10.417,
+  14.833,
+  16.458,
+  19.5,
+  20.917
+ ],
+ "freezes": [
+  {
+   "from": 5.125,
+   "to": 7.208,
+   "s": 2.08
+  },
+  {
+   "from": 9.0,
+   "to": 10.375,
+   "s": 1.38
+  },
+  {
+   "from": 14.833,
+   "to": 16.417,
+   "s": 1.58
+  },
+  {
+   "from": 16.458,
+   "to": 19.458,
+   "s": 3.0
+  },
+  {
+   "from": 19.5,
+   "to": 20.875,
+   "s": 1.38
+  }
+ ],
+ "black": [],
+ "white_flash": [],
+ "end_hard_cut_to_black": false,
+ "note": "open each strip. Pops are not detected here: check every action with clip_strip.py at 12 fps."
+}

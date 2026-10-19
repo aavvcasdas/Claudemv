@@ -7,68 +7,75 @@ function haoText(s,x,y,size=32,col='#684F59'){noStroke();fill(col);textFont('Not
 function haoHeart(x,y,k,col='#ED8C96') {const c=drawingContext;c.save();c.translate(x,y);c.scale(k,k);c.fillStyle=col;c.beginPath();c.moveTo(0,12);c.bezierCurveTo(-35,-10,-18,-36,0,-17);c.bezierCurveTo(18,-36,35,-10,0,12);c.fill();c.restore();}
 function haoPlant(x,y,t,k=1){push();translate(x,y);scale(k);haoBox(-22,0,44,54,'#CE937F',7);for(let j=0;j<3;j++){let xx=(j-1)*25+Math.sin(t*1.3+j)*7;haoLine(0,5,xx,-85-j*10,'#6B947D',5);fill('#91AC89');ellipse(xx-10,-47-j*10,32,14);for(let a=0;a<5;a++){let q=a*TAU/5;haoCircle(xx+Math.cos(q)*13,-85-j*10+Math.sin(q)*13,23,['#EDAFB1','#F0C97C','#D7B2CC'][j]);}haoCircle(xx,-85-j*10,13,'#FFF4C9');}pop();}
 function haoBench(x,y){haoBox(x,y,260,20,'#B48567',5);for(let j=0;j<3;j++)haoBox(x,y-80+j*22,260,14,'#BF987A',4);haoBox(x+20,y+20,12,75,'#675E61');haoBox(x+225,y+20,12,75,'#675E61');}
-function haoActors(t,lt,ax,ay,bx,by,kind='look'){
- const k=ease(seg(lt,0,1.8)), walk=kind==='walk';
- const wave=Math.sin(lt*3.2), gaze=Math.sin(lt*1.2)*.3;
- clawd(ax,ay,19,{t,boilKey:'hao-a',...move(walk?'walk':'idle',t),lookX:1,lookY:gaze,eyes:lt<.6?'wide':'normal',mouth:'smile',aR:kind==='wave'?.4+wave*.6:.15+k*.35,rot:kind==='lean'?k*.07:wave*.018});
- clawd(bx,by,18,{t,boilKey:'hao-b',...move(walk?'walk':'idle',t,.4),lookX:-1,eyes:kind==='lean'?'happy':'normal',mouth:'smile',aL:kind==='wave'?.4-wave*.6:.15+k*.35,rot:kind==='lean'?-k*.07:-wave*.018});
+// Lyric-led montage: solitude, protection, facade, helplessness, devotion, moth and awkwardness.
+function hvRoom(t,night=false){
+ background(night?'#2C344D':'#B9C8CB');haoBox(0,720,W,360,night?'#6C6374':'#C8B4A0');
+ haoBox(1050,100,650,525,'#6E7D91',12);haoBox(1075,125,600,475,night?'#314764':'#8EACB9',6);
+ for(let i=0;i<24;i++){let x=1080+hash(i)*580,y=130+((t*160+i*67)%460);haoLine(x,y,x-5,y+33,'#AFC3CD',2);}
+ haoLine(1370,125,1370,600,'#D0C3B3',12);haoLine(1075,380,1675,380,'#D0C3B3',12);
+ haoBox(1010,85,50,590,'#9C8490',4);haoBox(1690,85,90,590,'#9C8490',4);
+ haoPlant(1650,755,t,1.2);haoBox(180,330,15,405,'#746273');haoCircle(187,315,110,'#F3D9AC');
+ for(let i=0;i<8;i++)haoLine(0,780+i*44,W,780+i*44,night?'#756E7C':'#D6C3AF',2);
 }
-function haoScene(t,lt,dur,id){
- const night=id>=6, dusk=id>=4;
- background(night?'#283752':dusk?'#F5D2BC':'#F5E7DC');
- const ctx=drawingContext,gr=ctx.createLinearGradient(0,0,0,1080);gr.addColorStop(0,night?'#273750':dusk?'#E8B9B6':'#BFDCDD');gr.addColorStop(1,night?'#BE9AA9':'#FFF1D7');ctx.fillStyle=gr;ctx.fillRect(0,0,W,H);
- // Lateral parallax clouds, distant roofs and foliage.
- for(let j=0;j<6;j++){let x=((j*380+t*9)%(W+400))-200;noStroke();fill(night?'#66718B':'#FFF6E5');ellipse(x,130+j%3*65,230,36);}
- if(night){for(let j=0;j<40;j++)haoCircle(hash(j+44)*W,hash(j+89)*500,2+2*Math.sin(t*2+j)**2,'#FFF2C9');haoCircle(1540,170,95,'#FFF0C9');}
- for(let j=0;j<12;j++){haoBox(j*180,480-hash(j)*110,150,260,night?'#4D566F':'#C7B7B1',5);for(let k=0;k<3;k++)haoBox(j*180+25+k*38,440,18,30,night?'#F8D99A':'#EDE7D6',3);}
- haoBox(0,700,W,380,night?'#68657B':'#D7C5AB');
- for(let j=0;j<9;j++)haoLine(0,750+j*48,W,750+j*48,night?'#79718B':'#E4D5BF',2);
- push();translate(W/2,H/2);scale(1.025+.009*Math.sin(lt*.9));translate(-W/2,-H/2);
- const p=ease(seg(lt,.25,dur-.3));
- if(id===0){ // Flower shop: sliding door, swaying bouquets, mutual glance.
-  haoBox(200,235,1450,470,'#E7C9B7',16);haoBox(270,315,650,310,'#A6C4C0',10);haoBox(1010,300,460,400,'#789E9C',8);
-  for(let j=0;j<9;j++)haoBox(200+j*162,235,162,75,j%2?'#FFF1D7':'#CC7F7E');
-  haoText('花与晴天',600,385,48,'#FFF3DA');haoLine(1240+p*110,305,1240+p*110,695,'#F1DDC1',8);
-  for(let j=0;j<5;j++)haoPlant(340+j*120,680,t,j%2*.2+.8);
-  haoActors(t,lt,1080-150*p,925,1450-160*p,925,'wave');
- }else if(id===1){ // Street approach with moving bicycle and foreground leaves.
-  for(let j=0;j<3;j++){haoBox(120+j*600,340,410,355,['#C9A395','#B0BDA8','#D4B68E'][j]);haoBox(160+j*600,410,320,155,'#DDE8DE',7);haoBox(130+j*600,320,390,55,'#E8D4AD',5);}
-  haoBench(1180,715);haoActors(t,lt,440+330*p,930,1030+140*p,930,'walk');
-  let x=1900-lt*240;for(let q of [-65,65]){noFill();stroke('#6C7470');strokeWeight(7);circle(x+q,770,88);}haoLine(x-65,770,x,690,'#BC7E7D',6);haoLine(x,690,x+65,770,'#BC7E7D',6);
- }else if(id===2){ // Rain shelter, ripples and changing distance; canopy is scenery, not costume.
-  haoBox(320,270,1280,55,'#B58B94',10);haoBox(350,325,18,430,'#827783');haoBox(1550,325,18,430,'#827783');haoBench(1100,740);
-  haoActors(t,lt,620+140*p,925,1080-90*p,925,'look');
-  for(let j=0;j<85;j++){let x=hash(j+2)*W,y=(hash(j+500)*1100+t*510)%1100;if(x<320||x>1600||y<260)haoLine(x,y,x-14,y+45,'#A3BCC6',2);}
-  for(let j=0;j<10;j++){noFill();stroke('#A5B7BC');strokeWeight(2);ellipse(hash(j+30)*W,960+hash(j+40)*100,40+((t*35+j*9)%80),6+((t*8+j)%15));}
- }else if(id===3){ // Cafe, steam, pastries and approaching table.
-  haoBox(140,180,1640,560,'#C89984',12);for(let j=0;j<3;j++){haoBox(210+j*530,230,450,390,'#A8C6C2',12);haoLine(435+j*530,230,435+j*530,620,'#F5DFC1',12);}
-  haoActors(t,lt,440+180*p,925,1470-180*p,925,lt<1.8?'walk':'wave');haoBox(770,730,370,25,'#916A56',12);haoBox(940,755,25,190,'#916A56');
-  for(let j=0;j<2;j++){haoBox(825+j*190,680,52,52,'#FFF2D8',10);for(let a=0;a<3;a++){noFill();stroke('#FBECD6');strokeWeight(4);arc(850+j*190+Math.sin(t*2+a)*9,640-a*14,18,26,0,Math.PI);}}
-  haoPlant(1650,800,t,1.6);
- }else if(id===4){ // Riverbank, paper boat and ducks moving independently.
-  haoBox(0,700,W,380,'#89B5B9');for(let j=0;j<24;j++){let x=(j*180+t*35)%2100-90;haoLine(x,730+(j%7)*48,x+70,730+(j%7)*48,'#C4D7CB',3);}
-  haoBox(0,630,880,200,'#D8C1A4',15);haoActors(t,lt,320,790,680,790,'lean');
-  let x=900+p*550;fill('#FFF2D7');noStroke();triangle(x-75,840,x+75,840,x,900);triangle(x,835,x,750,x+70,835);
-  for(let j=0;j<3;j++){let x=1320+j*130+t*12;fill('#F6D797');ellipse(x,950+Math.sin(t+j)*10,65,35);haoCircle(x+28,930+Math.sin(t+j)*10,28,'#F6D797');}
- }else if(id===5){ // Carousel scenery, Clawds on the ground watching, rotating lamps.
-  haoBox(430,650,1050,90,'#CA8C88',35);fill('#D88B88');triangle(360,330,1540,330,950,100);haoBox(380,330,1140,55,'#F5D6A5',10);
-  for(let j=0;j<6;j++){let a=t*.8+j*TAU/6,x=950+Math.cos(a)*430,y=570+Math.sin(a)*45;haoLine(x,385,x,y,'#D0A56C',7);haoBox(x-45,y+Math.sin(t*3+j)*15,90,40,'#FBE6C1',20);haoCircle(430+j*205,355,16+3*pulse(t),'#FFF2AF');}
-  haoActors(t,lt,460+90*p,970,1420-90*p,970,'wave');
- }else if(id===6){ // Bridge rendezvous: lateral entry then lean, illuminated reflections.
-  for(let j=0;j<20;j++)haoLine(j*110,930,j*110+70,950+Math.sin(t+j)*12,'#BDA4A8',4);
-  haoBox(0,780,W,48,'#B7A6A4');for(let j=0;j<14;j++)haoBox(j*150,660,13,130,'#BAAAA8');haoBox(0,640,W,24,'#D2BBAA');
-  haoActors(t,lt,630+140*p,950,1230-140*p,950,'lean');
-  for(let j=0;j<2;j++){let x=210+j*1500;haoBox(x,290,13,500,'#62596C');haoCircle(x+6,285,78,'#EFCB94');haoCircle(x+6,285,48,'#FFF0BB');}
- }else { // Wide night finale, lanterns lift from background rather than worn accessories.
-  haoBox(0,760,W,320,'#668280');haoBench(790,800);haoActors(t,lt,810,960,1110,960,'lean');
-  for(let j=0;j<14;j++){let x=hash(j+77)*W+Math.sin(t+j)*20,y=900-((lt*100+j*80)%1050);haoBox(x,y,33,43,'#F1BE85',8);haoCircle(x+16,y+28,9,'#FFF0B4');}
-  for(let j=0;j<5;j++)haoHeart(680+j*145,530-Math.sin(lt+j)*22,.4+.12*Math.sin(lt*2+j),'#E9A2A4');
+function hvClawd(t,x,y,u,o={}){clawd(x,y,u,{t,boilKey:'solo',dy:Math.sin(t*2)*.08,sq:.015*Math.sin(t*2),mouth:'flat',...o});}
+function hvRain(t){for(let j=0;j<100;j++){let x=hash(j+2)*W,y=(hash(j+20)*1200+t*430)%1200;haoLine(x,y,x-18,y+48,'#AFC7D2',2);}for(let j=0;j<12;j++){noFill();stroke('#A9BBC8');strokeWeight(2);ellipse(hash(j)*W,760+hash(j+3)*150,20+((t*45+j*31)%120),5+((t*10+j)%20));}}
+function hvUmbrella(x,y,t,k=1){push();translate(x,y);scale(k);haoLine(0,0,0,245,'#A68E79',8);fill('#DCA16F');noStroke();arc(0,0,530,280,Math.PI,TAU);for(let j=-2;j<=2;j++)haoLine(0,-140,j*120,0,'#BA835D',3);pop();}
+function hvStage(t,lt,d,id){
+ let p=ease(seg(lt,0,d)),n=Math.sin(lt*2.4);
+ if(id===0){ // resolve to protect: one subject in rain then second enters on next shot
+  background('#71889B');haoBox(0,730,W,350,'#88959F');haoBox(120,180,470,480,'#687C8C');for(let j=0;j<4;j++)haoBox(160+j*100,250,55,220,'#B2B7AC');hvRain(t);
+  hvClawd(t,1160-160*p,800,32,{eyes:'sad',lookY:.5,aL:-.7,aR:-.7,rot:-.06});hvUmbrella(350+290*p,400,t);haoBench(1450,725);
+ }else if(id===1){
+  background('#738C9A');haoBox(0,730,W,350,'#879CA6');hvRain(t);haoBench(1350,720);
+  hvUmbrella(940,400,t,1.2);hvClawd(t,800+60*p,800,29,{lookX:1,aR:.8,eyes:'determined',mouth:'smile'});hvClawd(t,1130-50*p,800,27,{lookX:-1,eyes:p>.5?'normal':'sad',aL:-.5,aR:-.5,mouth:p>.5?'smile':'frown'});
+  // Raindrops stop at the canopy instead of decorating the characters.
+ }else if(id===2){ // mirror facade, one actual character and reflection within frame
+  hvRoom(t,true);haoBox(180,120,620,570,'#B19385',28);haoBox(205,145,570,520,'#7E91A3',18);
+  hvClawd(t,495,590,28,{eyes:'happy',mouth:'smile',aL:.2+n*.1,aR:.2-n*.1,flip:true});
+  hvClawd(t,900,850,37,{eyes:'sad',mouth:'frown',lookX:-1,aL:-.7,aR:-.7,rot:-.04});
+  haoBox(260,720,370,28,'#8B6F62');haoBox(290,748,18,150,'#8B6F62');haoBox(570,748,18,150,'#8B6F62');
+ }else if(id===3){ // smile falls away, close single face
+  hvRoom(t,true);hvClawd(t,800,880,54,{eyes:lt<.7?'happy':'sad',mouth:lt<.7?'smile':'frown',aL:-.4-p*.3,aR:-.4-p*.3,lookX:-.2,rot:-p*.05});
+  // A detached smiling card on the table represents the facade, never worn.
+  haoBox(1340,740,230,24,'#8B6F62');haoBox(1370,640+p*60,160,88,'#F2D8BA',12);haoCircle(1410,674+p*60,9,'#7B6270');haoCircle(1490,674+p*60,9,'#7B6270');haoLine(1420,697+p*60,1480,697+p*60,'#7B6270',4);
+ }else if(id===4){ // helpless: unread message, empty chair and retreating hand
+  hvRoom(t,true);haoBench(1250,760);hvClawd(t,620,855,39,{eyes:'sad',mouth:'frown',aR:.8-p*1.5,aL:-.7,rot:-p*.08});
+  haoBox(830,700,300,24,'#987B70');haoBox(960,724,20,160,'#987B70');haoBox(914,580,95,115,'#53546A',12);haoBox(923,591,77,90,'#B5C7CE',4);haoText('…',963,635,28,'#657281');
+  for(let j=0;j<3;j++){noFill();stroke('#ADB7C9');strokeWeight(3);arc(960,600,150+lt*50+j*50,90+lt*30+j*30,Math.PI,TAU);}
+ }else if(id===5){ // I love you, sole character deciding to send letter
+  hvRoom(t);hvClawd(t,790+160*p,850,42,{eyes:'normal',mouth:'smile',aR:.1+p*.7,lookX:1});
+  haoBox(1190,640,340,25,'#997760');haoBox(1335,665,22,210,'#997760');haoBox(1240,570,160,75,'#FFF0D4',6);haoLine(1240,570,1320,625,'#D6A8A0',3);haoLine(1400,570,1320,625,'#D6A8A0',3);haoHeart(1320,610,.38);
+ }else if(id===6){ // devotion: send warmth out while own room remains cold
+  background('#9AB2BD');haoBox(0,760,W,320,'#C7BDB1');haoBox(230,200,430,520,'#D5BAA1',14);haoBox(268,250,350,370,'#E9D4AD',8);haoBox(1400,180,330,560,'#7B8FA3',12);haoBox(1440,220,250,440,'#677B91',6);
+  hvClawd(t,850+190*p,840,35,{...move('walk',t),lookX:1,mouth:'smile',aR:.4});
+  let x=1030+300*p,y=540-80*Math.sin(p*Math.PI);haoBox(x,y,160,78,'#FFE6BE',8);haoLine(x,y,x+80,y+48,'#D7A7A0');haoLine(x+160,y,x+80,y+48,'#D7A7A0');haoHeart(x+80,y+44,.38);
+  for(let j=0;j<10;j++)haoCircle(x+hash(j)*140,650+Math.sin(t*2+j)*40,3,'#F8D3A6');
+ }else if(id===7){ // humble liking, very wide solitary courtyard
+  background('#35445E');haoBox(0,700,W,380,'#697885');for(let j=0;j<8;j++){haoBox(j*260,220,180,480,'#536076');haoBox(j*260+40,290,80,230,'#E0C4A1');}haoBench(1150,750);hvClawd(t,620+40*p,850,21,{eyes:'sad',lookX:1,mouth:'flat',aL:-.65,aR:-.65});
+  haoHeart(1120,440+Math.sin(t*2)*15,.5,'#C49EAC');
+  for(let j=0;j<18;j++)haoCircle(hash(j)*W,hash(j+3)*570,2+Math.sin(t+j)**2*2,'#D8D0B7');
+ }else if(id===8){ // no characters: moth flies toward lantern, lyric metaphor close-up
+  background('#27354D');for(let j=0;j<9;j++)haoBox(j*260,580-hash(j)*150,150,500,'#34435B');
+  const c=drawingContext,g=c.createRadialGradient(1370,420,30,1370,420,500);g.addColorStop(0,'#EDC58B');g.addColorStop(1,'#27354D00');c.fillStyle=g;c.fillRect(800,0,1100,960);
+  haoLine(1370,0,1370,265,'#BC9D7A',7);haoBox(1240,260,260,310,'#DCA672',30);haoBox(1260,280,220,270,'#F3CE8F',20);haoLine(1240,320,1500,320,'#B98F67');haoLine(1240,510,1500,510,'#B98F67');
+  let x=400+820*p,y=660-260*p+Math.sin(t*5)*35;push();translate(x,y);rotate(-.25+Math.sin(t*3)*.15);fill('#E9D7BC');ellipse(-35,0,60*(.3+.7*Math.abs(Math.sin(t*22))),65);ellipse(35,0,60*(.3+.7*Math.abs(Math.sin(t*22))),65);haoLine(0,-28,0,28,'#B9A79C',8);pop();
+  for(let j=0;j<18;j++)haoCircle(1220+hash(j)*300,550-((lt*80+j*23)%320),3,'#FFE2A0');
+ }else if(id===9){
+  hvRoom(t,true);haoBench(1250,760);hvClawd(t,680,860,29,{lookX:1,eyes:'normal',mouth:'flat',aL:-.4,aR:-.4,rot:-.035});haoHeart(1040,450,.45+.07*n,'#BC96A7');
+ }else{ // awkwardness: abortive wave, shifting eyes and steps; solo close up
+  hvRoom(t);let step=Math.sin(lt*5)*22*(1-p*.6);hvClawd(t,850+step,860,48,{eyes:lt<.7?'wide':'normal',mouth:lt<1?'smile':'wobble',lookX:Math.sin(lt*4),aR:lt<1?.8*Math.sin(lt*3):-.5,aL:-.5,rot:Math.sin(lt*6)*.035,walk:lt*1.3});
+  haoBox(1280,700,200,24,'#9B7965');haoPlant(1380,685,t,.7);for(let j=0;j<3;j++)haoLine(640+j*22,360+j*5,634+j*22,390+j*5,'#A5B8BC',5);
  }
- pop();
- // Foreground petals provide depth, not a substitute for the scene-specific actions above.
- if(id!==2)for(let j=0;j<14;j++){let x=(hash(j+3)*2200+t*(20+j%4*8))%2200-100,y=(hash(j+9)*1200+t*22)%1200;push();translate(x,y);rotate(t*.6+j);noStroke();fill(night?'#BAA1B0':'#E9AFB4');ellipse(0,0,16,7);pop();}
- haoText('好 喜 欢 你',235,95,38,night?'#FFF0DA':'#775962');
- haoText(String(id+1).padStart(2,'0')+' / 08',1730,95,23,night?'#E4CCCA':'#927E78');
- if(t>PROJECT.duration-.65){noStroke();fill(38,42,59,255*seg(t,PROJECT.duration-.65,PROJECT.duration));rect(0,0,W,H);}
+ haoText('好喜欢你',170,75,30,id===7||id===8?'#E7D8CC':'#715B68');
 }
-shots(HAO_STARTS.map((s,i)=>[s,(t,lt,d)=>haoScene(t,lt,d,i)]));
+const HV_START=[0,2.6,5.12,7.25,9,10.4,11.92,14.82,16.44,19.46,20.9];
+shots(HV_START.map((s,i)=>[s,(t,lt,d)=>hvStage(t,lt,d,i)]));
+// Full sentence remains readable from line onset; only the sung characters change colour.
+window.overlayHook=(c,t)=>{
+ const l=PROJECT.lyrics.find(l=>t>=l.t&&t<l.end);if(!l)return;
+ c.save();c.font='600 52px "Noto Serif SC"';c.textBaseline='middle';c.textAlign='left';
+ const chars=[...l.text],width=chars.reduce((a,v)=>a+c.measureText(v).width,0),y=990;
+ const g=c.createLinearGradient(0,900,0,1080);g.addColorStop(0,'#1F293700');g.addColorStop(1,'#1F2937BB');c.fillStyle=g;c.fillRect(0,900,W,180);
+ let x=(W-width)/2;
+ chars.forEach((v,i)=>{const w=l.words[i];c.lineWidth=5;c.strokeStyle='#263347';c.strokeText(v,x,y);c.fillStyle=w&&t>=w.s?'#FFD49B':'#FFF5E8';c.fillText(v,x,y);x+=c.measureText(v).width;});c.restore();
+};
