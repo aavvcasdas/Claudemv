@@ -70,12 +70,4 @@ function hvStage(t,lt,d,id){
 }
 const HV_START=[0,2.6,5.12,7.25,9,10.4,11.92,14.82,16.44,19.46,20.9];
 shots(HV_START.map((s,i)=>[s,(t,lt,d)=>hvStage(t,lt,d,i)]));
-// Full sentence remains readable from line onset; only the sung characters change colour.
-window.overlayHook=(c,t)=>{
- const l=PROJECT.lyrics.find(l=>t>=l.t&&t<l.end);if(!l)return;
- c.save();c.font='600 52px "Noto Serif SC"';c.textBaseline='middle';c.textAlign='left';
- const chars=[...l.text],width=chars.reduce((a,v)=>a+c.measureText(v).width,0),y=990;
- const g=c.createLinearGradient(0,900,0,1080);g.addColorStop(0,'#1F293700');g.addColorStop(1,'#1F2937BB');c.fillStyle=g;c.fillRect(0,900,W,180);
- let x=(W-width)/2;
- chars.forEach((v,i)=>{const w=l.words[i];c.lineWidth=5;c.strokeStyle='#263347';c.strokeText(v,x,y);c.fillStyle=w&&t>=w.s?'#FFD49B':'#FFF5E8';c.fillText(v,x,y);x+=c.measureText(v).width;});c.restore();
-};
+// Subtitles use the shared 去年夏天 kinetic renderer; no project-specific override.
