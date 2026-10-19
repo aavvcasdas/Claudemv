@@ -8,7 +8,7 @@ const PROJECT = {
   "renderer": "2d",
   "scene": "src/scenes/dongjing_butaire.js",
   "characterPolicy": "original",
-  "subtitleMode": "full-line",
+  "subtitleMode": "kinetic",
   "lyrics": [
     {
       "t": 15.74,
@@ -17,7 +17,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "照片,删",
-        "sec": "verse1"
+        "sec": "verse1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -79,7 +80,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去年夏天",
-        "sec": "verse1"
+        "sec": "verse1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -141,7 +143,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "街灯,夜",
-        "sec": "verse1"
+        "sec": "verse1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -203,7 +206,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "寂寞,渲染",
-        "sec": "verse1"
+        "sec": "verse1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -270,7 +274,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "人太多,漫无目的",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -352,7 +357,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "想念,心痛",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -434,7 +440,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "情侣,牵着手",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -516,7 +523,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "牵过手",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -553,7 +561,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "左手牵右手",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -596,7 +605,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q",
         "sec": "qq1",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -639,7 +649,8 @@ const PROJECT = {
       "meta": {
         "hi": "是谁呢",
         "sec": "qq1",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -706,7 +717,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "会是她吗",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -763,7 +775,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "什么事呢",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -815,7 +828,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "假装正经,摆平",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -912,7 +926,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "不多聊了",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -969,7 +984,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去吃饭了",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1021,7 +1037,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "很喜欢,距离",
-        "sec": "chorus1_b"
+        "sec": "chorus1_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1103,7 +1120,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "高冷的表情",
-        "sec": "chorus1_b"
+        "sec": "chorus1_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1195,7 +1213,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "总有一天,接近你",
-        "sec": "chorus1_b"
+        "sec": "chorus1_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1272,7 +1291,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "和别人在一起",
-        "sec": "chorus1_b"
+        "sec": "chorus1_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1349,7 +1369,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "街灯,夜",
-        "sec": "verse2"
+        "sec": "verse2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1411,7 +1432,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "寂寞渲染",
-        "sec": "verse2"
+        "sec": "verse2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1473,7 +1495,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "照片,删",
-        "sec": "verse2"
+        "sec": "verse2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1535,7 +1558,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "再没聊过天",
-        "sec": "verse2"
+        "sec": "verse2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1602,7 +1626,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "漫无目的",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1684,7 +1709,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "想念,心痛",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1766,7 +1792,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "情侣,牵着手",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1848,7 +1875,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "牵过手",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1885,7 +1913,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "左手牵右手",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1928,7 +1957,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q",
         "sec": "qq2",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -1971,7 +2001,8 @@ const PROJECT = {
       "meta": {
         "hi": "是谁呢",
         "sec": "qq2",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2038,7 +2069,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "会是她吗",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2095,7 +2127,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "什么事呢",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2147,7 +2180,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "假装正经,摆平",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2244,7 +2278,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "不多聊了",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2301,7 +2336,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去吃饭了",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2353,7 +2389,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "很喜欢,距离",
-        "sec": "chorus2_b"
+        "sec": "chorus2_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2435,7 +2472,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "高冷的表情",
-        "sec": "chorus2_b"
+        "sec": "chorus2_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2527,7 +2565,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "总有一天,接近你",
-        "sec": "chorus2_b"
+        "sec": "chorus2_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2604,7 +2643,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "和别人在一起",
-        "sec": "chorus2_b"
+        "sec": "chorus2_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2681,7 +2721,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "优雅的转身",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2718,7 +2759,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "熟悉的音乐",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2755,7 +2797,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "曾经那一段",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2807,7 +2850,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "淡出",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2844,7 +2888,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "时间轴",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2881,7 +2926,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "回忆,单曲循环",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -2959,7 +3005,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q",
         "sec": "qq3",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3002,7 +3049,8 @@ const PROJECT = {
       "meta": {
         "hi": "是谁呢",
         "sec": "qq3",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3069,7 +3117,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "会是她吗",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3126,7 +3175,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "什么事呢",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3178,7 +3228,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "假装正经,摆平",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3275,7 +3326,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "不多聊了",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3332,7 +3384,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去吃饭了",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3384,7 +3437,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "很喜欢,距离",
-        "sec": "chorus3_b"
+        "sec": "chorus3_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3466,7 +3520,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "高冷的表情",
-        "sec": "chorus3_b"
+        "sec": "chorus3_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3558,7 +3613,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "总有一天,接近你",
-        "sec": "chorus3_b"
+        "sec": "chorus3_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3635,7 +3691,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "和别人在一起",
-        "sec": "chorus3_b"
+        "sec": "chorus3_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3713,7 +3770,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q",
         "sec": "qq4",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3756,7 +3814,8 @@ const PROJECT = {
       "meta": {
         "hi": "是谁呢",
         "sec": "qq4",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3823,7 +3882,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "会是她吗",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3880,7 +3940,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "什么事呢",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -3932,7 +3993,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "假装正经,摆平",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4029,7 +4091,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "不多聊了",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4086,7 +4149,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去吃饭了",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4138,7 +4202,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "很喜欢,距离",
-        "sec": "chorus4_b"
+        "sec": "chorus4_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4220,7 +4285,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "高冷的表情",
-        "sec": "chorus4_b"
+        "sec": "chorus4_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4312,7 +4378,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "总有一天,接近你",
-        "sec": "chorus4_b"
+        "sec": "chorus4_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4389,7 +4456,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "和别人在一起",
-        "sec": "chorus4_b"
+        "sec": "chorus4_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4467,7 +4535,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q,是谁呢",
         "sec": "outro",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4571,7 +4640,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "照片,删",
-        "sec": "verse1"
+        "sec": "verse1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4633,7 +4703,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去年夏天",
-        "sec": "verse1"
+        "sec": "verse1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4695,7 +4766,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "街灯,夜",
-        "sec": "verse1"
+        "sec": "verse1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4757,7 +4829,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "寂寞,渲染",
-        "sec": "verse1"
+        "sec": "verse1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4824,7 +4897,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "人太多,漫无目的",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4906,7 +4980,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "想念,心痛",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -4988,7 +5063,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "情侣,牵着手",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5070,7 +5146,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "牵过手",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5107,7 +5184,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "左手牵右手",
-        "sec": "pre1"
+        "sec": "pre1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5150,7 +5228,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q",
         "sec": "qq1",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5193,7 +5272,8 @@ const PROJECT = {
       "meta": {
         "hi": "是谁呢",
         "sec": "qq1",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5260,7 +5340,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "会是她吗",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5317,7 +5398,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "什么事呢",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5369,7 +5451,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "假装正经,摆平",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5466,7 +5549,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "不多聊了",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5523,7 +5607,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去吃饭了",
-        "sec": "chorus1"
+        "sec": "chorus1",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5575,7 +5660,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "很喜欢,距离",
-        "sec": "chorus1_b"
+        "sec": "chorus1_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5657,7 +5743,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "高冷的表情",
-        "sec": "chorus1_b"
+        "sec": "chorus1_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5749,7 +5836,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "总有一天,接近你",
-        "sec": "chorus1_b"
+        "sec": "chorus1_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5826,7 +5914,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "和别人在一起",
-        "sec": "chorus1_b"
+        "sec": "chorus1_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5903,7 +5992,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "街灯,夜",
-        "sec": "verse2"
+        "sec": "verse2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -5965,7 +6055,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "寂寞渲染",
-        "sec": "verse2"
+        "sec": "verse2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6027,7 +6118,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "照片,删",
-        "sec": "verse2"
+        "sec": "verse2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6089,7 +6181,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "再没聊过天",
-        "sec": "verse2"
+        "sec": "verse2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6156,7 +6249,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "漫无目的",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6238,7 +6332,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "想念,心痛",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6320,7 +6415,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "情侣,牵着手",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6402,7 +6498,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "牵过手",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6439,7 +6536,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "左手牵右手",
-        "sec": "pre2"
+        "sec": "pre2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6482,7 +6580,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q",
         "sec": "qq2",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6525,7 +6624,8 @@ const PROJECT = {
       "meta": {
         "hi": "是谁呢",
         "sec": "qq2",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6592,7 +6692,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "会是她吗",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6649,7 +6750,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "什么事呢",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6701,7 +6803,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "假装正经,摆平",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6798,7 +6901,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "不多聊了",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6855,7 +6959,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去吃饭了",
-        "sec": "chorus2"
+        "sec": "chorus2",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6907,7 +7012,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "很喜欢,距离",
-        "sec": "chorus2_b"
+        "sec": "chorus2_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -6989,7 +7095,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "高冷的表情",
-        "sec": "chorus2_b"
+        "sec": "chorus2_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7081,7 +7188,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "总有一天,接近你",
-        "sec": "chorus2_b"
+        "sec": "chorus2_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7158,7 +7266,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "和别人在一起",
-        "sec": "chorus2_b"
+        "sec": "chorus2_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7235,7 +7344,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "优雅的转身",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7272,7 +7382,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "熟悉的音乐",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7309,7 +7420,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "曾经那一段",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7361,7 +7473,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "淡出",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7398,7 +7511,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "时间轴",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7435,7 +7549,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "回忆,单曲循环",
-        "sec": "bridge"
+        "sec": "bridge",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7513,7 +7628,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q",
         "sec": "qq3",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7556,7 +7672,8 @@ const PROJECT = {
       "meta": {
         "hi": "是谁呢",
         "sec": "qq3",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7623,7 +7740,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "会是她吗",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7680,7 +7798,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "什么事呢",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7732,7 +7851,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "假装正经,摆平",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7829,7 +7949,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "不多聊了",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7886,7 +8007,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去吃饭了",
-        "sec": "chorus3"
+        "sec": "chorus3",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -7938,7 +8060,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "很喜欢,距离",
-        "sec": "chorus3_b"
+        "sec": "chorus3_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8020,7 +8143,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "高冷的表情",
-        "sec": "chorus3_b"
+        "sec": "chorus3_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8112,7 +8236,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "总有一天,接近你",
-        "sec": "chorus3_b"
+        "sec": "chorus3_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8189,7 +8314,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "和别人在一起",
-        "sec": "chorus3_b"
+        "sec": "chorus3_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8267,7 +8393,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q",
         "sec": "qq4",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8310,7 +8437,8 @@ const PROJECT = {
       "meta": {
         "hi": "是谁呢",
         "sec": "qq4",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8377,7 +8505,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "会是她吗",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8434,7 +8563,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "什么事呢",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8486,7 +8616,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "假装正经,摆平",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8583,7 +8714,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "不多聊了",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8640,7 +8772,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "去吃饭了",
-        "sec": "chorus4"
+        "sec": "chorus4",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8692,7 +8825,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "很喜欢,距离",
-        "sec": "chorus4_b"
+        "sec": "chorus4_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8774,7 +8908,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "高冷的表情",
-        "sec": "chorus4_b"
+        "sec": "chorus4_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8866,7 +9001,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "总有一天,接近你",
-        "sec": "chorus4_b"
+        "sec": "chorus4_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -8943,7 +9079,8 @@ const PROJECT = {
       "conf": 0.99,
       "meta": {
         "hi": "和别人在一起",
-        "sec": "chorus4_b"
+        "sec": "chorus4_b",
+        "pos": "bottom"
       },
       "words": [
         {
@@ -9021,7 +9158,8 @@ const PROJECT = {
       "meta": {
         "hi": "叮叮叮当当Q,是谁呢",
         "sec": "outro",
-        "qq": true
+        "qq": true,
+        "pos": "bottom"
       },
       "words": [
         {

@@ -1,7 +1,7 @@
 {
   "version": 4,
   "characterPolicy": "original",
-  "subtitleMode": "full-line",
+  "subtitleMode": "kinetic",
   "sources": [
     "https://www.kugeci.com/song/1HMUF3DY",
     "https://xiaojiangclub.com/lyrics/34723470.html"
@@ -807,5 +807,12 @@
       "action": "QQ提示响起，消息卡弹出并震动",
       "repeat": 4
     }
+  ],
+  "subtitleWorkflow": [
+    "audio_to_raw_subtitles",
+    "search_and_compare_lyrics",
+    "correct_text_and_alignment",
+    "storyboard",
+    "render"
   ]
 }

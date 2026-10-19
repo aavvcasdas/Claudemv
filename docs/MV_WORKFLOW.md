@@ -1,18 +1,22 @@
 # 歌词驱动 MV 工作流
 
 ## 1. 先改项目
-在 `projects/<slug>/` 保存 `config.json`、`plan.json`、`STORYBOARD.md`。配置包含 `characterPolicy: "original"`、`subtitleMode: "full-line"`。用 `node tools/activate_project.mjs <slug>` 激活项目。
+在 `projects/<slug>/` 保存 `config.json`、`plan.json`、`STORYBOARD.md`。配置包含 `characterPolicy: "original"`、`subtitleMode: "kinetic"`。用 `node tools/activate_project.mjs <slug>` 激活项目。
 
 默认角色策略由 `src/character-policy.js` 执行：只保留原色原形及表情、姿势、转身和走路；拒绝穿戴和身体绘制回调。道具独立绘于环境，不贴在身体上。旧项目特殊造型只有用户再次明确要求才可选择 `characterPolicy: "custom"`。
 
 ## 2. 确认音频和唱词
-检查实际容器和时长，歌词网络来源和识别互相验证；记录片段位置及实际歌词。以音频对齐句和词，不照搬不同版本LRC偏移。不确定处记录，不冒充精确。
+检查实际容器和时长，先生成音频识别字幕初稿，再搜索网络歌词逐句比对并修正，记录初稿和校对结果；记录片段位置及实际歌词。以音频对齐句和词，不照搬不同版本LRC偏移。不确定处记录，不冒充精确。
 
 ## 3. 锁定分镜
 每句列出场景、人物数、动作、镜头和道具，2–3秒内有具体推进。无人特写须服务歌词；仅互动需要时才安排多人。重复句可换景别或继续同一动作，不改变语义。背景细节服务场景，不删成空背景跳舞，也不滥加装饰。
 
 ## 4. 实现和字幕
-从项目计划生成时间轴。完整句始终可读，逐词/字高亮。角色不穿戴，情绪由眼神、手臂、姿势、空间距离、镜头表现。保持原音轨。
+从项目计划生成时间轴。使用共享 karaoke.js 的 kinetic 模式，不另造样式。角色不穿戴，情绪由眼神、手臂、姿势、空间距离、镜头表现。保持原音轨。
 
 ## 5. 检查与交付
 查看每类镜头及每段副歌联系图，确认角色附件为零、歌词与画面一致、单人/无人/多人有叙事理由。检查时间轴全覆盖、字幕词时间有效、视频音轨时长、运动诊断；低运动段逐一说明，禁止为了指标加隐形动效。保存复盘、视频及项目配置，再推送。
+
+## 字幕样式基准
+
+统一复用 `src/karaoke.js` 的 kinetic 渲染器及 `projects/qunian_xiatian/analysis/lyrics.json` 的 meta 约定（hi、pos）。无底框、毛笔字体、弹入、关键词金色强调。顺序固定为音频生成初稿→网络歌词搜索比对→修正文本与时间→分镜。保存 `analysis/subtitles_raw.json` 和 `analysis/subtitle_comparison.json`。不得直接将网络LRC当成本音频时间，不得因无识别结果就跳过字幕。
