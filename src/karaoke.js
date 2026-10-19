@@ -199,6 +199,37 @@ window.EXTRA_FONTS = ['72px "Ma Shan Zheng"', '600 56px "Noto Serif SC"'];
     const a = clamp(Math.min((t - (t0 - 0.06)) / 0.12, (t1 + 0.06 - t) / 0.12));
     if (a <= 0.01) return;
 
+    if (PROJECT.subtitleMode === 'full-line') {
+      c.save();
+      c.globalAlpha = a;
+      c.font = '600 50px "Noto Serif SC"';
+      c.textBaseline = 'middle'; c.textAlign = 'left'; c.lineJoin = 'round';
+      const chars = [...txt], total = chars.reduce((w, ch) => w + c.measureText(ch).width, 0);
+      const scale = Math.min(1, (W - 180) / Math.max(1, total));
+      const gradient = c.createLinearGradient(0, H - 170, 0, H);
+      gradient.addColorStop(0, 'rgba(22,30,45,0)'); gradient.addColorStop(1, 'rgba(22,30,45,.72)');
+      c.fillStyle = gradient; c.fillRect(0, H - 170, W, 170);
+      c.translate(W / 2, H - 80); c.scale(scale, scale);
+      let x = -total / 2;
+      const charTimes = [];
+      for (const word of words || []) {
+        const token = [...(word.w || word.word || '')];
+        token.forEach((ch, j) => charTimes.push({ ch, s: word.s + (word.e - word.s) * j / token.length }));
+      }
+      let wi = 0;
+      for (const ch of chars) {
+        while (wi < charTimes.length && /\s/.test(charTimes[wi].ch) && charTimes[wi].ch !== ch) wi++;
+        const timing = charTimes[wi];
+        const onset = timing?.ch === ch ? timing.s : t0 + (x + total / 2) / Math.max(1, total) * (t1 - t0);
+        if (timing?.ch === ch) wi++;
+        c.lineWidth = 5; c.strokeStyle = '#263347'; c.strokeText(ch, x, 0);
+        c.fillStyle = t >= onset ? '#FFD49B' : '#FFF6EA'; c.fillText(ch, x, 0);
+        x += c.measureText(ch).width;
+      }
+      c.restore();
+      return;
+    }
+
     if (typeof PROJECT !== 'undefined' && PROJECT.subtitleMode === 'kinetic') {
       drawKineticSubtitle(c, cur, t, a);
       return;

@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync,existsSync} from 'node:fs';
+const slug=process.argv[2];
+if(!slug || !/^[a-z0-9_]+$/.test(slug)) throw Error('Usage: node tools/activate_project.mjs <project_slug>');
+const cfg=JSON.parse(readFileSync(`projects/${slug}/config.json`,'utf8'));
+if(!cfg.scene || !existsSync(cfg.scene)) throw Error('Project scene is missing');
+writeFileSync('src/config.js',`// Generated from projects/${slug}/config.json\nconst PROJECT = ${JSON.stringify(cfg,null,2)};\n`);
+let html=readFileSync('studio.html','utf8');
+html=html.replace(/<script src="src\/scenes\/[^\"]+"><\/script>/,`<script src="${cfg.scene}"></script>`);
+writeFileSync('studio.html',html);
+console.log(`Active project: ${slug}`);

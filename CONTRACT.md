@@ -61,6 +61,10 @@ Claudemv/
 
 ---
 
+## 当前默认约束
+
+遵守 `AGENTS.md` 和 `docs/MV_WORKFLOW.md`：先更新项目配置及逐句分镜，再制作；Clawd默认原貌无穿戴；人物数量随歌词需要；完整句字幕及词高亮。旧角色服装示例仅为历史内容，不能作为新制作默认。运动检查不许靠不可见像素变化规避。
+
 ## Stage Gates & Artifact Contract
 
 ### Stage 1 — Reference Breakdown (`analysis/`)

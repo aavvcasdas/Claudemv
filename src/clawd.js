@@ -63,6 +63,9 @@ function tintCols(o) {
 //   extras: hat, emote + emoteK (0..1 pop) + emoteAge (s since it appeared), draw(u, sw), armL(u, sw), armR(u, sw)
 //   boil:   boilKey (a stable id for its boil seeds; defaults to call order, so set it if characters come and go mid-shot)
 function clawd(x, y, u, o = {}) {
+  if (typeof cleanClawdOptions === 'function') {
+    o = cleanClawdOptions(o, PROJECT.characterPolicy || 'original');
+  }
   // 轻量待机呼吸：未指定走路/跳跃时，随节拍微小起伏，避免画面完全静止但不过度跳动
   if (o.t !== undefined && o.dy === undefined && o.walk === undefined && o.aL === undefined && o.aR === undefined) {
     const _bp = (typeof BEAT !== 'undefined' && typeof OFF !== 'undefined') ? (o.t - OFF) / BEAT : o.t * 2.1;
