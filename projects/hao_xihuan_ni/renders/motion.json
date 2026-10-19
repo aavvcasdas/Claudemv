@@ -1,0 +1,13 @@
+{
+ "video": "projects/hao_xihuan_ni/renders/video.mp4",
+ "fps": 24.0,
+ "frames": 573,
+ "cuts": [
+  17.667
+ ],
+ "freezes": [],
+ "black": [],
+ "white_flash": [],
+ "end_hard_cut_to_black": false,
+ "note": "open each strip. Pops are not detected here: check every action with clip_strip.py at 12 fps."
+}
