@@ -257,7 +257,9 @@ def try_whisper_align(audio_path: Path, lines: list[str], model_name: str, lang:
         # Avoid hanging if huggingface.co is unreachable by setting a short socket/HF timeout
         os.environ.setdefault("HF_HUB_DOWNLOAD_TIMEOUT", "5")
         os.environ.setdefault("HF_HUB_ETAG_TIMEOUT", "3")
-        model = WhisperModel(model_name, device="cpu", compute_type="int8")
+        local_fw = Path("/tmp/fw-tiny")
+        resolved_model = str(local_fw) if (local_fw / "model.bin").exists() else model_name
+        model = WhisperModel(resolved_model, device="cpu", compute_type="int8")
         prompt = "，".join(lines)
         segments, _ = model.transcribe(
             str(audio_path),
