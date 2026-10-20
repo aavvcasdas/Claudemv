@@ -1,0 +1,37 @@
+{
+  "bytes": 32393302,
+  "sha256": "670b3c09f8a99db72cfa60bdacb9a80b4fb712842ae8d2e5d3ea4b86456e23bb",
+  "full_decode_exit": 0,
+  "decode_errors": "",
+  "faststart": true,
+  "metadata": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "profile": "Main",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "24/1",
+        "duration": "188.208984"
+      },
+      {
+        "codec_name": "aac",
+        "profile": "LC",
+        "codec_type": "audio",
+        "r_frame_rate": "0/0",
+        "duration": "188.267007"
+      }
+    ],
+    "format": {
+      "duration": "188.268000",
+      "size": "32393302"
+    }
+  },
+  "paths": [
+    "朋友的酒_Q弹版.mp4",
+    "projects/pengyou_de_jiu/renders/video.mp4"
+  ],
+  "all_regular_files": true
+}
