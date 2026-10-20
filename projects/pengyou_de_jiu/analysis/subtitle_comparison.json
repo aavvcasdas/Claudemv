@@ -1,0 +1,11 @@
+{
+  "order": "raw audio draft first, web lyric search next, guided draft then forced attention alignment",
+  "sources": [
+    "https://xiaojiangclub.com/lyrics/33715538.html",
+    "https://mobanduoduo.com/geci/14492.html"
+  ],
+  "raw": "subtitles_raw.json",
+  "guided": "subtitles_guided.json",
+  "corrected": "lyrics.json",
+  "limits": "tiny ASR performs poorly on this mix; known-text forced attention estimates using local anchors; not human listening verified; no foreign-language ending was inserted"
+}
