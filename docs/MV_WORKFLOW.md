@@ -20,3 +20,7 @@
 ## 字幕样式基准
 
 统一复用 `src/karaoke.js` 的 kinetic 渲染器及 `projects/qunian_xiatian/analysis/lyrics.json` 的 meta 约定（hi、pos）。无底框、毛笔字体、弹入、关键词金色强调。顺序固定为音频生成初稿→网络歌词搜索比对→修正文本与时间→分镜。保存 `analysis/subtitles_raw.json` 和 `analysis/subtitle_comparison.json`。不得直接将网络LRC当成本音频时间，不得因无识别结果就跳过字幕。
+
+## 可下载成片要求
+
+交付的 `.mp4` 路径必须是真实视频文件，不得使用符号链接、文本路径、Git LFS占位文件冒充。推送前完整解码视频和音频，检查H264/yuv420p+AAC、moov位于mdat之前（faststart）。推送后确认远端提交，并至少下载一个实际远端视频核对SHA256与解码。项目中多个交付路径必须都可独立下载。

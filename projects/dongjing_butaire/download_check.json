@@ -1,0 +1,36 @@
+{
+  "bytes": 34867769,
+  "sha256": "8950685c68b14b2f9ef3fd80d564ade2e59ba4855bbf42f59dcc987a6c44bd01",
+  "full_decode_exit": 0,
+  "full_decode_stderr": "",
+  "format": "MP4, H264 Main@4.0, yuv420p, AAC-LC stereo 44.1kHz",
+  "faststart": true,
+  "atoms": [
+    {
+      "type": "ftyp",
+      "offset": 0,
+      "size": 32
+    },
+    {
+      "type": "moov",
+      "offset": 32,
+      "size": 170171
+    },
+    {
+      "type": "free",
+      "offset": 170203,
+      "size": 8
+    },
+    {
+      "type": "mdat",
+      "offset": 170211,
+      "size": 34697558
+    }
+  ],
+  "paths": [
+    "东京不太热_校园版.mp4",
+    "projects/dongjing_butaire/renders/video.mp4",
+    "projects/dongjing_butaire/renders_v4/video.mp4"
+  ],
+  "all_regular_files": true
+}
